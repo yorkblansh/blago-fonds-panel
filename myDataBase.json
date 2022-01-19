@@ -1,0 +1,17 @@
+{
+    "test1": "super test",
+    "test3": {
+        "test": "test",
+        "json": {
+            "test": [
+                "test"
+            ]
+        }
+    },
+    "test4": {
+        "new": "cool",
+        "json": {
+            "important": 5
+        }
+    }
+}
