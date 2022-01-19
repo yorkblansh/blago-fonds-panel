@@ -5,14 +5,21 @@ export interface Iauth_api {
    (obj: { req: IRequest; res: IResponse }): void;
 }
 
-export const adminka_api: Iauth_api = ({ req, res }) => {
-   console.dir(req.cookies);
+export const auth_api: Iauth_api = ({ req, res }) => {
+   console.dir(req.body);
+   const user_is_admin = true;
+   const login = req.body.login;
+   const password = req.body.password;
+   console.log(`login: ${login}, password: ${password}`);
 
-   if (req.cookies.admin_key) {
-      console.log('IN PARAM YES');
-      //затем кидаем дополнительные куки для админа и отдаем статику
-      res.sendFile(__dirname + '/build/index.html');
+   //Запрос в бд ----
+   if (user_is_admin) {
+      //еще какие то действия
+
+      res.redirect('/adminka');
    } else {
+      console.log('not found user, return user to home page ');
+
       res.redirect('/auth');
    }
 };
