@@ -48,8 +48,8 @@ class Express {
     * Mounts all the defined routes //? Тут монтируются web страницы
     */
    private mountRoutes(): void {
-      this._express.set('view engine', 'ejs'); //?Выбор шаблонизатора
-      this._express.set('views', __dirname + '../../../views'); //? Говорим, что наш "html" находится в папке views
+      // this._express.set('view engine', 'ejs'); //?Выбор шаблонизатора
+      //this._express.set('views', __dirname + '../../../views'); //? Говорим, что наш "html" находится в папке views
       this._express.use(coockie_parser());
 
       // //? 🠗🠕 Подключаем всякие вспомогательные примочки для декодирования
