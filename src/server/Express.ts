@@ -56,7 +56,8 @@ class Express {
       this._express.use(express.json()); // for parsing application/json
       this._express.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-      this._express = Routes.mountWeb(this._express);
+      //  this._express =
+      Routes.mountWeb(this._express);
       //	this.express = Routes.mountApi(this.express);
    }
 

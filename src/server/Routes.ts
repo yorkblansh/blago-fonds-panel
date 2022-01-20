@@ -6,8 +6,11 @@ import path from 'path';
 //import apiRouter from './../routes/Api';
 
 class Routes {
-   public mountWeb(_express: Application): Application {
-      return _express.use('/', WEBrouter, express.static(path.join(__dirname, 'build')));
+   public mountWeb(_express: Application): void {
+      _express.use('/', WEBrouter, express.static(path.join(__dirname, 'build')));
+      // _express.get('*', (req, res) => {
+      //    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+      // });
    }
 
    // public mountApi(_express: Application): Application {

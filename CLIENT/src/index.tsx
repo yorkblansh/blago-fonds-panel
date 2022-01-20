@@ -17,17 +17,17 @@ import {
 const App = () => {
    return (
       <div>
-         <div>
+         {/* <div>
             <button></button>
-         </div>
-         {/* <meta charSet="utf-8" />
+         </div> */}
+         <meta charSet="utf-8" />
 
          <BrowserRouter>
             <Routes>
                <Route path="/" element={<HOME_PAGE />} />
                <Route path="/auth" element={<AUTH_PAGE />} />
             </Routes>
-         </BrowserRouter> */}
+         </BrowserRouter>
       </div>
    );
 };
