@@ -1,11 +1,6 @@
-import { Request as IRequest } from 'express';
-import { Response as IResponse } from 'express';
+import { IMware } from './typings/mware.interfaces';
 
-export interface Iauth_api {
-   (obj: { req: IRequest; res: IResponse }): void;
-}
-
-export const auth_api: Iauth_api = ({ req, res }) => {
+export const Auth_mware: IMware = ({ req, res }) => {
    console.dir(req.body);
    const user_is_admin = true;
    const login = req.body.login;

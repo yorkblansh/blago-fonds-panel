@@ -1,11 +1,6 @@
-import { Request as IRequest } from 'express';
-import { Response as IResponse } from 'express';
+import { IMware } from './typings/mware.interfaces';
 
-export interface Iadminka_api {
-   (obj: { req: IRequest; res: IResponse }): void;
-}
-
-export const adminka_api: Iadminka_api = ({ req, res }) => {
+export const Adminka_mware: IMware = ({ req, res, logger }) => {
    console.dir(req.cookies);
 
    if (req.cookies.admin_key) {

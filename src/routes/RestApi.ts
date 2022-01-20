@@ -2,15 +2,15 @@ import { Router } from 'express';
 
 import AuthController from '../controllers/clients/auth.controller';
 import { Adminka_Controller } from '../controllers/clients/adminka.controller';
-import RegController from '../controllers/clients/home_page.controller';
+import { Home_page_Controller } from '../controllers/clients/home_page.controller';
 
-const router = Router();
+const WEBrouter = Router();
 
-router.get('/adminka', Adminka_Controller.show); //? Админка
+WEBrouter.get('/adminka', Adminka_Controller.show); //? Админка
 
-router.get('/auth', AuthController.show); //? Страница авторизации
-router.post('/auth', AuthController.perform); //? Обработка авторизации POST запрос
+WEBrouter.get('/auth', AuthController.show); //? Страница авторизации
+WEBrouter.post('/auth', AuthController.perform); //? Обработка авторизации POST запрос
 
-router.get('/', RegController.show);
+WEBrouter.get('/', Home_page_Controller.show);
 
-export default router;
+export { WEBrouter };

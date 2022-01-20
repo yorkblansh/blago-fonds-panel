@@ -1,10 +1,12 @@
 import { Request as IRequest } from 'express';
 import { Response as IResponse } from 'express';
-import { adminka_api } from '../../middlewares/api/adminka.api';
+import { ILogger } from '../../logger/Logger';
+import { Adminka_mware } from '../../middlewares/adminka.mware';
 
 class Adminka_Controller {
    public static show(req: IRequest, res: IResponse): void {
-      adminka_api({ req, res });
+      const logger: ILogger = req.app.locals.logger;
+      Adminka_mware({ req, res, logger });
    }
 }
 

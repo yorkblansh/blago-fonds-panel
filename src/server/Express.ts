@@ -2,7 +2,7 @@ import express from 'express';
 import http from 'http';
 import Locals from './Locals';
 import Routes from './Routes';
-import Kernel from '../middlewares/Kernel';
+import { Kernel } from '../middlewares/Kernel';
 import coockie_parser from 'cookie-parser';
 
 class Express {
