@@ -17,7 +17,7 @@
     "emitDecoratorMetadata": true /* Enables experimental support for emitting type metadata for decorators. */
   },
   "lib": ["es2021"],
-  "exclude": ["views/", "dist/", "CLIENT/",]
+  "exclude": ["views/", "dist/", "react_frontend/",]
 }
 // {
 //   "compilerOptions": {
