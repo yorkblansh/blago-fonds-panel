@@ -1,15 +1,15 @@
 import { Application } from 'express';
-import { JsonDB_Service } from './services/jsondb';
-import { ILogger, Logger } from '../logger/Logger';
+import { JsonDB_Service } from './services/jsondb.contract';
+import { ILogger, Logger } from '../LOGS/Logger';
 
 export class Kernel {
    public static init(express: Application): void {
-      const { logger } = this.Contracts(express);
+      const { logger } = this.Contracts();
       express.locals.logger = logger;
-      JsonDB_Service();
+      express.locals.jsondb_service = JsonDB_Service();
    }
 
-   private static Contracts: IKernel_Contracts = (express) => {
+   private static Contracts: IKernel_Contracts = () => {
       const logger = new Logger();
 
       return {
@@ -18,5 +18,5 @@ export class Kernel {
    };
 }
 interface IKernel_Contracts {
-   (express: Application): { logger: ILogger };
+   (): { logger: ILogger };
 }

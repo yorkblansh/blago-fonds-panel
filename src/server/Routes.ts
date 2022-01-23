@@ -2,7 +2,6 @@ import { Application } from 'express';
 import { WEBrouter } from '../routes/RestApi';
 import express from 'express';
 import path from 'path';
-
 //import apiRouter from './../routes/Api';
 
 class Routes {

@@ -36,12 +36,7 @@ class Express {
     ** Mounts all the defined middlewares
     */
    private mountMiddlewares(): void {
-      //this._express =
-      Kernel.init(
-         this._express,
-         //  this.server_for_client,
-         //  this.server_for_pribor,
-      );
+      Kernel.init(this._express);
    }
 
    /**
