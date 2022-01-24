@@ -1,7 +1,22 @@
 .auth {
+    &--bolvanka {
+        position: relative;
+        display: flex;
+        width: calc(100% / 3);
+    }
+
     &--header {
+        display: flex;
+        flex-direction: row;
+        top: 0;
+        position: absolute;
         width: 100%;
         height: 60px;
         background-color: chartreuse;
+    }
+
+    &--go-to-home {
+        width: 60px;
+        height: 60px;
     }
 }

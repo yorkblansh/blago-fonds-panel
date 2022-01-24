@@ -1,0 +1,23 @@
+.auth {
+    &--header-btn {
+        display: flex;
+        width: calc(100% / 3);
+        height: 50px;
+        background-color: crimson;
+        border-radius: 6px;
+        margin: 3px;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+
+
+        &>* {
+            margin: 14px;
+            height: fit-content;
+            width: fit-content;
+            display: flex;
+            margin-bottom: 3px;
+            margin-inline: 5px;
+        }
+    }
+}

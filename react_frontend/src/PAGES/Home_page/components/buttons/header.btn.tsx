@@ -5,7 +5,7 @@ export const Header_BTN = (props: { label: string }) => {
       <>
          <div
             onClick={() => {
-               document.location.href = '/auth';
+               document.location.href = '/adminka';
             }}
             className="header-btn"
             children={<div>{props.label}</div>}
