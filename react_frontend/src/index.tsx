@@ -1,27 +1,14 @@
 import ReactDOM from 'react-dom';
-//import './index.css';
-import reportWebVitals from './reportWebVitals';
-import { AUTH_PAGE } from './ROUTES/Auth/Auth.Page';
-import { HOME_PAGE } from 'ROUTES/Home_page/Home.Page';
+import './index.scss';
+import { AUTH_PAGE } from './PAGES/Auth/Auth.Page';
+import { HOME_PAGE } from 'PAGES/Home_page/Home.Page';
 
-import {
-   BrowserRouter,
-   // Switch,
-   Route,
-   Routes,
-   // Link,
-   // useRouteMatch,
-   // useParams
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 const App = () => {
    return (
       <div>
-         {/* <div>
-            <button></button>
-         </div> */}
          <meta charSet="utf-8" />
-
          <BrowserRouter>
             <Routes>
                <Route path="/" element={<HOME_PAGE />} />

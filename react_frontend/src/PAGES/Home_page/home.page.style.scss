@@ -1,0 +1,23 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    align-content: center;
+
+    &--wrapper {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        margin: 15px;
+
+        &--element {
+            background-color: blueviolet;
+            margin: 15px;
+            border-radius: 6px;
+            margin: 5px;
+            padding: 5px;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
