@@ -1,3 +1,4 @@
+import { API } from 'api/CONSTS';
 import axios from 'axios';
 
 export interface IgetHomePageData {
@@ -13,6 +14,13 @@ export const getHomePageData: IgetHomePageData = (cb) => {
       .catch((err) => {
          console.dir(err);
       });
+};
+
+export const sendFormModify = (data: any) => {
+   axios
+      .post(API.modify_data_api, data)
+      .then((res) => {})
+      .catch((err) => console.error(err));
 };
 
 // export const goToAdminka = (): void => {

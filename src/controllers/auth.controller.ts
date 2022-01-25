@@ -1,7 +1,7 @@
 import { Request as IRequest } from 'express';
 import { Response as IResponse } from 'express';
 import { ILogger } from '../LOGS/Logger';
-import { Auth_mware } from '../middlewares/auth.mware';
+import { Auth_mware } from '../middlewares/api/auth.mware';
 
 export class Auth_Controller {
    public static show(req: IRequest, res: IResponse): void {

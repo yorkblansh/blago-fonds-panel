@@ -1,5 +1,5 @@
-import { sendStatic } from './send_static_file.mw';
-import { IMware } from './typings/mware.interfaces';
+import { sendStatic } from '../send_static_file.mw';
+import { IMware } from '../typings/mware.interfaces';
 
 export class Auth_mware {
    public static show: IMware = ({ res, logger }) => {

@@ -1,4 +1,4 @@
-import { IMware } from './typings/mware.interfaces';
+import { IMware } from '../typings/mware.interfaces';
 
 export class LogOut_mware {
    public static perform: IMware = ({ logger, req, res }) => {
