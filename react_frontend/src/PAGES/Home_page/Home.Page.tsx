@@ -5,7 +5,7 @@ import { ListBlocks_Contract } from './components/modules/list.blocks.contract';
 import './home.page.style.scss';
 
 export const HOME_PAGE = () => {
-   let { ListBlocks } = ListBlocks_Contract();
+   let { ListBlocks } = ListBlocks_Contract({ path: '/home' });
    return (
       <>
          <Header AuthBtn={<Header_BTN label="Перейти в админку" />} />

@@ -16,8 +16,23 @@
             border-radius: 6px;
             margin: 5px;
             padding: 5px;
+            width: auto;
+
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-between;
+
+
+            &--data {
+                display: flex;
+                flex-direction: column;
+            }
+
+            &--buttons {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
         }
     }
 }

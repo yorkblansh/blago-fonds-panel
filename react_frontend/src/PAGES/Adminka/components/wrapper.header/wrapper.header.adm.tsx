@@ -1,3 +1,5 @@
+import './wrapper.header.adm.style.scss';
+
 export interface IHeaderWR_Adminka {
    (props: { ExitBtn: JSX.Element; HomeBtn: JSX.Element }): JSX.Element;
 }

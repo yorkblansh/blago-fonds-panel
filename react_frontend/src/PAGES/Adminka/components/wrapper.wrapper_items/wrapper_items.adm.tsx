@@ -1,7 +1,12 @@
 export interface IWrapperItems {
-   (props: { Items: JSX.Element[] }): JSX.Element;
+   (props: { Items: JSX.Element[]; ModalMenus: JSX.Element[] }): JSX.Element;
 }
 
-export const WrapperItems: IWrapperItems = ({ Items }) => {
-   return <div className="adminka--wrapper--wrapper_items">{Items}</div>;
+export const WrapperItems: IWrapperItems = ({ Items, ModalMenus }) => {
+   return (
+      <>
+         <div className="adminka--wrapper--wrapper_items">{Items}</div>
+         {ModalMenus}
+      </>
+   );
 };

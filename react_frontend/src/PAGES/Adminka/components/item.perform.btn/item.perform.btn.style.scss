@@ -1,0 +1,12 @@
+.adm-edit-btn {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    background-color: cornflowerblue;
+    padding: 3px;
+    border-radius: 5px;
+
+    &>* {
+        height: fit-content;
+    }
+}

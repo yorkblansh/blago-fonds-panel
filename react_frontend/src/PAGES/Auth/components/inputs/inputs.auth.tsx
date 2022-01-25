@@ -10,7 +10,7 @@ export const Inputs_Auth: I_Inputs_Auth = ({ input_type, Label }) => {
    return (
       <>
          <div className="input_type--label">{Label}</div>
-         <input className={end_input_type} name={end_input_type} type={_type} id={end_input_type} />
+         <input className={end_input_type} name={`${input_type}-input`} type={_type} id={`${input_type}-input`} />
       </>
    );
 };

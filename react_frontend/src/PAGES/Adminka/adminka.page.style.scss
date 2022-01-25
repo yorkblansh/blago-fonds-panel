@@ -1,0 +1,10 @@
+.adminka {
+    display: flex;
+    flex-direction: column;
+    background-color: chartreuse;
+
+    &--wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+}
