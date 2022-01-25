@@ -1,5 +1,5 @@
-import { useItemList } from 'app/home_page/hooks/useItemList';
-import { ListItem } from 'PAGES/Home_page/components/list.items/list.items';
+import { useItemList } from 'app/hooks/useItemList';
+import { ListItem } from 'PAGES/Home_page/components/list.item/list.item';
 
 export const AdminkaItems_Contract = () => {
    const { list } = useItemList();

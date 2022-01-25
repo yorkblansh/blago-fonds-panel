@@ -4,6 +4,7 @@ import { AUTH_PAGE } from './PAGES/Auth/Auth.Page';
 import { HOME_PAGE } from 'PAGES/Home_page/Home.Page';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page';
 
 const App = () => {
    return (
@@ -13,6 +14,7 @@ const App = () => {
             <Routes>
                <Route path="/" element={<HOME_PAGE />} />
                <Route path="/auth" element={<AUTH_PAGE />} />
+               <Route path="/adminka" element={<ADMINKA_PAGE />} />
             </Routes>
          </BrowserRouter>
       </div>

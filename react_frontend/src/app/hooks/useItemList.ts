@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getHomePageData } from '../axios.fns';
+import { getHomePageData } from '../home_page/axios.fns';
 import { dev_data } from '../DEV_DATA';
 
 export const useItemList = () => {
