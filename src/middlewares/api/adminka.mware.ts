@@ -1,5 +1,5 @@
-import { sendStatic } from './send_static_file.mw';
-import { IMware } from './typings/mware.interfaces';
+import { sendStatic } from '../send_static_file.mw';
+import { IMware } from '../typings/mware.interfaces';
 
 export const Adminka_mware: IMware = ({ req, res, logger }) => {
    if (req.cookies.admin_key) {

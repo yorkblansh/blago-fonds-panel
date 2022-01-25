@@ -13,9 +13,12 @@ interface IButton_Modal {
 export const Button_Modal: IButton_Modal = ({ index, type, Label, modal_type }) => {
    if (type === 'SAVE') {
       return (
-         <div className={`modal-btn--${type}`} id={`${type}_btn_${index}`}>
+         <button
+            // onClick={()=>{}}
+            className={`modal-btn--${type}`}
+            id={`${type}_btn_${index}`}>
             {Label}
-         </div>
+         </button>
       );
    } else if (type === 'CLOSE') {
       return (

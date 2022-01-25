@@ -18,6 +18,7 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
                SaveBtn={<Button_Modal type="SAVE" index={index} Label={'Сохранить'} modal_type={'modify'} />}
                InputModal={
                   <div className="modal--input_wrapper">
+                     <form action="/"></form>
                      <InputModal Label={'Название'} value={values.name} />
                      <InputModal Label={'Ссылка1'} value={values.link1} />
                      <InputModal Label={'Ссылка2'} value={values.link2} />
