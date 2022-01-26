@@ -9,6 +9,7 @@ export const getHomePageData: IgetHomePageData = (cb) => {
    axios
       .post('/home')
       .then((res) => {
+         console.dir(res);
          cb(res);
       })
       .catch((err) => {

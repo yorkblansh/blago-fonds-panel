@@ -1,16 +1,20 @@
 {
     "organizes": [
         {
-            "name": "Благофонд",
-            "link1": "httppppp1",
-            "link2": "http2",
-            "info": "other info"
+            "Благофонд": {
+                "info": "other info",
+                "link1": "httppppp1",
+                "link2": "http2",
+                "name": "Благофонд"
+            }
         },
         {
-            "name": "Благофонд1",
-            "link1": "httppppp1",
-            "link2": "http2",
-            "info": "other info"
+            "Благофонд1111": {
+                "info": "other info1111111111",
+                "link1": "httppppp1111111111",
+                "link2": "http2111111111",
+                "name": "Благофонд1111111111"
+            }
         }
     ]
 }

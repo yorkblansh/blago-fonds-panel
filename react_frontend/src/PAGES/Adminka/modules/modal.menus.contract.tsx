@@ -2,6 +2,7 @@
 import { API, FORM_INPUTS, FORM_NAME } from 'api/CONSTS';
 import { formSubmit } from 'app/adminka/form.submit';
 import { Ilist } from 'app/hooks/useItemList';
+import { DynObjName } from 'PAGES/Home_page/components/modules/list.blocks.contract';
 import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal';
 import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal';
 import { ModalMenu } from '../layouts/modal.menus/modal.menus';
@@ -11,7 +12,8 @@ interface IModalMenus_Contract {
 }
 
 export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
-   let ModalMenus = list.map((values, index) => {
+   let ModalMenus = list.map((values: DynObjName, index) => {
+      let [KEY] = Object.keys(values);
       return (
          <>
             <ModalMenu
@@ -33,10 +35,10 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
                         method="POST"
                         id={FORM_NAME.modify_data_form}
                         action={API.modify_data_api}>
-                        <InputModal name="name" Label="Название" value={values.name} index={index} />
-                        <InputModal name="link1" Label="Ссылка1" value={values.link1} index={index} />
-                        <InputModal name="link2" Label="Ссылка2" value={values.link2} index={index} />
-                        <InputModal name="info" Label="Доп. Информация" value={values.info} index={index} />
+                        <InputModal name="name" Label="Название" value={values[KEY].name} index={index} />
+                        <InputModal name="link1" Label="Ссылка1" value={values[KEY].link1} index={index} />
+                        <InputModal name="link2" Label="Ссылка2" value={values[KEY].link2} index={index} />
+                        <InputModal name="info" Label="Доп. Информация" value={values[KEY].info} index={index} />
                      </form>
                      <button form={FORM_NAME.modify_data_form} type="submit">
                         kkkkkk

@@ -11,12 +11,20 @@ export const AdminkaModifyData_mware: IMware = ({ req, res, logger }) => {
    logger.log(req.body);
    const { jsondb } = JsonDB_Contract();
    const { info, link1, link2, name }: I_obj = req.body;
-   jsondb.push('/organizes', [
+   jsondb.push(
+      `/organizes[0]/${name}`,
       {
-         name,
+         info,
          link1,
          link2,
-         info,
+         name,
       },
-   ]);
+      true,
+   );
+   // jsondb.push(`/organizes/${name}`, {
+   //    name,
+   //    link1,
+   //    link2,
+   //    info,
+   // });
 };
