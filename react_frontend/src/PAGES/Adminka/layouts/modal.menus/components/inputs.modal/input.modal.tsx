@@ -7,12 +7,14 @@ interface I_InputModal {
 
 export const InputModal: I_InputModal = ({ Label, value, name, index }) => {
    console.dir(value);
+   const old_value = value;
 
    let { _value, perform_value } = Perf_val(value);
 
    return (
       <div className="modal--input_wrapper--input">
          <div children={Label} />
+         <input id={`old_input_${name}_${index}`} type="hidden" value={old_value} />
          <input
             name={name}
             id={`input_${name}_${index}`}
