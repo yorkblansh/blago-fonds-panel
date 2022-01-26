@@ -16,7 +16,16 @@ export const formSubmit = (index: any) => {
    //       return (dd[value] = _k);
    //    });
    //    let aa: any = form?.elements.namedItem(FORM_INPUTS.name);
-   let dd = document.getElementById(`input_name_${index}`);
-   console.dir(dd);
-   sendFormModify(dd);
+   let name: any = document.getElementById(`input_name_${index}`);
+   let link1: any = document.getElementById(`input_link1_${index}`);
+   let link2: any = document.getElementById(`input_link2_${index}`);
+   let info: any = document.getElementById(`input_info_${index}`);
+   let objj = {
+      name: name.value,
+      link1: link1.value,
+      link2: link2.value,
+      info: info.value,
+   };
+
+   sendFormModify(objj);
 };
