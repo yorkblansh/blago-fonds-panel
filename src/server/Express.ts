@@ -1,6 +1,5 @@
 import express from 'express';
 import http from 'http';
-import Locals from './Locals';
 import Routes from './Routes';
 import { Kernel } from '../middlewares/Kernel';
 import coockie_parser from 'cookie-parser';
@@ -23,13 +22,8 @@ class Express {
 
       this.server_for_client = http.createServer(this._express); //? HTTP сервер для клиентов
 
-      this.mountDotEnv(); //? Подключение .env файла из корня сервера(в нем настрйоки mysql)
       this.mountMiddlewares(); //? Монтировка "бизнес-логики" (middlewares из одноименной папки)
       this.mountRoutes(); //? Монтировка путей: /, /auth, /register и т.д
-   }
-
-   private mountDotEnv(): void {
-      this._express = Locals.init(this._express);
    }
 
    /**
