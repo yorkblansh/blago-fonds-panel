@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { API, FORM_INPUTS, FORM_NAME } from 'api/CONSTS';
-import { formSubmit } from 'app/adminka/form.submit';
+import { API, FORM_NAME } from 'api/CONSTS';
 import { Ilist } from 'app/hooks/useItemList';
 import { DynObjName } from 'PAGES/Home_page/components/modules/list.blocks.contract';
 import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal';
@@ -50,6 +49,7 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
                index={index}
             />
             <ModalMenu
+               RemoveModalLabel="Удалить"
                type="remove"
                values={values}
                index={index}

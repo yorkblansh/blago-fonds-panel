@@ -8,10 +8,11 @@ interface IModalMenu {
       SaveBtn: JSX.Element;
       CloseBtn: JSX.Element;
       InputModal: JSX.Element;
+      RemoveModalLabel?: string;
    }): JSX.Element;
 }
 
-export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, InputModal }) => {
+export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, InputModal, RemoveModalLabel }) => {
    if (type === 'modify' || type === 'create') {
       return (
          <>
@@ -33,7 +34,26 @@ export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, 
          </>
       );
    } else if (type === 'remove') {
-      return <div></div>;
+      return (
+         <>
+            <div
+               id={`modal-perform-menu_${type}_${index}`}
+               style={{
+                  display: 'none',
+               }}>
+               <div className="black-background-opacity" />
+               <div className="modal-perform-menu">
+                  {/* {InputModal} */}
+
+                  <div className="modal--btns">
+                     {RemoveModalLabel}
+                     {CloseBtn}
+                     {SaveBtn}
+                  </div>
+               </div>
+            </div>
+         </>
+      );
    } else {
       return <div></div>;
    }
