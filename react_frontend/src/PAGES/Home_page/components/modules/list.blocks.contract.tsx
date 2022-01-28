@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
+import { MAIN_PATHES } from 'api/CONSTS';
 import { Ilist, Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Config_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { ListItem } from '../list.item/list.item';
 
 interface IListBlocks_Contract {
-   (props: { path: '/home' | '/adminka' }): { ListBlocks: JSX.Element[]; list: Ilist };
+   (props: { path: keyof typeof MAIN_PATHES }): { ListBlocks: JSX.Element[]; list: Ilist };
 }
 
 export interface DynObjName {
@@ -26,8 +27,8 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path }) => {
             </div>
             {path === '/adminka' && ( //? Если компонент рендериться в админке, то рисуем кнопки
                <div className="home-page--wrapper--element--buttons">
-                  <Item_Config_BTN Label="Изменить" index={i} type="modify" />
-                  <Item_Config_BTN Label="Удалить" index={i} type="remove" />
+                  <Item_Config_BTN Label="Изменить" index={i} type="MODIFY" />
+                  <Item_Config_BTN Label="Удалить" index={i} type="REMOVE" />
                </div>
             )}
          </div>

@@ -5,7 +5,6 @@ interface IModalMenu {
    (props: {
       type: keyof typeof PERF_TYPE;
       index: number;
-      values: {};
       SaveBtn: JSX.Element;
       CloseBtn: JSX.Element;
       InputModal: JSX.Element;
@@ -13,7 +12,7 @@ interface IModalMenu {
    }): JSX.Element;
 }
 
-export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, InputModal, RemoveModalLabel }) => {
+export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, InputModal, RemoveModalLabel }) => {
    if (type === 'MODIFY' || type === 'CREATE') {
       return (
          <>
