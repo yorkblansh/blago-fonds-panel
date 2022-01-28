@@ -1,8 +1,9 @@
+import { PERF_TYPE } from 'api/CONSTS';
 import './modal.menus.style.scss';
 
 interface IModalMenu {
    (props: {
-      type: 'modify' | 'remove' | 'create';
+      type: keyof typeof PERF_TYPE;
       index: number;
       values: {};
       SaveBtn: JSX.Element;
@@ -13,7 +14,7 @@ interface IModalMenu {
 }
 
 export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, InputModal, RemoveModalLabel }) => {
-   if (type === 'modify' || type === 'create') {
+   if (type === 'MODIFY' || type === 'CREATE') {
       return (
          <>
             <div
@@ -33,7 +34,7 @@ export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, values, 
             </div>
          </>
       );
-   } else if (type === 'remove') {
+   } else if (type === 'REMOVE') {
       return (
          <>
             <div

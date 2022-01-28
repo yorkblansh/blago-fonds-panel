@@ -11,4 +11,12 @@ export enum FORM_INPUTS {
 
 export enum API {
    modify_data_api = '/modify_data_api',
+   remove_data_api = '/remove_data_api',
+   create_data_api = '/create_data_api',
+}
+
+export enum PERF_TYPE {
+   'MODIFY',
+   'REMOVE',
+   'CREATE',
 }

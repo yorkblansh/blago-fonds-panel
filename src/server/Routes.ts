@@ -7,9 +7,9 @@ import path from 'path';
 class Routes {
    public mountWeb(_express: Application): void {
       _express.use('/', WEBrouter, express.static(path.join(__dirname, 'build')));
-      // _express.get('*', (req, res) => {
-      //    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-      // });
+      _express.get('*', (req, res) => {
+         res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+      });
    }
 
    // public mountApi(_express: Application): Application {

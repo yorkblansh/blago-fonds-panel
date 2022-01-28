@@ -17,44 +17,37 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
          <>
             <ModalMenu
                key={'modify-menu'}
-               CloseBtn={<Button_Modal type="CLOSE" index={index} Label="Закрыть" modal_type="modify" />}
+               CloseBtn={<Button_Modal type="CLOSE" index={index} Label="Закрыть" modal_type="MODIFY" />}
                SaveBtn={
                   <Button_Modal
                      form="modify_data_form"
                      type="SAVE"
                      index={index}
                      Label="Сохранить"
-                     modal_type="modify"
+                     modal_type="MODIFY"
                   />
                }
                InputModal={
                   <div className="modal--input_wrapper">
-                     <form
-                        name={FORM_NAME.modify_data_form}
-                        method="POST"
-                        id={FORM_NAME.modify_data_form}
-                        action={API.modify_data_api}>
+                     <form name={FORM_NAME.modify_data_form}>
                         <InputModal name="name" Label="Название" value={values[KEY].name} index={index} />
                         <InputModal name="link1" Label="Ссылка1" value={values[KEY].link1} index={index} />
                         <InputModal name="link2" Label="Ссылка2" value={values[KEY].link2} index={index} />
                         <InputModal name="info" Label="Доп. Информация" value={values[KEY].info} index={index} />
                      </form>
-                     <button form={FORM_NAME.modify_data_form} type="submit">
-                        kkkkkk
-                     </button>
                   </div>
                }
-               type="modify"
+               type="MODIFY"
                values={values}
                index={index}
             />
             <ModalMenu
                RemoveModalLabel="Удалить"
-               type="remove"
+               type="REMOVE"
                values={values}
                index={index}
-               SaveBtn={<Button_Modal type="SAVE" index={index} Label="Сохранить" modal_type="remove" />}
-               CloseBtn={<Button_Modal type="CLOSE" index={index} Label="Закрыть" modal_type="remove" />}
+               SaveBtn={<Button_Modal type="SAVE" index={index} Label="Сохранить" modal_type="REMOVE" />}
+               CloseBtn={<Button_Modal type="CLOSE" index={index} Label="Закрыть" modal_type="REMOVE" />}
                InputModal={<div></div>}
             />
          </>

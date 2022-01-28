@@ -4,6 +4,8 @@ import { Adminka_Controller } from '../controllers/adminka.controller';
 import { Home_page_Controller } from '../controllers/home_page.controller';
 import { LogOut_Controller } from '../controllers/logout.controller';
 import { ModifyData_Controller } from '../controllers/adminka.controllers/modify.data.controller';
+import { RemoveData_Controller } from '../controllers/adminka.controllers/remove.data.controller';
+import { CreateData_Controller } from '../controllers/adminka.controllers/create.data.controller';
 
 export const WEBrouter = Router();
 
@@ -17,3 +19,7 @@ WEBrouter.post('/auth_post', Auth_Controller.perform); //? Обработка а
 WEBrouter.post('/home', Home_page_Controller.perform);
 WEBrouter.get('/logout', LogOut_Controller.perform);
 WEBrouter.post('/modify_data_api', ModifyData_Controller.perform);
+WEBrouter.post('/remove_data_api', RemoveData_Controller.perform);
+WEBrouter.post('/create_data_api', CreateData_Controller.perform);
+
+

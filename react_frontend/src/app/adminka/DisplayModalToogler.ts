@@ -1,4 +1,6 @@
-export const DisplayModalToogler = (index: string | number, display_status: boolean, type: 'modify' | 'remove') => {
+import { PERF_TYPE } from 'api/CONSTS';
+
+export const DisplayModalToogler = (index: string | number, display_status: boolean, type: keyof typeof PERF_TYPE) => {
    if (display_status === true) {
       document
          .getElementById(`modal-perform-menu_${type}_${index}`)

@@ -5,6 +5,10 @@ export interface IgetHomePageData {
    (cb: (res: { data: { organizes: any[] } }) => void): void;
 }
 
+interface IsendForm {
+   (props: { data: any, path: keyof typeof API }): void
+}
+
 export const getHomePageData: IgetHomePageData = (cb) => {
    axios
       .post('/home')
@@ -17,10 +21,10 @@ export const getHomePageData: IgetHomePageData = (cb) => {
       });
 };
 
-export const sendFormModify = (data: any) => {
+export const sendForm: IsendForm = ({ data, path }) => {
    axios
-      .post(API.modify_data_api, data)
-      .then((res) => {})
+      .post(path, data)
+      .then((res) => { })
       .catch((err) => console.error(err));
 };
 
