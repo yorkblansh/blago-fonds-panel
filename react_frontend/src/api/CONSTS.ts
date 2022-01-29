@@ -15,6 +15,8 @@ export enum MAIN_PATHES {
    '/auth',
    '/',
    '/logout',
+
+   '/register',
 }
 
 export enum API {

@@ -1,10 +1,10 @@
 import './inputs.style.scss';
 
-export interface I_Inputs_Auth {
+interface IAccount_Input {
    (props: { input_type: 'login' | 'password'; Label: string }): JSX.Element;
 }
 
-export const Inputs_Auth: I_Inputs_Auth = ({ input_type, Label }) => {
+export const Account_Input: IAccount_Input = ({ input_type, Label }) => {
    let _type = useTypeContract(input_type);
    let end_input_type = `input_type--${input_type}`;
    return (

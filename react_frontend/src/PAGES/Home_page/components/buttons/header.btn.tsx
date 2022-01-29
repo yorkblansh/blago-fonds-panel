@@ -1,14 +1,19 @@
+import { MAIN_PATHES } from 'api/CONSTS';
 import './header.btn.style.scss';
 
-export const Header_BTN = (props: { label: string }) => {
+interface IHeader_BTN {
+   (props: { label: string; type: keyof typeof MAIN_PATHES }): JSX.Element;
+}
+
+export const Header_BTN: IHeader_BTN = ({ label, type }) => {
    return (
       <>
          <div
             onClick={() => {
-               document.location.href = '/adminka';
+               document.location.href = type;
             }}
             className="header-btn"
-            children={<div>{props.label}</div>}
+            children={<div>{label}</div>}
          />
       </>
    );

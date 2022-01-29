@@ -8,7 +8,10 @@ export const HOME_PAGE = () => {
    let { ListBlocks } = ListBlocks_Contract({ path: '/home' });
    return (
       <>
-         <Header AuthBtn={<Header_BTN label="Перейти в админку" />} />
+         <Header
+            AuthBtn={<Header_BTN type="/auth" label="Войти в профиль" />}
+            RegisterBtn={<Header_BTN type="/register" label="Регистрация" />}
+         />
          <div className="home-page" id="home-page">
             <div className="home-page--wrapper" id="home-page--wrapper">
                {ListBlocks}
