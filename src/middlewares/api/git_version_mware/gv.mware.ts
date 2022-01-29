@@ -7,7 +7,7 @@ export const GV_mware: IMware = ({ req, res, logger }) => {
 
    if (req.cookies.admin_key) {
       res.send({
-         version: _soft_ver,
+         version: soft_ver,
       });
    }
 };
