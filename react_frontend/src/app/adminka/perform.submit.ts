@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { API, PERF_TYPE } from 'api/CONSTS';
+import { API, MAIN_PATHES, PERF_TYPE } from 'api/CONSTS';
 import { sendForm } from 'app/home_page/axios.fns';
 
 export const perform_submit = (index: any, perform_type: keyof typeof PERF_TYPE) => {
@@ -21,9 +21,22 @@ export const perform_submit = (index: any, perform_type: keyof typeof PERF_TYPE)
    } else if (perform_type === 'REMOVE') {
       _path = '/remove_data_api';
       objj = { index };
+   } else if (perform_type === 'CREATE') {
+      _path = '/create_data_api';
+      let name: any = document.getElementById(`input_name_create`);
+      let link1: any = document.getElementById(`input_link1_create`);
+      let link2: any = document.getElementById(`input_link2_create`);
+      let info: any = document.getElementById(`input_info_create`);
+      objj = {
+         name: name.value,
+         link1: link1.value,
+         link2: link2.value,
+         info: info.value,
+      };
    } else {
       _path = '/modify_data_api';
    }
+   document.location.href = '/adminka';
 
    sendForm({ data: objj, path: _path });
 };

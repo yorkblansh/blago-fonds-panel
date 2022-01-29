@@ -18,7 +18,9 @@ export const Button_Modal: IButton_Modal = ({ index, button_type, Label, modal_t
          <button
             type="button"
             onClick={(e) => {
-               perform_submit(index, modal_type);
+               if (button_type === 'SAVE') {
+                  perform_submit(index, modal_type);
+               }
                DisplayModalToogler(index, false, modal_type);
             }}
             className={`modal-btn--${button_type}`}

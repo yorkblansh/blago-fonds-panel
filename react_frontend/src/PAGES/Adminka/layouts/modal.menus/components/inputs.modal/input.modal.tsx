@@ -2,7 +2,7 @@ import { FORM_INPUTS } from 'api/CONSTS';
 import { useState } from 'react';
 import './input.modal.style.scss';
 interface I_InputModal {
-   (props: { Label: string; index: number; value: string; name: keyof typeof FORM_INPUTS }): JSX.Element;
+   (props: { Label: string; index: number | string; value: string; name: keyof typeof FORM_INPUTS }): JSX.Element;
 }
 
 export const InputModal: I_InputModal = ({ Label, value, name, index }) => {

@@ -17,7 +17,7 @@ export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, InputMod
    if (type === 'MODIFY') {
       _index = index;
    } else if (type === 'CREATE') {
-      _index = 0;
+      _index = 'create';
    }
    if (type === 'MODIFY' || type === 'CREATE') {
       return (

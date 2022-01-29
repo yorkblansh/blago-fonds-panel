@@ -40,16 +40,15 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
                InputModal={<div></div>}
             />
             <ModalMenu
-               key={'modify-menu'}
-               CloseBtn={<Button_Modal button_type="CLOSE" index={index} Label="Закрыть" modal_type="CREATE" />}
-               SaveBtn={<Button_Modal button_type="SAVE" index={index} Label="Добавить" modal_type="CREATE" />}
+               CloseBtn={<Button_Modal button_type="CLOSE" index="create" Label="Закрыть" modal_type="CREATE" />}
+               SaveBtn={<Button_Modal button_type="SAVE" index="create" Label="Добавить" modal_type="CREATE" />}
                InputModal={
                   <div className="modal--input_wrapper">
                      <form>
-                        <InputModal name="name" Label="Название" value={values.name} index={index} />
-                        <InputModal name="link1" Label="Ссылка1" value={values.link1} index={index} />
-                        <InputModal name="link2" Label="Ссылка2" value={values.link2} index={index} />
-                        <InputModal name="info" Label="Доп. Информация" value={values.info} index={index} />
+                        <InputModal name="name" Label="Название" value="" index="create" />
+                        <InputModal name="link1" Label="Ссылка1" value="" index="create" />
+                        <InputModal name="link2" Label="Ссылка2" value="" index="create" />
+                        <InputModal name="info" Label="Доп. Информация" value="" index="create" />
                      </form>
                   </div>
                }
