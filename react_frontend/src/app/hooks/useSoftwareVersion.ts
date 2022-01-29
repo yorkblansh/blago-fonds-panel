@@ -9,6 +9,7 @@ export const useSoftwareVersion = () => {
          getSoftwareVersion((version) => {
             // console.dir(version);
             updateVER(version);
+            //
          });
       } else if (process.env.NODE_ENV === 'development') {
          //  updateList(dev_data.organizes);
