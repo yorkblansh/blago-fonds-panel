@@ -13,7 +13,8 @@ export const getSoftwareVersion = (cb: (props: any) => void) => {
    axios
       .get('/get_version')
       .then((res) => {
-         console.dir(res);
+         console.dir(`GET VER ${res}`);
+         console.info(res);
          cb(res);
       })
       .catch((err) => {
