@@ -6,8 +6,20 @@ export interface IgetHomePageData {
 }
 
 interface IsendForm {
-   (props: { data: any, path: keyof typeof API }): void
+   (props: { data: any; path: keyof typeof API }): void;
 }
+
+export const getSoftwareVersion = (cb: (props: any) => void) => {
+   axios
+      .get('/get_version')
+      .then((res) => {
+         console.dir(res);
+         cb(res);
+      })
+      .catch((err) => {
+         console.dir(err);
+      });
+};
 
 export const getHomePageData: IgetHomePageData = (cb) => {
    axios
@@ -24,7 +36,7 @@ export const getHomePageData: IgetHomePageData = (cb) => {
 export const sendForm: IsendForm = ({ data, path }) => {
    axios
       .post(path, data)
-      .then((res) => { })
+      .then((res) => {})
       .catch((err) => console.error(err));
 };
 

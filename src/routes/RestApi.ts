@@ -6,6 +6,8 @@ import { LogOut_Controller } from '../controllers/logout.controller';
 import { ModifyData_Controller } from '../controllers/adminka.controllers/modify.data.controller';
 import { RemoveData_Controller } from '../controllers/adminka.controllers/remove.data.controller';
 import { CreateData_Controller } from '../controllers/adminka.controllers/create.data.controller';
+import { GV_mware } from '../middlewares/api/git_version_mware/gv.mware';
+import { Git_Version_Controller } from '../controllers/git_version_controller/git_version_controller';
 
 export const WEBrouter = Router();
 
@@ -22,4 +24,4 @@ WEBrouter.post('/modify_data_api', ModifyData_Controller.perform);
 WEBrouter.post('/remove_data_api', RemoveData_Controller.perform);
 WEBrouter.post('/create_data_api', CreateData_Controller.perform);
 
-
+WEBrouter.get('/get_version', Git_Version_Controller.show);

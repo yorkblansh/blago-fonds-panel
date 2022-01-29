@@ -6,10 +6,12 @@ import { HeaderWR_Adminka } from './components/wrapper.header/wrapper.header.adm
 import { WrapperItems } from './components/wrapper.wrapper_items/wrapper_items.adm';
 import { ModalMenus_Contract } from './modules/modal.menus.contract';
 import { Add_Item_Btn } from './components/add.item.btn/add.item.btn';
+import { useSoftwareVersion } from 'app/hooks/useSoftwareVersion';
 
 export const ADMINKA_PAGE = () => {
    let { ListBlocks, list } = ListBlocks_Contract({ path: '/adminka' });
    let { ModalMenus } = ModalMenus_Contract({ list });
+   let { software_version } = useSoftwareVersion();
    return (
       <div className="adminka">
          <div className="adminka--wrapper">
@@ -19,6 +21,7 @@ export const ADMINKA_PAGE = () => {
             />
             <Add_Item_Btn Label="Добавить новое" />
             <WrapperItems key={'wrapper-items'} Items={ListBlocks} ModalMenus={ModalMenus} />
+            <div id="software-version" children={software_version} />
          </div>
       </div>
    );
