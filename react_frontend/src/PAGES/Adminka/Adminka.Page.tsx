@@ -17,7 +17,7 @@ export const ADMINKA_PAGE = () => {
                HomeBtn={<Header_ADM_BTN path="/" Label="На главную" />}
                ExitBtn={<Header_ADM_BTN path="/logout" Label="Выйти из админки" />}
             />
-            <Add_Item_Btn />
+            <Add_Item_Btn Label="Добавить новое" />
             <WrapperItems key={'wrapper-items'} Items={ListBlocks} ModalMenus={ModalMenus} />
          </div>
       </div>

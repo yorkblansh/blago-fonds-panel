@@ -13,11 +13,17 @@ interface IModalMenu {
 }
 
 export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, InputModal, RemoveModalLabel }) => {
+   let _index;
+   if (type === 'MODIFY') {
+      _index = index;
+   } else if (type === 'CREATE') {
+      _index = 0;
+   }
    if (type === 'MODIFY' || type === 'CREATE') {
       return (
          <>
             <div
-               id={`modal-perform-menu_${type}_${index}`}
+               id={`modal-perform-menu_${type}_${_index}`}
                style={{
                   display: 'none',
                }}>
