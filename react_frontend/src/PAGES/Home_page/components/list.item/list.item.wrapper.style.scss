@@ -15,6 +15,10 @@
             margin: 2px;
             border-radius: 5px;
             background-color: rgb(30, 159, 210);
+
+            &--link {
+                text-decoration: underline;
+            }
         }
     }
 }

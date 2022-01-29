@@ -21,8 +21,8 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path }) => {
          <div key={`element_${i}`} className="home-page--wrapper--element" id="home-page--wrapper--element">
             <div className="home-page--wrapper--element--data">
                <ListItem Label="Название" index={i} value={value[KEY].name} />
-               <ListItem Label="Ссылка1" index={i} value={value[KEY].link1} />
-               <ListItem Label="Ссылка2" index={i} value={value[KEY].link2} />
+               <ListItem link Label="Ссылка1" index={i} value={value[KEY].link1} />
+               <ListItem link Label="Ссылка2" index={i} value={value[KEY].link2} />
                <ListItem Label="Доп. информация" index={i} value={value[KEY].info} />
             </div>
             {path === '/adminka' && ( //? Если компонент рендериться в админке, то рисуем кнопки
