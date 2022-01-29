@@ -5,6 +5,10 @@
     background-color: cornflowerblue;
     padding: 3px;
     border-radius: 5px;
+    border-color: rgb(12, 44, 148);
+    border-width: 4px;
+    border-style: solid;
+    cursor: pointer;
 
     &>* {
         height: fit-content;
