@@ -21,7 +21,7 @@ export const ADMINKA_PAGE = () => {
             />
             <Add_Item_Btn Label="Добавить новое" />
             <WrapperItems key={'wrapper-items'} Items={ListBlocks} ModalMenus={ModalMenus} />
-            {/* <div id="software-version" children={software_version} /> */}
+            <div id="software-version" children={software_version} />
          </div>
       </div>
    );

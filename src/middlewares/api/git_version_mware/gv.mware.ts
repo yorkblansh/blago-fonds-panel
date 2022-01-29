@@ -1,13 +1,13 @@
 import { IMware } from '../../typings/mware.interfaces';
-import simpleGit, { SimpleGit, CleanOptions } from 'simple-git';
-const git: SimpleGit = simpleGit().clean(CleanOptions.FORCE);
+import shelljs from 'shelljs';
 
 export const GV_mware: IMware = ({ req, res, logger }) => {
-   console.dir('GIT TAG');
-   console.dir(git.tags());
+   const soft_ver = shelljs.exec('git describe').toString();
+   const _soft_ver = soft_ver.substring(0, soft_ver.length - 12);
+
    if (req.cookies.admin_key) {
       res.send({
-         version: git.tag(),
+         version: _soft_ver,
       });
    }
 };

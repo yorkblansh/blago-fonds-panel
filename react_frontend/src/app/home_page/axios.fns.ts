@@ -15,7 +15,7 @@ export const getSoftwareVersion = (cb: (props: any) => void) => {
       .then((res) => {
          console.dir(`GET VER ${res}`);
          console.info(res);
-         cb(res);
+         cb(res.data.version);
       })
       .catch((err) => {
          console.dir(err);
