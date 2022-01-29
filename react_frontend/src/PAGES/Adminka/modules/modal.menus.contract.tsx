@@ -35,7 +35,7 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
                RemoveModalLabel="Удалить"
                type="REMOVE"
                index={index}
-               SaveBtn={<Button_Modal button_type="SAVE" index={index} Label="Сохранить" modal_type="REMOVE" />}
+               SaveBtn={<Button_Modal button_type="SAVE" index={index} Label="Удалить??" modal_type="REMOVE" />}
                CloseBtn={<Button_Modal button_type="CLOSE" index={index} Label="Закрыть" modal_type="REMOVE" />}
                InputModal={<div></div>}
             />
