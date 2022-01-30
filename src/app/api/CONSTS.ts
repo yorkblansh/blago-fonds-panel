@@ -1,7 +1,3 @@
-// export enum FORM_NAME {
-//    modify_data_form = 'modify_data_form',
-// }
-
 export enum FORM_INPUTS {
    'name',
    'link1',
@@ -30,3 +26,5 @@ export enum PERF_TYPE {
    'REMOVE',
    'CREATE',
 }
+
+export const PATH = (path: keyof typeof MAIN_PATHES) => path;

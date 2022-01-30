@@ -19,9 +19,9 @@
       // "<>*": [
       //   "components*"
       // ],
-      // "components": [
-      //   "components/index"
-      // ],
+      "consts": [
+        "../../src/app/api/"
+      ],
       // "scripts": [
       //   "scripts/index"
       // ],

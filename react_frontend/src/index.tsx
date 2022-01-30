@@ -5,12 +5,8 @@ import { HOME_PAGE } from 'PAGES/Home_page/Home.Page';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page';
-import { MAIN_PATHES } from 'api/CONSTS';
+import { PATH } from 'api/CONSTS';
 import { REGISTER_PAGE } from 'PAGES/Register/Register.Page';
-
-const PATH = (path: keyof typeof MAIN_PATHES): string => {
-   return MAIN_PATHES[path].toString();
-};
 
 const App = () => {
    return (

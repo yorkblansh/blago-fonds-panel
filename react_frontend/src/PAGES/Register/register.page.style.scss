@@ -1,0 +1,16 @@
+.register-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh);
+
+    &--form_wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 277px;
+        height: fit-content;
+        justify-content: center;
+        align-items: center;
+    }
+}
