@@ -1,7 +1,7 @@
 import './header.style.scss';
 
 export interface IHeader {
-   (props: { AuthBtn: JSX.Element; RegisterBtn: JSX.Element }): JSX.Element;
+   (props: { AuthBtn?: JSX.Element; RegisterBtn?: JSX.Element }): JSX.Element;
 }
 
 export const Header: IHeader = ({ AuthBtn, RegisterBtn }) => {

@@ -10,10 +10,10 @@ export const AUTH_PAGE = () => {
          <Header_Auth Header_BTN={<Header_BTN_AUTH label="Вернуться на главную" />} />
          <div className="auth-page--form_wrapper">
             <form action="/auth_post" className="formInput--auth" id="vhod" method="POST">
-               <Account_Input Label="Логин" input_type="login" />
+               <Account_Input path="/auth" Label="Логин" input_type="login" />
                <br />
                <br />
-               <Account_Input Label="Пароль" input_type="password" />
+               <Account_Input path="/auth" Label="Пароль" input_type="password" />
                <p></p>
             </form>
             <input value="Войти" className="input_type--submit" type="submit" form="vhod" />

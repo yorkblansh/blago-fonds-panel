@@ -8,8 +8,8 @@ export class Auth_mware {
    };
    public static perform: IMware = ({ req, res }) => {
       console.dir(req.body);
-      const login = req.body['login-input'];
-      const password = req.body['password-input'];
+      const login = req.body['login-input_auth'];
+      const password = req.body['password-input_auth'];
       console.log(`login: ${login}, password: ${password}`);
 
       if (login === 'asdfg' && password === '123456789') {
