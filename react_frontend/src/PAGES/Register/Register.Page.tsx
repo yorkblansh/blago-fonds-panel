@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import { Account_Input } from 'PAGES/Auth/components/account.inputs/account.inputs';
 import { Header_BTN } from './components/buttons/header.btn';
-import { Header } from './components/header/header';
+import { Header } from 'PAGES/Home_page/components/header/header';
 import { ListBlocks_Contract } from './components/modules/list.blocks.contract';
 import './home.page.style.scss';
 
@@ -10,7 +10,7 @@ export const REGISTER_PAGE = () => {
    return (
       <>
          <div className="auth-page">
-            <Header_Register Header_BTN={<Header_BTN_Register label="Вернуться на главную" />} />
+            <Header_Register Header_BTN={<Header_BTN label="Вернуться на главную" />} />
             <div className="auth-page--form_wrapper">
                <form action="/auth_post" className="formInput--auth" id="vhod" method="POST">
                   <Account_Input path="/register" Label="Логин" input_type="login" />
