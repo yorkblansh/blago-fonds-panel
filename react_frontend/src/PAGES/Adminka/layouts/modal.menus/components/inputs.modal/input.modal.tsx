@@ -1,4 +1,4 @@
-import { FORM_INPUTS } from 'api/CONSTS';
+import { FORM_INPUTS } from '_consts';
 import { useState } from 'react';
 import './input.modal.style.scss';
 interface I_InputModal {

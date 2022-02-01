@@ -1,4 +1,4 @@
-import { MAIN_PATHES } from 'api/CONSTS';
+import { MAIN_PATHES } from '_consts';
 import './inputs.style.scss';
 
 interface IAccount_Input {

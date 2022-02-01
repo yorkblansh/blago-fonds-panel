@@ -1,6 +1,6 @@
 import './item.perform.btn.style.scss';
 import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler';
-import { PERF_TYPE } from 'api/CONSTS';
+import { PERF_TYPE } from '_consts';
 export interface I_Item_Config_BTN {
    (props: { type: keyof typeof PERF_TYPE; index: number; Label: string }): JSX.Element;
 }

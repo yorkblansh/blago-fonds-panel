@@ -1,5 +1,5 @@
 import './button.modal.style.scss';
-import { PERF_TYPE } from 'api/CONSTS';
+import { PERF_TYPE } from '_consts';
 import { perform_submit } from 'app/adminka/perform.submit';
 import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler';
 

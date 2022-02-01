@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { API, MAIN_PATHES } from 'api/CONSTS';
+import { API, MAIN_PATHES } from '_consts';
 import { Ilist, Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Config_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { ListItem } from '../list.item/list.item';
