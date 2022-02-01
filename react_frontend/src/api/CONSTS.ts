@@ -14,12 +14,14 @@ export enum MAIN_PATHES {
 }
 
 export enum API {
+   '/reg_user_api',
    '/logout',
    '/home',
    '/auth_post',
    '/modify_data_api',
    '/remove_data_api',
    '/create_data_api',
+   '/get_version',
 }
 
 export enum PERF_TYPE {

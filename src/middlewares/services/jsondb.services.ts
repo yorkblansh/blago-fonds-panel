@@ -35,4 +35,9 @@ export class JsonDB_Services {
          true,
       );
    };
+
+   public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
+      const { jsondb } = JsonDB_Contract();
+      jsondb.push(`/users[]/${login}`, { password });
+   };
 }

@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
-import { MAIN_PATHES } from 'api/CONSTS';
+import { API, MAIN_PATHES } from 'api/CONSTS';
 import { Ilist, Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Config_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { ListItem } from '../list.item/list.item';
 
 interface IListBlocks_Contract {
-   (props: { path: keyof typeof MAIN_PATHES }): { ListBlocks: JSX.Element[]; list: Ilist };
+   (props: { path: keyof typeof API | keyof typeof MAIN_PATHES }): { ListBlocks: JSX.Element[]; list: Ilist };
 }
 
 export interface DynObjName {

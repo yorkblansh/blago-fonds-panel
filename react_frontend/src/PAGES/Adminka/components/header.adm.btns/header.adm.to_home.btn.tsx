@@ -1,8 +1,8 @@
 import './header.adm.to_home.btn.style.scss';
-import { MAIN_PATHES } from 'api/CONSTS';
+import { API, MAIN_PATHES } from 'api/CONSTS';
 
 export interface IHeader_ADM_BTN {
-   (props: { Label: string; path: keyof typeof MAIN_PATHES }): JSX.Element;
+   (props: { Label: string; path: keyof typeof API | keyof typeof MAIN_PATHES }): JSX.Element;
 }
 
 export const Header_ADM_BTN: IHeader_ADM_BTN = ({ Label, path }) => {
