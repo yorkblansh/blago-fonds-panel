@@ -7,7 +7,7 @@ import './register.page.style.scss';
 export const REGISTER_PAGE = () => {
    return (
       <div className="register-page">
-         <Header Buttons={[<Header_BTN path="/" label="Вернуться на главную" />]} />
+         <Header reg_or_auth Buttons={[<Header_BTN path="/" label="Вернуться на главную" />]} />
          <div className="register-page--form_wrapper">
             <form action="/auth_post" className="formInput--auth" id="vhod" method="POST">
                <Account_Input path="/register" Label="Логин" input_type="login" />

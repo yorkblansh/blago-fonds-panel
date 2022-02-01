@@ -2,14 +2,16 @@
   "compilerOptions": {
     "types": [ "node"],
     // "jsx": "react",
+  
     "jsx": "react-jsx",
     "module": "commonjs",
     "esModuleInterop": true,
     "target": "esnext",
     "moduleResolution": "node",
+    "baseUrl": ".",
     "sourceMap": true,
     "outDir": "dist",
-
+ 
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     /* Experimental Options */
