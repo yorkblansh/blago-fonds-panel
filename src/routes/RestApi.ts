@@ -8,7 +8,7 @@ import { RemoveData_Controller } from '../controllers/adminka.controllers/remove
 import { CreateData_Controller } from '../controllers/adminka.controllers/create.data.controller';
 import { Git_Version_Controller } from '../controllers/git_version_controller/git_version_controller';
 import { Register_Controller } from 'src/controllers/register.controller';
-import { REST_API, PATH } from '_consts';
+import { REST_API, PATH } from 'src/consts';
 
 export const WEBrouter = Router();
 
