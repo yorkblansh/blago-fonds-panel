@@ -8,7 +8,7 @@
     "esModuleInterop": true,
     "target": "esnext",
     "moduleResolution": "node",
-    "baseUrl": ".",
+    "baseUrl": ".src",
     "sourceMap": true,
     "outDir": "dist",
  

@@ -1,8 +1,7 @@
 import { Request as IRequest } from 'express';
 import { Response as IResponse } from 'express';
 import { ILogger } from '../LOGS/Logger';
-import { Register_mware } from 'src/middlewares/api/register.mware';
-
+import { Register_mware } from '../middlewares/api/register.mware';
 export class Register_Controller {
    public static show(req: IRequest, res: IResponse): void {
       const logger: ILogger = req.app.locals.logger;
