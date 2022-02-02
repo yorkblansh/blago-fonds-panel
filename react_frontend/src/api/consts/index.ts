@@ -9,7 +9,7 @@ export enum MAIN_PATHES {
    '/adminka',
    '/auth',
    '/',
-   'hjhjh',
+   'hyuyuyuyu',
    '/register',
 }
 
