@@ -1,0 +1,3 @@
+[submodule "consts"]
+	path = react_frontend/src/api/consts
+	url = git@gitlab.com:_blago_info_/consts.git
