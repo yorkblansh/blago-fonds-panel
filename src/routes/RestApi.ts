@@ -8,7 +8,7 @@ import { RemoveData_Controller } from '../controllers/adminka.controllers/remove
 import { CreateData_Controller } from '../controllers/adminka.controllers/create.data.controller';
 import { Git_Version_Controller } from '../controllers/git_version_controller/git_version_controller';
 import { Register_Controller } from '../controllers/register.controller';
-import { REST_API, PATH } from '../consts';
+import { REST_API, PATH } from '../../react_frontend/src/api/consts';
 
 export const WEBrouter = Router();
 
