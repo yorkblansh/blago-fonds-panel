@@ -22,7 +22,6 @@
     "dependencies": {
         "@types/shelljs": "^0.8.11",
         "@types/validator": "^13.7.1",
-        "_consts": "gitlab:_blago_info_/consts",
         "async": "^3.2.3",
         "axios": "^0.25.0",
         "colors": "^1.4.0",
