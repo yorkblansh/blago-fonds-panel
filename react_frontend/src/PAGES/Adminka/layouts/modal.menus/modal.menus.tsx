@@ -1,4 +1,4 @@
-import { PERF_TYPE } from '_consts';
+import { PERF_TYPE } from 'api/consts';
 import './modal.menus.style.scss';
 
 interface IModalMenu {

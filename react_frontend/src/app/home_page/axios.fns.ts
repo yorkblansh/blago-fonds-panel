@@ -1,4 +1,4 @@
-import { API } from '_consts';
+import { API } from 'api/consts';
 import axios from 'axios';
 
 export interface IgetHomePageData {

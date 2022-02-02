@@ -1,4 +1,4 @@
-import { MAIN_PATHES } from '_consts';
+import { MAIN_PATHES } from 'api/consts';
 import './header.btn.style.scss';
 
 interface IHeader_BTN {

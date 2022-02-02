@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import { API, PERF_TYPE } from '_consts';
+import { API, PERF_TYPE } from 'api/consts';
 import { sendForm } from 'app/home_page/axios.fns';
 
 export const perform_submit = (index: any, perform_type: keyof typeof PERF_TYPE) => {

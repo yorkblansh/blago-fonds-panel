@@ -5,7 +5,7 @@ import { HOME_PAGE } from 'PAGES/Home_page/Home.Page';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page';
-import { PATH } from '_consts';
+import { PATH } from 'api/consts';
 import { REGISTER_PAGE } from 'PAGES/Register/Register.Page';
 
 const App = () => {

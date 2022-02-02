@@ -1,4 +1,4 @@
-import { PERF_TYPE } from '_consts';
+import { PERF_TYPE } from 'api/consts';
 
 export const DisplayModalToogler = (index: string | number, display_status: boolean, type: keyof typeof PERF_TYPE) => {
    if (display_status === true) {
