@@ -7,9 +7,11 @@ import { WrapperItems } from './components/wrapper.wrapper_items/wrapper_items.a
 import { ModalMenus_Contract } from './modules/modal.menus.contract';
 import { Add_Item_Btn } from './components/add.item.btn/add.item.btn';
 import { useSoftwareVersion } from 'app/hooks/useSoftwareVersion';
+import { getAccountProps } from 'app/getAccountProps';
 
 export const ADMINKA_PAGE = () => {
-   let { ListBlocks, list } = ListBlocks_Contract({ path: '/adminka' });
+   let { is_authorized } = getAccountProps();
+   let { ListBlocks, list } = ListBlocks_Contract({ path: '/adminka', is_authorized });
    let { ModalMenus } = ModalMenus_Contract({ list });
    let { software_version } = useSoftwareVersion();
    return (

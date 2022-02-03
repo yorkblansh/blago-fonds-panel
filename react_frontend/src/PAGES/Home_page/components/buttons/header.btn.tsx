@@ -8,13 +8,20 @@ interface IHeader_BTN {
 export const Header_BTN: IHeader_BTN = ({ label, path }) => {
    return (
       <>
-         <div
-            onClick={() => {
-               document.location.href = path;
-            }}
-            className="header-btn"
-            children={<div>{label}</div>}
-         />
+         <div className="dropdown">
+            <button
+               onClick={() => {
+                  document.location.href = path;
+               }}
+               className="header-btn dropbtn"
+               children={<div>{label}</div>}
+            />
+            <div className="dropdown-content">
+               <a href="#">Выйти</a>
+               {/* <a href="#">Ссылка 2</a>
+         <a href="#">Ссылка 3</a> */}
+            </div>
+         </div>
       </>
    );
 };
