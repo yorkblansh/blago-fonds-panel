@@ -2,7 +2,7 @@ import { MAIN_PATHES } from 'api/consts';
 import './header.btn.style.scss';
 
 interface IHeader_BTN {
-   (props: { label: string; path: keyof typeof MAIN_PATHES }): JSX.Element;
+   (props: { label: string; path: keyof typeof MAIN_PATHES | '/logout' }): JSX.Element;
 }
 
 export const Header_BTN: IHeader_BTN = ({ label, path }) => {

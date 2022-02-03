@@ -5,14 +5,17 @@ import { Item_Config_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.
 import { ListItem } from '../list.item/list.item';
 
 interface IListBlocks_Contract {
-   (props: { path: keyof typeof API | keyof typeof MAIN_PATHES }): { ListBlocks: JSX.Element[]; list: Ilist };
+   (props: { path: keyof typeof API | keyof typeof MAIN_PATHES; is_authorized: boolean }): {
+      ListBlocks: JSX.Element[];
+      list: Ilist;
+   };
 }
 
 export interface DynObjName {
    [key: string]: Ilist_elements;
 }
 
-export const ListBlocks_Contract: IListBlocks_Contract = ({ path }) => {
+export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
    const { list } = useItemList();
 
    let ListBlocks: JSX.Element[] = list.map((value: DynObjName, i) => {
