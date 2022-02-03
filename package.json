@@ -2,9 +2,9 @@
     "name": "report_parser",
     "version": "1.0.0",
     "description": "",
-    "main": "dist/index.js",
+    "main": "dist/src/index.js",
     "scripts": {
-        "start": "./node_modules/.bin/eslint src/ && tsc && node dist/index.js",
+        "start": "./node_modules/.bin/eslint src/ && tsc && node dist/src/index.js",
         "build": "./node_modules/.bin/eslint src/ && tsc",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
