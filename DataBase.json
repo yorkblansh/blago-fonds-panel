@@ -1,21 +1,33 @@
 {
     "organizes": [
         {
-            "Благофонд0000": {
-                "info": "other info___",
-                "link1": "httppppp",
-                "link2": "http2___",
-                "name": "Благофонд0000",
-                "last_modify":"100000011010"
+            "123": {
+                "info": "",
+                "link1": "",
+                "link2": "",
+                "name": "123",
+                "index": 3,
+                "last_modify": "04/02/22 12:04:17"
             }
         },
         {
-            "Благофонд0000": {
+            "Благофонд22": {
                 "info": "other info___",
                 "link1": "httppppp",
                 "link2": "http2___",
-                "name": "Благофонд0000",
-                "last_modify":"100000011010"
+                "name": "Благофонд22",
+                "index": 1,
+                "last_modify": "04/02/22 48:04:17"
+            }
+        },
+        {
+            "Благофонд3": {
+                "info": "other info___",
+                "link1": "httppppp",
+                "link2": "http2___",
+                "name": "Благофонд3",
+                "index": 0,
+                "last_modify": "04/02/22 50:04:17"
             }
         },
         {
@@ -24,16 +36,8 @@
                 "link1": "httppppp",
                 "link2": "http2___",
                 "name": "Благофонд1",
-                "last_modify":"100000011010"
-            }
-        },
-        {
-            "123": {
-                "info": "",
-                "link1": "",
-                "link2": "",
-                "name": "123",
-                "last_modify":"100000011010"
+                "index": 1,
+                "last_modify": "04/02/22 01:05:17"
             }
         }
     ],
@@ -41,12 +45,17 @@
         "asdfg": {
             "login": "asdfg",
             "password": "123456789",
-            "user_type":"admin"
+            "user_type": "admin"
         },
         "qwe": {
             "login": "qwe",
             "password": "qwe",
-            "user_type":"default"
+            "user_type": "default",
+            "favorites": {
+                "Благофонд3": "Благофонд3",
+                "Благофонд22": "Благофонд22",
+                "Благофонд1": "Благофонд1"
+            }
         }
     }
 }

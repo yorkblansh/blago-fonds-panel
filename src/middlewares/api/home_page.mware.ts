@@ -12,7 +12,9 @@ export class Home_page_mware {
       const { json_data_HOME_PAGE } = JsonDB_Services.home_page_dataPerform();
       res.send({ organizes: json_data_HOME_PAGE });
    };
-   public static add2favorite: IMware = ({ req, res, logger }) => {
+   public static add2favorite: IMware = ({ req }) => {
+      const { org_name, user_name }: { org_name: string; user_name: string } = req.body;
       console.dir(req.body);
+      JsonDB_Services.add2favorite({ org_name, user_name });
    };
 }

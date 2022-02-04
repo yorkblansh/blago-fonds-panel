@@ -33,11 +33,17 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 					<div className="home-page--wrapper--element--buttons">
 						<Item_Perform_BTN Label="Изменить" index={i} type="MODIFY" />
 						<Item_Perform_BTN Label="Удалить" index={i} type="REMOVE" />
+						<LastModify_DIV text={`Последнее изменение: ${value[KEY].last_modify}`} />
 					</div>
 				)}
 				{path === '/' && is_authorized && (
 					<div className="home-page--wrapper--element--buttons">
-						<Item_Perform_BTN Label="Добавить визбранное" index={i} type="ADD_2_FAVORITE" />
+						<Item_Perform_BTN
+							org_name={value[KEY].name}
+							Label="Добавить визбранное"
+							index={i}
+							type="ADD_2_FAVORITE"
+						/>
 						<LastModify_DIV text={`Последнее изменение: ${value[KEY].last_modify}`} />
 					</div>
 				)}

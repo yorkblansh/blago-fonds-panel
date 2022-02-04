@@ -3,6 +3,9 @@ import { I_obj } from '../api/adminka/adminka.data.perform.mware';
 import { JsonDB_Contract } from '../models/jsondb.contract';
 import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface';
 
+interface Iadd2favorite {
+   (props: { user_name: string; org_name: string }): void;
+}
 export class JsonDB_Services {
    public static home_page_dataPerform = () => {
       const { jsondb } = JsonDB_Contract();
@@ -12,9 +15,20 @@ export class JsonDB_Services {
       return { json_data_HOME_PAGE };
    };
 
-   public static adminka_create_data = ({ info, link1, link2, name }: I_obj) => {
+   public static add2favorite: Iadd2favorite = ({ user_name, org_name }) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.push(`/organizes[]/${name}`, { info, link1, link2, name }, true);
+      // try {
+      //    jsondb.delete(`/users/${user_name}/favorites[${jsondb.getIndex(`/users/${user_name}/favorites`, org_name)}]`);
+      // } catch (error) {
+      //    console.dir(error);
+      // }
+
+      jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true);
+   };
+
+   public static adminka_create_data = (obj: I_obj) => {
+      const { jsondb } = JsonDB_Contract();
+      jsondb.push(`/organizes[]/${obj.name}`, obj, true);
    };
 
    public static adminka_remove_data = ({ index }: { index: string | number }) => {
@@ -22,19 +36,10 @@ export class JsonDB_Services {
       jsondb.delete(`/organizes[${index}]`);
    };
 
-   public static adminka_modify_data = ({ info, link1, link2, name, index }: I_obj) => {
+   public static adminka_modify_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.delete(`/organizes[${index}]`);
-      jsondb.push(
-         `/organizes[]/${name}`,
-         {
-            info,
-            link1,
-            link2,
-            name,
-         },
-         true,
-      );
+      jsondb.delete(`/organizes[${obj.index}]`);
+      jsondb.push(`/organizes[]/${obj.name}`, obj, true);
    };
 
    public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
