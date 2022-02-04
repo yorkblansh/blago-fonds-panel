@@ -5,7 +5,8 @@
                 "info": "other info___",
                 "link1": "httppppp",
                 "link2": "http2___",
-                "name": "Благофонд0000"
+                "name": "Благофонд0000",
+                "last_modify":"100000011010"
             }
         },
         {
@@ -13,7 +14,8 @@
                 "info": "other info___",
                 "link1": "httppppp",
                 "link2": "http2___",
-                "name": "Благофонд0000"
+                "name": "Благофонд0000",
+                "last_modify":"100000011010"
             }
         },
         {
@@ -21,7 +23,8 @@
                 "info": "other info___",
                 "link1": "httppppp",
                 "link2": "http2___",
-                "name": "Благофонд1"
+                "name": "Благофонд1",
+                "last_modify":"100000011010"
             }
         },
         {
@@ -29,7 +32,8 @@
                 "info": "",
                 "link1": "",
                 "link2": "",
-                "name": "123"
+                "name": "123",
+                "last_modify":"100000011010"
             }
         }
     ],

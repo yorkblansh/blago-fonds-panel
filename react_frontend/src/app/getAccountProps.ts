@@ -15,7 +15,7 @@ export const getAccountProps = () => {
 			is_authorized = false;
 		}
 	} else if (process.env.NODE_ENV === 'development') {
-		is_authorized = false;
+		is_authorized = true;
 		user_name = 'test_user';
 		user_key = 'keykey';
 	} else {

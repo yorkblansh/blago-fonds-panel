@@ -2,6 +2,7 @@
 import { API, MAIN_PATHES } from 'api/consts';
 import { Ilist, Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
+import { LastModify_DIV } from '../last_modify.div/last_modify.div';
 import { ListItem } from '../list.item/list.item';
 
 interface IListBlocks_Contract {
@@ -37,6 +38,7 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 				{path === '/' && is_authorized && (
 					<div className="home-page--wrapper--element--buttons">
 						<Item_Perform_BTN Label="Добавить визбранное" index={i} type="ADD_2_FAVORITE" />
+						<LastModify_DIV text={`Последнее изменение: ${value[KEY].last_modify}`} />
 					</div>
 				)}
 			</div>
