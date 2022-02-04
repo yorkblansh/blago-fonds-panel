@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export interface IgetItemsPageData {
 	(
-		props: { path: keyof typeof MAIN_PATHES; data?: { user_name: string } },
+		props: { path: keyof typeof MAIN_PATHES; user_name?: string },
 		cb: (res: { data: { organizes: any[] } }) => void,
 	): void;
 }
@@ -25,9 +25,9 @@ export const getSoftwareVersion = (cb: (props: any) => void) => {
 		});
 };
 
-export const getItemsPageData: IgetItemsPageData = ({ path, data }, cb) => {
+export const getItemsPageData: IgetItemsPageData = ({ path, user_name }, cb) => {
 	axios
-		.post(path, data) // home or favorites
+		.post(path, { user_name }) // home or favorites
 		.then((res) => {
 			console.dir(res);
 			cb(res);

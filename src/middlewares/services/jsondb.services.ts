@@ -6,6 +6,7 @@ import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface';
 interface Iadd2favorite {
    (props: { user_name: string; org_name: string }): void;
 }
+
 export class JsonDB_Services {
    public static home_page_dataPerform = () => {
       const { jsondb } = JsonDB_Contract();
@@ -15,7 +16,10 @@ export class JsonDB_Services {
       return { json_data_HOME_PAGE };
    };
 
-   public static getFavorites = () => {
+   public static getFavorites = ({ user_name }: { user_name: string }) => {
+      const { jsondb } = JsonDB_Contract();
+      const favorites = jsondb.getData(`/users/${user_name}/favorites`);
+
       return { favorites };
    };
 

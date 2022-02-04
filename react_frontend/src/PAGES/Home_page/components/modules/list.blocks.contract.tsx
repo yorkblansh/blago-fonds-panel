@@ -7,7 +7,7 @@ import { LastModify_DIV } from '../last_modify.div/last_modify.div';
 import { ListItem } from '../list.item/list.item';
 
 interface IListBlocks_Contract {
-	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean; user_name?: string }): {
+	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
 		ListBlocks: JSX.Element[];
 		list: Ilist;
 	};
@@ -17,8 +17,8 @@ export interface DynObjName {
 	[key: string]: Ilist_elements;
 }
 
-export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized, user_name }) => {
-	const { list } = useItemList(path, { user_name });
+export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
+	const { list } = useItemList(path);
 
 	let ListBlocks: JSX.Element[] = list.map((value: DynObjName, i) => {
 		let [KEY] = Object.keys(value);
