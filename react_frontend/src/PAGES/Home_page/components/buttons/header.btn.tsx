@@ -1,37 +1,33 @@
 import { MAIN_PATHES } from 'api/consts';
 import './header.btn.style.scss';
+import './dropdown.btn.style.scss';
+
+type _path = keyof typeof MAIN_PATHES | '/logout';
 
 interface IHeader_BTN {
-   (props: { label: string; path: keyof typeof MAIN_PATHES | '/logout' }): JSX.Element;
+	(props: { label: string; path: _path; dropdown?: [{ path: _path; label: string }] }): JSX.Element;
 }
 
-export const Header_BTN: IHeader_BTN = ({ label, path }) => {
-   return (
-      <>
-         <div className="dropdown">
-            <button
-               onClick={() => {
-                  document.location.href = path;
-               }}
-               className="header-btn dropbtn"
-               children={<div>{label}</div>}
-            />
-            <div className="dropdown-content">
-               <a href="#">Выйти</a>
-               {/* <a href="#">Ссылка 2</a>
-         <a href="#">Ссылка 3</a> */}
-            </div>
-         </div>
-      </>
-   );
+export const Header_BTN: IHeader_BTN = ({ label, path, dropdown }) => {
+	return (
+		<>
+			<div className="dropdown">
+				<button
+					onClick={() => {
+						!dropdown && (document.location.href = path);
+					}}
+					className="header-btn dropbtn"
+					children={<div>{label}</div>}
+				/>
+				{dropdown && (
+					<div className="dropdown-content">
+						{dropdown.map(({ path, label }) => {
+							return <a href={path}>{label}</a>;
+						})}
+						{/* <a href={path}>Выйти</a> */}
+					</div>
+				)}
+			</div>
+		</>
+	);
 };
-
-// const Button = Router(({ history }: { history: string[] }, props: { label: string }) => (
-//    <div
-//       onClick={() => {
-//          history.push('/new-location');
-//       }}
-//       className="header-btn"
-//       children={<div>{props.label}</div>}
-//    />
-// ));
