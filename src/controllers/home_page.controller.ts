@@ -11,4 +11,8 @@ export class Home_page_Controller {
       const logger: ILogger = req.app.locals.logger;
       Home_page_mware.perform({ req, res, logger });
    };
+   public static add2favorite = (req: IRequest, res: IResponse) => {
+      const logger: ILogger = req.app.locals.logger;
+      Home_page_mware.add2favorite({ req, res, logger });
+   };
 }

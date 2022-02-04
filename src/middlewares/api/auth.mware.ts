@@ -1,5 +1,5 @@
 import md5 from 'md5';
-import { PATH } from '../../../react_frontend/src/api/consts';
+import { COOKIES, PATH } from '../../../react_frontend/src/api/consts';
 import { sendStatic } from '../send_static_file.mw';
 import { JsonDB_Services } from '../services/jsondb.services';
 import { IMware } from '../typings/mware.interfaces';
@@ -21,7 +21,7 @@ export class Auth_mware {
             if (user_type === 'admin') {
                if (_login === login && _password === password) {
                   res.cookie(
-                     'admin_key',
+                     COOKIES('admin_key'),
                      { a_k: '789456123' },
                      {
                         expires: new Date(Date.now() + 172800000),
@@ -34,7 +34,10 @@ export class Auth_mware {
                }
             } else if (user_type === 'default') {
                if (_login === login && _password === password) {
-                  res.cookie('user_key', md5(new Date(Date.now() + 172800000).toString()), {
+                  res.cookie(COOKIES('user_key'), md5(new Date(Date.now() + 172800000).toString()), {
+                     expires: new Date(Date.now() + 172800000),
+                  });
+                  res.cookie(COOKIES('user_name'), login, {
                      expires: new Date(Date.now() + 172800000),
                   });
                   res.redirect(PATH('/'));

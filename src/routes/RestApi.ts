@@ -28,4 +28,6 @@ WEBrouter.post(REST_API('/create_data_api'), CreateData_Controller.perform);
 
 WEBrouter.post(REST_API('/reg_user_api'), Register_Controller.perform);
 
+WEBrouter.post(REST_API('/add_2_favorite'), Home_page_Controller.add2favorite);
+
 WEBrouter.get(REST_API('/get_version'), Git_Version_Controller.show);

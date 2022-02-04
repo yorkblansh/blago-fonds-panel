@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
+import { PATH, REST_API } from 'api/consts';
 import { getAccountProps } from 'app/getAccountProps';
 import { Header_BTN } from './components/buttons/header.btn';
 import { Header } from './components/header/header';
@@ -6,16 +7,21 @@ import { ListBlocks_Contract } from './components/modules/list.blocks.contract';
 import './home.page.style.scss';
 
 export const HOME_PAGE = () => {
-	let { is_authorized } = getAccountProps();
-	// const is_authorized = false;
-	let { ListBlocks } = ListBlocks_Contract({ path: '/home', is_authorized });
-	console.dir(is_authorized);
+	let { is_authorized, user_name } = getAccountProps();
+	let { ListBlocks } = ListBlocks_Contract({ path: '/', is_authorized });
 	return (
 		<>
 			<Header
 				Buttons={
 					is_authorized
-						? [<Header_BTN dropdown={[{ label: 'Выйти', path: '/logout' }]} path="/logout" label="Выйти" />]
+						? [
+								<Header_BTN path={PATH('/favorites')} label="Избранные" />,
+								<Header_BTN
+									path={REST_API('/logout')}
+									label={user_name}
+									dropdown_list={[{ label: 'Выйти', click_link: '/logout' }]}
+								/>,
+						  ]
 						: [
 								<Header_BTN path="/auth" label="Войти в профиль" />,
 								<Header_BTN path="/register" label="Регистрация" />,
@@ -23,9 +29,7 @@ export const HOME_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
-				<div className="home-page--wrapper" id="home-page--wrapper">
-					{ListBlocks}
-				</div>
+				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>
 	);

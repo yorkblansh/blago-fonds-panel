@@ -1,14 +1,14 @@
-import { MAIN_PATHES } from 'api/consts';
+import { API, MAIN_PATHES } from 'api/consts';
 import './header.btn.style.scss';
 import './dropdown.btn.style.scss';
 
-type _path = keyof typeof MAIN_PATHES | '/logout';
+type _path = keyof typeof MAIN_PATHES | keyof typeof API;
 
 interface IHeader_BTN {
-	(props: { label: string; path: _path; dropdown?: [{ path: _path; label: string }] }): JSX.Element;
+	(props: { label: string; path: _path; dropdown_list?: [{ click_link: _path; label: string }] }): JSX.Element;
 }
 
-export const Header_BTN: IHeader_BTN = ({ label, path, dropdown }) => {
+export const Header_BTN: IHeader_BTN = ({ label, path, dropdown_list: dropdown }) => {
 	return (
 		<>
 			<div className="dropdown">
@@ -21,8 +21,8 @@ export const Header_BTN: IHeader_BTN = ({ label, path, dropdown }) => {
 				/>
 				{dropdown && (
 					<div className="dropdown-content">
-						{dropdown.map(({ path, label }) => {
-							return <a href={path}>{label}</a>;
+						{dropdown.map(({ click_link, label }) => {
+							return <a href={click_link}>{label}</a>;
 						})}
 						{/* <a href={path}>Выйти</a> */}
 					</div>
