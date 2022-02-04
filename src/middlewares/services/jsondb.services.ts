@@ -15,6 +15,10 @@ export class JsonDB_Services {
       return { json_data_HOME_PAGE };
    };
 
+   public static getFavorites = () => {
+      return { favorites };
+   };
+
    public static add2favorite: Iadd2favorite = ({ user_name, org_name }) => {
       const { jsondb } = JsonDB_Contract();
       // try {

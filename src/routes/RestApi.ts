@@ -9,6 +9,7 @@ import { CreateData_Controller } from '../controllers/adminka.controllers/create
 import { Git_Version_Controller } from '../controllers/git_version_controller/git_version_controller';
 import { Register_Controller } from '../controllers/register.controller';
 import { REST_API, PATH } from '../../react_frontend/src/api/consts';
+import { Favorites_Controller } from '../controllers/favorites.controller';
 
 export const WEBrouter = Router();
 
@@ -28,6 +29,7 @@ WEBrouter.post(REST_API('/create_data_api'), CreateData_Controller.perform);
 
 WEBrouter.post(REST_API('/reg_user_api'), Register_Controller.perform);
 
+WEBrouter.post(PATH('/favorites'), Favorites_Controller.perform);
 WEBrouter.post(REST_API('/add_2_favorite'), Home_page_Controller.add2favorite);
 
 WEBrouter.get(REST_API('/get_version'), Git_Version_Controller.show);

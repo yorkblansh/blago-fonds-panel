@@ -1,8 +1,11 @@
-import { API, REST_API } from 'api/consts';
+import { API, MAIN_PATHES, REST_API } from 'api/consts';
 import axios from 'axios';
 
-export interface IgetHomePageData {
-	(cb: (res: { data: { organizes: any[] } }) => void): void;
+export interface IgetItemsPageData {
+	(
+		props: { path: keyof typeof MAIN_PATHES; data?: { user_name: string } },
+		cb: (res: { data: { organizes: any[] } }) => void,
+	): void;
 }
 
 interface IsendForm {
@@ -22,9 +25,9 @@ export const getSoftwareVersion = (cb: (props: any) => void) => {
 		});
 };
 
-export const getHomePageData: IgetHomePageData = (cb) => {
+export const getItemsPageData: IgetItemsPageData = ({ path, data }, cb) => {
 	axios
-		.post(REST_API('/home'))
+		.post(path, data) // home or favorites
 		.then((res) => {
 			console.dir(res);
 			cb(res);
