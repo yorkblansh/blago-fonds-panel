@@ -19,13 +19,14 @@ export type Ilist = {
 export const useItemList = (path: keyof typeof MAIN_PATHES) => {
 	let { user_name } = getAccountProps();
 
-	let bb = [{ name: { name: '', link1: '', link2: '', info: '', last_modify: '' } }];
+	let bb = { organizes: { name: '', link1: '', link2: '', info: '', last_modify: '' } };
 	const aa: any[] | never[] = [];
 	const [list, updateList] = useState(bb);
 
 	let _path: any;
 	if (path === '/') _path = REST_API('/home');
 	if (path === '/favorites') _path = REST_API('/favorites_api');
+	if (path === '/adminka') _path = REST_API('/home');
 
 	useEffect(() => {
 		if (process.env.NODE_ENV === 'production') {
@@ -33,8 +34,8 @@ export const useItemList = (path: keyof typeof MAIN_PATHES) => {
 				updateList(a.data.organizes);
 			});
 		} else if (process.env.NODE_ENV === 'development') {
-			updateList(dev_data.organizes);
+			// updateList(dev_data.organizes);
 		}
 	}, [_path, path, updateList, user_name]);
-	return { list };
+	return { list: Object.values(list) };
 };

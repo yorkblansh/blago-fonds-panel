@@ -1,7 +1,10 @@
 /* eslint-disable react/jsx-pascal-case */
-import { MAIN_PATHES } from 'api/consts';
+import { MAIN_PATHES, PATH, PERF_TYPE } from 'api/consts';
+import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler';
 import { getAccountProps } from 'app/getAccountProps';
-import { Ilist, Ilist_elements, useItemList } from 'app/hooks/useItemList';
+import { add2favorite } from 'app/home_page/add2favorite';
+import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
+import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { LastModify_DIV } from '../last_modify.div/last_modify.div';
 import { ListItem } from '../list.item/list.item';
@@ -9,7 +12,8 @@ import { ListItem } from '../list.item/list.item';
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
 		ListBlocks: JSX.Element[];
-		list: Ilist;
+		list: any;
+		//  Ilist;
 	};
 }
 
@@ -19,35 +23,48 @@ export interface DynObjName {
 
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
 	const { list } = useItemList(path);
+	const { favorites_names, user_name } = getAccountProps();
 
-	let ListBlocks: JSX.Element[] = list.map((value: DynObjName, i) => {
-		let [KEY] = Object.keys(value);
+	let ListBlocks: JSX.Element[] = list.map((organisation, i) => {
+		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
+			isRenderAdminkaBtns = path === '/adminka',
+			isFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
+			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'];
 		return (
 			<div key={`element_${i}`} className="home-page--wrapper--element" id="home-page--wrapper--element">
 				<div className="home-page--wrapper--element--data">
-					<ListItem Label="Название" index={i} value={value[KEY].name} />
-					<ListItem link Label="Ссылка1" index={i} value={value[KEY].link1} />
-					<ListItem link Label="Ссылка2" index={i} value={value[KEY].link2} />
-					<ListItem Label="Доп. информация" index={i} value={value[KEY].info} />
+					<ListItem Label="Название" index={i} value={organisation.name} />
+					<ListItem link Label="Ссылка1" index={i} value={organisation.link1} />
+					<ListItem link Label="Ссылка2" index={i} value={organisation.link2} />
+					<ListItem Label="Доп. информация" index={i} value={organisation.info} />
 				</div>
-				{path === '/adminka' && ( //? Если компонент рендериться в админке, то рисуем кнопки
-					<div className="home-page--wrapper--element--buttons">
-						<Item_Perform_BTN Label="Изменить" index={i} type="MODIFY" />
-						<Item_Perform_BTN Label="Удалить" index={i} type="REMOVE" />
-						<LastModify_DIV text={`Последнее изменение: ${value[KEY].last_modify}`} />
-					</div>
-				)}
-				{path === '/' && is_authorized && (
-					<div className="home-page--wrapper--element--buttons">
+				<div className="home-page--wrapper--element--buttons">
+					{isRenderAdminkaBtns && //? Если компонент рендериться в админке, то рисуем кнопки
+						BTN_TYPES.map((TYPE) => {
+							return (
+								<Item_Perform_BTN
+									_onClick={() => {
+										DisplayModalToogler(i, true, TYPE);
+									}}
+									Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
+									type={TYPE}
+								/>
+							);
+						})}
+					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
-							org_name={value[KEY].name}
-							Label="Добавить визбранное"
-							index={i}
-							type="ADD_2_FAVORITE"
+							_onClick={() => {
+								isFavoriteOrg
+									? removeFromFavorite(organisation.name, user_name)
+									: add2favorite(organisation.name, user_name);
+								document.location.href = PATH(path);
+							}}
+							Label={isFavoriteOrg ? 'Убрать из избранного' : 'Добавить визбранное'}
+							type={isFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 						/>
-						<LastModify_DIV text={`Последнее изменение: ${value[KEY].last_modify}`} />
-					</div>
-				)}
+					)}
+					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
+				</div>
 			</div>
 		);
 	});

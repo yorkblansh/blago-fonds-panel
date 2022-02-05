@@ -4,12 +4,12 @@ import axios from 'axios';
 export interface IgetItemsPageData {
 	(
 		props: { path: keyof typeof MAIN_PATHES; user_name?: string },
-		cb: (res: { data: { organizes: any[] } }) => void,
+		cb: (res: { data: { organizes: any } }) => void,
 	): void;
 }
 
 interface IsendForm {
-	(props: { data: any; path: keyof typeof API }): void;
+	(props: { data?: any; path: keyof typeof API }, cb?: (res: any) => void): void;
 }
 
 export const getSoftwareVersion = (cb: (props: any) => void) => {
@@ -37,10 +37,12 @@ export const getItemsPageData: IgetItemsPageData = ({ path, user_name }, cb) => 
 		});
 };
 
-export const sendForm: IsendForm = ({ data, path }) => {
+export const sendForm: IsendForm = ({ data, path }, cb) => {
 	axios
 		.post(path, data)
-		.then((res) => {})
+		.then((res) => {
+			if (cb) cb(res);
+		})
 		.catch((err) => console.error(err));
 };
 

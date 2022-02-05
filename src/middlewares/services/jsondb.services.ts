@@ -2,8 +2,9 @@ import { Iuser_types } from '../../../react_frontend/src/api/consts';
 import { I_obj } from '../api/adminka/adminka.data.perform.mware';
 import { JsonDB_Contract } from '../models/jsondb.contract';
 import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface';
+import async from 'async';
 
-interface Iadd2favorite {
+interface IaddORremove_favorite {
    (props: { user_name: string; org_name: string }): void;
 }
 
@@ -17,26 +18,47 @@ export class JsonDB_Services {
       return { json_data_HOME_PAGE };
    };
 
-   public static getFavorites = ({ user_name }: { user_name: string }) => {
+   public static getFavorites_ONLY_NAME_STRINGS = (user_name: string) => {
       const { jsondb } = JsonDB_Contract();
       const favorites = jsondb.getData(`/users/${user_name}/favorites`);
-
-      for (const key in favorites) {
-         // console.dir(favorites[key]);
-         jsondb.getData(`/organizes/`);
-      }
-      return { favorites };
+      const obj_keys = Object.keys(favorites);
+      return { obj_keys, favorites };
    };
 
-   public static add2favorite: Iadd2favorite = ({ user_name, org_name }) => {
+   public static getFavorites = ({ user_name, cb }: { user_name: string; cb }): any => {
       const { jsondb } = JsonDB_Contract();
-      // try {
-      //    jsondb.delete(`/users/${user_name}/favorites[${jsondb.getIndex(`/users/${user_name}/favorites`, org_name)}]`);
-      // } catch (error) {
-      //    console.dir(error);
-      // }
+      const { obj_keys, favorites } = this.getFavorites_ONLY_NAME_STRINGS(user_name);
+      // eslint-disable-next-line prefer-const
+      let end_obj = {};
+      async.each(
+         obj_keys,
+         (key, _cb) => {
+            end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`);
+            _cb();
+         },
+         (err) => {
+            if (err) console.dir(err);
+            console.dir(end_obj);
+            cb(end_obj);
+         },
+      );
 
+      // return { favorites: end_favorites };
+      // for (const key in favorites) {
+      //    end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`);
+      //    // console.dir(favorites[key]);
+      //    // console.dir(jsondb.getData(`/organizes/${favorites[key]}`));
+      // }
+   };
+
+   public static add2favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
+      const { jsondb } = JsonDB_Contract();
       jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true);
+   };
+
+   public static remove_from_favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
+      const { jsondb } = JsonDB_Contract();
+      jsondb.delete(`/users/${user_name}/favorites/${org_name}`);
    };
 
    public static adminka_create_data = (obj: I_obj) => {
@@ -49,15 +71,28 @@ export class JsonDB_Services {
       jsondb.delete(`/organizes/${name}`);
    };
 
+   public static get_users_ONLY_NAME_STRINGS = () => {
+      const { jsondb } = JsonDB_Contract();
+      const users_names = Object.keys(jsondb.getData('/users'));
+      return { users_names };
+   };
+
    public static adminka_modify_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.delete(`/organizes/${obj.name}`);
-      jsondb.push(`/organizes/${obj.name}`, obj, true);
+      if (obj.old_name) {
+         const { users_names } = this.get_users_ONLY_NAME_STRINGS();
+         users_names.forEach((user_name) => {
+            this.remove_from_favorite({ user_name, org_name: obj.old_name });
+            this.add2favorite({ user_name, org_name: obj.name });
+         });
+         jsondb.delete(`/organizes/${obj.old_name}`);
+         jsondb.push(`/organizes/${obj.name}`, obj, true);
+      }
    };
 
    public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.push(`/users/${login}`, { login, password });
+      jsondb.push(`/users/${login}`, { login, password, user_type: 'default' });
    };
 
    public static get_user = (

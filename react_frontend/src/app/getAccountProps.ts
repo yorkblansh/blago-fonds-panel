@@ -1,8 +1,10 @@
 import { env } from 'process';
 import { getCookie } from './getCookie';
+import { getFavoritesNames } from './hooks/useFavorites.names.list';
 
 export const getAccountProps = () => {
 	let user_name: string;
+
 	let user_key: string;
 	let cookies: any = getCookie();
 	let is_authorized = false;
@@ -23,6 +25,6 @@ export const getAccountProps = () => {
 		is_authorized = false;
 		user_name = 'test_user';
 	}
-
-	return { is_authorized, user_key, user_name };
+	let { favorites_names } = getFavoritesNames(user_name);
+	return { is_authorized, user_key, user_name, favorites_names };
 };

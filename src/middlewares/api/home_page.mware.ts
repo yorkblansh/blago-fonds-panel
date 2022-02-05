@@ -1,10 +1,12 @@
 import { IMware } from '../typings/mware.interfaces';
 import { sendStatic } from '../send_static_file.mw';
 import { JsonDB_Services } from '../services/jsondb.services';
+import { PATH } from '../../../react_frontend/src/api/consts';
 
 export class Home_page_mware {
-   public static show: IMware = ({ res, logger }) => {
+   public static show: IMware = ({ req, res, logger }) => {
       logger.log('home page returned');
+
       return sendStatic(res);
    };
    public static perform: IMware = ({ res, logger }) => {
@@ -14,7 +16,15 @@ export class Home_page_mware {
    };
    public static add2favorite: IMware = ({ req }) => {
       const { org_name, user_name }: { org_name: string; user_name: string } = req.body;
+      console.dir('SMTH ADDED TO FAVORITE');
       console.dir(req.body);
       JsonDB_Services.add2favorite({ org_name, user_name });
+   };
+
+   public static remove_from_favorite: IMware = ({ req, res, logger }) => {
+      const { org_name, user_name }: { org_name: string; user_name: string } = req.body;
+      console.dir('SMTH REMOVED FROM FAVORITE');
+
+      JsonDB_Services.remove_from_favorite({ org_name, user_name });
    };
 }

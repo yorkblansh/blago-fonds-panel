@@ -7,13 +7,14 @@ export type I_obj = {
    info: string;
    index?: string;
    last_modify: string;
+   old_name?: string;
 };
 
 export class AdminkaPerformData {
    public static AdminkaModifyData_mware: IMware = ({ req, logger }) => {
       logger.log(req.body);
-      const { info, link1, link2, name, index, last_modify }: I_obj = req.body;
-      JsonDB_Services.adminka_modify_data({ info, link1, link2, name, index, last_modify });
+      const { info, link1, link2, name, index, last_modify, old_name }: I_obj = req.body;
+      JsonDB_Services.adminka_modify_data({ info, link1, link2, name, index, last_modify, old_name });
    };
 
    public static AdminkaCreateData_mware: IMware = ({ req, logger }) => {

@@ -2,7 +2,7 @@ import { sendStatic } from '../send_static_file.mw';
 import { IMware } from '../typings/mware.interfaces';
 
 export const Adminka_mware: IMware = ({ req, res, logger }) => {
-   if (req.cookies.admin_key) {
+   if (req.cookies.admin_key.a_k === '789456123') {
       sendStatic(res);
       logger.log(req.cookies);
       console.dir(req.cookies);

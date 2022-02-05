@@ -23,6 +23,7 @@ WEBrouter.get(PATH('/'), Home_page_Controller.show);
 WEBrouter.post(REST_API('/auth_post'), Auth_Controller.perform); //? Обработка авторизации POST запрос
 WEBrouter.post(REST_API('/home'), Home_page_Controller.perform);
 WEBrouter.get(REST_API('/logout'), LogOut_Controller.perform);
+
 WEBrouter.post(REST_API('/modify_data_api'), ModifyData_Controller.perform);
 WEBrouter.post(REST_API('/remove_data_api'), RemoveData_Controller.perform);
 WEBrouter.post(REST_API('/create_data_api'), CreateData_Controller.perform);
@@ -31,5 +32,7 @@ WEBrouter.post(REST_API('/reg_user_api'), Register_Controller.perform);
 
 WEBrouter.post(REST_API('/favorites_api'), Favorites_Controller.perform);
 WEBrouter.post(REST_API('/add_2_favorite'), Home_page_Controller.add2favorite);
+WEBrouter.post(REST_API('/remove_from_favorite'), Home_page_Controller.remove_from_favorite);
+WEBrouter.post(REST_API('/get_favorites_names'), Favorites_Controller.get_favorite_org_names);
 
 WEBrouter.get(REST_API('/get_version'), Git_Version_Controller.show);

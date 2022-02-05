@@ -1,13 +1,9 @@
 export const dev_data = {
-	organizes: [
-		{
-			name: {
-				info: 'other info',
-				link1: 'httppppp1',
-				link2: 'http2',
-				name: 'Благофонд',
-				last_modify: '1010100100',
-			},
-		},
-	],
+	organizes: {
+		info: 'other info',
+		link1: 'httppppp1',
+		link2: 'http2',
+		name: 'Благофонд',
+		last_modify: '1010100100',
+	},
 };

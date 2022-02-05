@@ -2,10 +2,10 @@
     display: flex;
     width: fit-content;
     height: fit-content;
-    background-color: cornflowerblue;
+
     padding: 3px;
     border-radius: 5px;
-    border-color: rgb(12, 44, 148);
+
     border-width: 4px;
     border-style: solid;
     cursor: pointer;
@@ -13,5 +13,17 @@
 
     &>* {
         height: fit-content;
+    }
+}
+
+.btn {
+    &--ADD_2_FAVORITE {
+        background-color: cornflowerblue;
+        border-color: rgb(12, 44, 148);
+    }
+
+    &--REMOVE_FROM_FAVORITE {
+        background-color: #d45333;
+        border-color: #b0ae1d;
     }
 }
