@@ -12,6 +12,7 @@ export class JsonDB_Services {
       const { jsondb } = JsonDB_Contract();
       const json_data: Ijson_data_HOME_PAGE = jsondb.getData(`/organizes`);
       const json_data_HOME_PAGE = json_data;
+      console.dir('MUST GET ORGSSSS');
       console.dir(json_data);
       return { json_data_HOME_PAGE };
    };
@@ -19,9 +20,10 @@ export class JsonDB_Services {
    public static getFavorites = ({ user_name }: { user_name: string }) => {
       const { jsondb } = JsonDB_Contract();
       const favorites = jsondb.getData(`/users/${user_name}/favorites`);
+
       for (const key in favorites) {
          // console.dir(favorites[key]);
-         jsondb.getData(`/organizes/`)
+         jsondb.getData(`/organizes/`);
       }
       return { favorites };
    };
@@ -39,18 +41,18 @@ export class JsonDB_Services {
 
    public static adminka_create_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.push(`/organizes[]/${obj.name}`, obj, true);
+      jsondb.push(`/organizes/${obj.name}`, obj, true);
    };
 
-   public static adminka_remove_data = ({ index }: { index: string | number }) => {
+   public static adminka_remove_data = ({ name }: { name: string }) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.delete(`/organizes[${index}]`);
+      jsondb.delete(`/organizes/${name}`);
    };
 
    public static adminka_modify_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
-      jsondb.delete(`/organizes[${obj.index}]`);
-      jsondb.push(`/organizes[]/${obj.name}`, obj, true);
+      jsondb.delete(`/organizes/${obj.name}`);
+      jsondb.push(`/organizes/${obj.name}`, obj, true);
    };
 
    public static reg_new_user = ({ login, password }: { login: string; password: string }) => {

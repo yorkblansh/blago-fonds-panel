@@ -24,7 +24,7 @@ export class AdminkaPerformData {
 
    public static AdminkaRemoveData_mware: IMware = ({ req, logger }) => {
       logger.log(req.body);
-      const { index }: I_obj = req.body;
-      JsonDB_Services.adminka_remove_data({ index });
+      const { name }: I_obj = req.body;
+      JsonDB_Services.adminka_remove_data({ name });
    };
 }
