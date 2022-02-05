@@ -19,7 +19,10 @@ export class JsonDB_Services {
    public static getFavorites = ({ user_name }: { user_name: string }) => {
       const { jsondb } = JsonDB_Contract();
       const favorites = jsondb.getData(`/users/${user_name}/favorites`);
-
+      for (const key in favorites) {
+         // console.dir(favorites[key]);
+         jsondb.getData(`/organizes/`)
+      }
       return { favorites };
    };
 
