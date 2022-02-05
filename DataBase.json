@@ -1,1 +1,64 @@
-{"organizes":{"1111":{"info":"","link1":"","link2":"","name":"1111","index":3,"last_modify":"05/02/22 22:19:46","old_name":"1111111ooo"},"Благофонд3":{"info":"other info___","link1":"httppppp","link2":"http2___","name":"Благофонд3","index":0,"last_modify":"04/02/22 50:04:17"},"Благофонд11111111":{"info":"dop inffffaaa","link1":"google.com","link2":"yandex.ru","name":"Благофонд11111111","index":3,"last_modify":"05/02/22 22:16:02","old_name":"Благофонд1"},"Благофонд222":{"info":"other info___","link1":"http://google.com","link2":"http2___","name":"Благофонд222","index":2,"last_modify":"05/02/22 22:16:25","old_name":"Благофонд222___"}},"users":{"1":{"login":"1","password":"1","user_type":"default"},"asdfg":{"login":"asdfg","password":"123456789","user_type":"admin","favorites":{"1111":"1111","Благофонд11111111":"Благофонд11111111","Благофонд222":"Благофонд222"}},"qwe":{"login":"qwe","password":"qwe","user_type":"default","favorites":{"1111":"1111","Благофонд11111111":"Благофонд11111111","Благофонд222":"Благофонд222","Nnn":"Nnn"}}}}
+{
+    "organizes": {
+        "1111": {
+            "info": "",
+            "link1": "",
+            "link2": "",
+            "name": "1111",
+            "index": 3,
+            "last_modify": "05/02/22 22:19:46",
+            "old_name": "1111111ooo"
+        },
+        "Благофонд3": {
+            "info": "other info___",
+            "link1": "httppppp",
+            "link2": "http2___",
+            "name": "Благофонд3",
+            "index": 0,
+            "last_modify": "04/02/22 50:04:17"
+        },
+        "Благофонд11111111": {
+            "info": "dop inffffaaa",
+            "link1": "google.com",
+            "link2": "yandex.ru",
+            "name": "Благофонд11111111",
+            "index": 3,
+            "last_modify": "05/02/22 22:16:02",
+            "old_name": "Благофонд1"
+        },
+        "Благофонд222": {
+            "info": "other info___",
+            "link1": "http://google.com",
+            "link2": "http2___",
+            "name": "Благофонд222",
+            "index": 2,
+            "last_modify": "05/02/22 22:16:25",
+            "old_name": "Благофонд222___"
+        }
+    },
+    "users": {
+        "1": {
+            "login": "1",
+            "password": "1",
+            "user_type": "default"
+        },
+        "asdfg": {
+            "login": "asdfg",
+            "password": "123456789",
+            "user_type": "admin",
+            "favorites": {
+                "1111": "1111",
+                "Благофонд11111111": "Благофонд11111111",
+                "Благофонд222": "Благофонд222"
+            }
+        },
+        "qwe": {
+            "login": "qwe",
+            "password": "qwe",
+            "user_type": "default",
+            "favorites": {
+                "Благофонд11111111": "Благофонд11111111"
+            }
+        }
+    }
+}
