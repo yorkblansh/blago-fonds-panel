@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-pascal-case */
 import { Ilist } from 'app/hooks/useItemList';
-import { DynObjName } from 'PAGES/Home_page/components/modules/list.blocks.contract';
+import { DynObjName } from 'PAGES/modules/list.blocks.contract';
 import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal';
 import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal';
 import { ModalMenu } from '../layouts/modal.menus/modal.menus';

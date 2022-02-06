@@ -3,7 +3,7 @@ import { PATH, REST_API } from 'api/consts';
 import { getAccountProps } from 'app/getAccountProps';
 import { Header_BTN } from './components/buttons/header.btn';
 import { Header } from './components/header/header';
-import { ListBlocks_Contract } from './components/modules/list.blocks.contract';
+import { ListBlocks_Contract } from '../modules/list.blocks.contract';
 import './home.page.style.scss';
 
 export const HOME_PAGE = () => {
@@ -15,6 +15,7 @@ export const HOME_PAGE = () => {
 				Buttons={
 					is_authorized
 						? [
+								<Header_BTN path={PATH('/stats')} label="Перейти в статистику" />,
 								<Header_BTN path={PATH('/favorites')} label="Избранные" />,
 								<Header_BTN
 									path={REST_API('/logout')}

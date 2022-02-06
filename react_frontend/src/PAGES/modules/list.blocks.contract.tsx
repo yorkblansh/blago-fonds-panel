@@ -6,8 +6,9 @@ import { add2favorite } from 'app/home_page/add2favorite';
 import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
 import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
-import { LastModify_DIV } from '../last_modify.div/last_modify.div';
-import { ListItem } from '../list.item/list.item';
+import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
+import { LastModify_DIV } from '../Home_page/components/last_modify.div/last_modify.div';
+import { ListItem } from '../Home_page/components/list.item/list.item';
 
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
@@ -26,10 +27,12 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 	const { favorites_names, user_name } = getAccountProps();
 
 	let ListBlocks: JSX.Element[] = list.map((organisation, i) => {
+		console.dir(organisation.favorite_counter);
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
 			isFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
-			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'];
+			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'],
+			isRenderCounter = organisation.favorite_counter !== 0;
 		return (
 			<div key={`element_${i}`} className="home-page--wrapper--element" id="home-page--wrapper--element">
 				<div className="home-page--wrapper--element--data">
@@ -63,6 +66,7 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 							type={isFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 						/>
 					)}
+					<FavoriteCounter_div favorite_counter={organisation.favorite_counter} isRender={isRenderCounter} />
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>
 			</div>

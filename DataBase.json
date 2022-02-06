@@ -8,7 +8,7 @@
             "index": 3,
             "last_modify": "05/02/22 22:19:46",
             "old_name": "1111111ooo",
-            "favorite_counter": 5
+            "favorite_counter": 1
         },
         "Благофонд3": {
             "info": "other info___",
@@ -16,11 +16,11 @@
             "link2": "http2___",
             "name": "Благофонд3",
             "index": 0,
-            "favorite_counter": 13,
+            "favorite_counter": 2,
             "last_modify": "04/02/22 50:04:17"
         },
         "Благофонд11111111": {
-            "favorite_counter": 2,
+            "favorite_counter": 0,
             "info": "dop inffffaaa",
             "link1": "google.com",
             "link2": "yandex.ru",
@@ -30,7 +30,7 @@
             "old_name": "Благофонд1"
         },
         "Благофонд222": {
-            "favorite_counter": 6,
+            "favorite_counter": 2,
             "info": "other info___",
             "link1": "http://google.com",
             "link2": "http2___",
@@ -44,7 +44,13 @@
         "1": {
             "login": "1",
             "password": "1",
-            "user_type": "default"
+            "user_type": "default",
+            "favorites": {
+                "1111": "1111",
+                "Благофонд3": "Благофонд3",
+                "Благофонд11111111": "Благофонд11111111",
+                "Благофонд222": "Благофонд222"
+            }
         },
         "admin": {
             "login": "admin",
@@ -56,7 +62,8 @@
             "password": "qwe",
             "user_type": "default",
             "favorites": {
-                "Благофонд11111111": "Благофонд11111111"
+                "Благофонд3": "Благофонд3",
+                "Благофонд222": "Благофонд222"
             }
         }
     }

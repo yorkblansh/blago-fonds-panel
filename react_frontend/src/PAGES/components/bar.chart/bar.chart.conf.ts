@@ -25,6 +25,7 @@ export const BarData: IBarData = ({ labels, numeric_values, DatasetLabel }) => {
 				label: DatasetLabel,
 				data: numeric_values,
 				backgroundColor: 'blue',
+				borderRadius: 5,
 			},
 		],
 		// 	// {
@@ -44,7 +45,11 @@ export const BarOptions: IBarOptions = ({ title_text }) => {
 	const bar_options: IBarOptions_object = {
 		responsive: true,
 		color: 'blue',
+		scales: {
+			y: { ticks: { stepSize: 1 } },
+		},
 		plugins: {
+			decimation: { algorithm: 'lttb' },
 			legend: {
 				position: 'top' as const,
 			},

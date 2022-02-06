@@ -19,7 +19,7 @@ export type Ilist = {
 export const useItemList = (path: keyof typeof MAIN_PATHES) => {
 	let { user_name } = getAccountProps();
 
-	let bb = { organizes: { name: '', link1: '', link2: '', info: '', last_modify: '' } };
+	let bb = { organizes: { name: '', link1: '', link2: '', info: '', last_modify: '', favorite_counter: 0 } };
 	const aa: any[] | never[] = [];
 	const [list, updateList] = useState(bb);
 
