@@ -9,7 +9,9 @@ import { ListBlocks_Contract } from 'PAGES/modules/list.blocks.contract';
 export const FAVORITES_PAGE = () => {
 	let { is_authorized } = getAccountProps();
 	let { ListBlocks } = ListBlocks_Contract({ path: '/favorites', is_authorized });
+	let isListBlocks = ListBlocks.length !== 0;
 
+	console.dir(ListBlocks);
 	return (
 		<>
 			<Header
@@ -20,7 +22,9 @@ export const FAVORITES_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
-				{is_authorized && <div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />}
+				{is_authorized && isListBlocks && (
+					<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
+				)}
 			</div>
 		</>
 	);

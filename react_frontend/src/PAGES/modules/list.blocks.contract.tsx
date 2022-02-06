@@ -23,14 +23,15 @@ export interface DynObjName {
 }
 
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
-	const { list } = useItemList(path);
+	const { list, list_length } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
+	let isList_Empty = list_length === 0;
 
 	let ListBlocks: JSX.Element[] = list.map((organisation, i) => {
 		console.dir(organisation.favorite_counter);
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
-			isFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
+			is_aFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
 			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'],
 			isRenderCounter = organisation.favorite_counter !== 0;
 		return (
@@ -57,21 +58,21 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
 							_onClick={() => {
-								isFavoriteOrg
+								is_aFavoriteOrg
 									? removeFromFavorite(organisation.name, user_name)
 									: add2favorite(organisation.name, user_name);
 								document.location.href = PATH(path);
 							}}
-							Label={isFavoriteOrg ? 'Убрать из избранного' : 'Добавить визбранное'}
-							type={isFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
+							Label={is_aFavoriteOrg ? 'Убрать из избранного' : 'Добавить визбранное'}
+							type={is_aFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 						/>
 					)}
-					<FavoriteCounter_div favorite_counter={organisation.favorite_counter} isRender={isRenderCounter} />
+					{isRenderCounter && <FavoriteCounter_div favorite_counter={organisation.favorite_counter} />}
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>
 			</div>
 		);
 	});
 
-	return { ListBlocks, list };
+	return { ListBlocks: !isList_Empty ? ListBlocks : [<div>Пусто</div>], list };
 };

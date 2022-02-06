@@ -9,10 +9,19 @@
     justify-content: center;
     align-content: center;
 
+    &--fav_count_color {
+        color: brown;
+        font-size: 17px;
+        padding: 5px;
+        background-color: gold;
+        border-radius: 11px;
+        margin: 5px;
+    }
 
     &>* {
         display: flex;
         margin-bottom: 3px;
         margin-inline: 5px;
+        align-items: center;
     }
 }

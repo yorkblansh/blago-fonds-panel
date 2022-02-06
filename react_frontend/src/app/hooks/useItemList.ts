@@ -37,5 +37,5 @@ export const useItemList = (path: keyof typeof MAIN_PATHES) => {
 			// updateList(dev_data.organizes);
 		}
 	}, [_path, path, updateList, user_name]);
-	return { list: Object.values(list) };
+	return { list: Object.values(list), list_length: Object.values(list).length };
 };
