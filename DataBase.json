@@ -7,7 +7,8 @@
             "name": "1111",
             "index": 3,
             "last_modify": "05/02/22 22:19:46",
-            "old_name": "1111111ooo"
+            "old_name": "1111111ooo",
+            "favorite_counter": 5
         },
         "Благофонд3": {
             "info": "other info___",
@@ -15,9 +16,11 @@
             "link2": "http2___",
             "name": "Благофонд3",
             "index": 0,
+            "favorite_counter": 13,
             "last_modify": "04/02/22 50:04:17"
         },
         "Благофонд11111111": {
+            "favorite_counter": 2,
             "info": "dop inffffaaa",
             "link1": "google.com",
             "link2": "yandex.ru",
@@ -27,6 +30,7 @@
             "old_name": "Благофонд1"
         },
         "Благофонд222": {
+            "favorite_counter": 6,
             "info": "other info___",
             "link1": "http://google.com",
             "link2": "http2___",

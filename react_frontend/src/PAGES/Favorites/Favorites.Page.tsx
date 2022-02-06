@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-pascal-case */
-import { PATH, REST_API } from 'api/consts';
+import { PATH } from 'api/consts';
 import { getAccountProps } from 'app/getAccountProps';
+import { Bar_Chart } from 'PAGES/components/bar.chart/bar.chart';
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn';
 import { Header } from 'PAGES/Home_page/components/header/header';
 import { ListBlocks_Contract } from 'PAGES/Home_page/components/modules/list.blocks.contract';
 
 export const FAVORITES_PAGE = () => {
-	let { is_authorized, user_name } = getAccountProps();
+	let { is_authorized } = getAccountProps();
 	let { ListBlocks } = ListBlocks_Contract({ path: '/favorites', is_authorized });
+
 	return (
 		<>
 			<Header

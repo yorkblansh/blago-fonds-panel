@@ -18,6 +18,23 @@ export class JsonDB_Services {
       return { json_data_HOME_PAGE };
    };
 
+   public static getOrganizes_favorite_counts = () => {
+      const { jsondb } = JsonDB_Contract();
+      const organizes = jsondb.getData(`/organizes`);
+      const org_names = Object.keys(organizes);
+      // eslint-disable-next-line prefer-const
+      let favorite_count: number[] = [];
+
+      favorite_count = org_names.map((org_name): number => {
+         return jsondb.getData(`/organizes/${org_name}/favorite_counter`);
+      });
+      const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
+         return [org_name, favorite_count[i]];
+      });
+      console.dir(end_pairs);
+      return { end_pairs };
+   };
+
    public static getFavorites_ONLY_NAME_STRINGS = (user_name: string) => {
       const { jsondb } = JsonDB_Contract();
       const favorites = jsondb.getData(`/users/${user_name}/favorites`);
@@ -51,19 +68,37 @@ export class JsonDB_Services {
       // }
    };
 
+   public static get_favorite_count_byOrgName = (org_name: string) => {
+      const { jsondb } = JsonDB_Contract();
+      const favorite_count: number = jsondb.getData(`/organizes/${org_name}/favorite_counter`);
+      return { favorite_count };
+   };
+
+   public static incrORdecr_favorite_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
+      const { jsondb } = JsonDB_Contract();
+      const _push = (favorite_counter: number) =>
+         jsondb.push(`/organizes/${org_name}/favorite_counter`, favorite_counter, true);
+      const { favorite_count } = this.get_favorite_count_byOrgName(org_name);
+      perf_type === 'INCREMENT' && _push(favorite_count + 1);
+      perf_type === 'DECREMENT' && _push(favorite_count - 1);
+   };
+
    public static add2favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
       const { jsondb } = JsonDB_Contract();
+      this.incrORdecr_favorite_counter(org_name, 'INCREMENT');
       jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true);
    };
 
    public static remove_from_favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
       const { jsondb } = JsonDB_Contract();
+      this.incrORdecr_favorite_counter(org_name, 'DECREMENT');
       jsondb.delete(`/users/${user_name}/favorites/${org_name}`);
    };
 
    public static adminka_create_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
       jsondb.push(`/organizes/${obj.name}`, obj, true);
+      jsondb.push(`/organizes/${obj.name}/favorite_counter`, 0, true);
    };
 
    public static adminka_remove_data = ({ name }: { name: string }) => {
@@ -81,12 +116,14 @@ export class JsonDB_Services {
       const { jsondb } = JsonDB_Contract();
       if (obj.old_name) {
          const { users_names } = this.get_users_ONLY_NAME_STRINGS();
+         const { favorite_count } = this.get_favorite_count_byOrgName(obj.name);
          users_names.forEach((user_name) => {
             this.remove_from_favorite({ user_name, org_name: obj.old_name });
             this.add2favorite({ user_name, org_name: obj.name });
          });
          jsondb.delete(`/organizes/${obj.old_name}`);
          jsondb.push(`/organizes/${obj.name}`, obj, true);
+         jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true);
       }
    };
 

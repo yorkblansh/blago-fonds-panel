@@ -10,6 +10,7 @@ import { Git_Version_Controller } from '../controllers/git_version_controller/gi
 import { Register_Controller } from '../controllers/register.controller';
 import { REST_API, PATH } from '../../react_frontend/src/api/consts';
 import { Favorites_Controller } from '../controllers/favorites.controller';
+import { Stats_Controller } from '../controllers/stats.controller';
 
 export const WEBrouter = Router();
 
@@ -34,5 +35,7 @@ WEBrouter.post(REST_API('/favorites_api'), Favorites_Controller.perform);
 WEBrouter.post(REST_API('/add_2_favorite'), Home_page_Controller.add2favorite);
 WEBrouter.post(REST_API('/remove_from_favorite'), Home_page_Controller.remove_from_favorite);
 WEBrouter.post(REST_API('/get_favorites_names'), Favorites_Controller.get_favorite_org_names);
+
+WEBrouter.post(REST_API('/get_stats'), Stats_Controller.get_stats);
 
 WEBrouter.get(REST_API('/get_version'), Git_Version_Controller.show);

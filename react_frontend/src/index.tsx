@@ -8,6 +8,7 @@ import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page';
 import { PATH } from 'api/consts';
 import { REGISTER_PAGE } from 'PAGES/Register/Register.Page';
 import { FAVORITES_PAGE } from 'PAGES/Favorites/Favorites.Page';
+import { STATS_PAGE } from 'PAGES/Stats/Stats.Page';
 
 const App = () => {
 	return (
@@ -20,6 +21,7 @@ const App = () => {
 					<Route path={PATH('/adminka')} element={<ADMINKA_PAGE />} />
 					<Route path={PATH('/register')} element={<REGISTER_PAGE />} />
 					<Route path={PATH('/favorites')} element={<FAVORITES_PAGE />} />
+					<Route path={PATH('/stats')} element={<STATS_PAGE />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

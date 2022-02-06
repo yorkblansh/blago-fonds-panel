@@ -25,6 +25,7 @@ export const getAccountProps = () => {
 		is_authorized = false;
 		user_name = 'test_user';
 	}
+	let is_admin = user_name === 'admin' && true;
 	let { favorites_names } = getFavoritesNames(user_name);
-	return { is_authorized, user_key, user_name, favorites_names };
+	return { is_authorized, user_key, user_name, favorites_names, is_admin };
 };
