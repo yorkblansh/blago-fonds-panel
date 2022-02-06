@@ -42,15 +42,10 @@
             "password": "1",
             "user_type": "default"
         },
-        "asdfg": {
-            "login": "asdfg",
-            "password": "123456789",
-            "user_type": "admin",
-            "favorites": {
-                "1111": "1111",
-                "Благофонд11111111": "Благофонд11111111",
-                "Благофонд222": "Благофонд222"
-            }
+        "admin": {
+            "login": "admin",
+            "password": "admin",
+            "user_type": "admin"
         },
         "qwe": {
             "login": "qwe",
