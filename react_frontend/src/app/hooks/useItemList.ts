@@ -13,7 +13,12 @@ export type Ilist_elements = {
 };
 
 export type Ilist = {
-	name: Ilist_elements;
+	name: string;
+	link1: string;
+	link2: string;
+	info: string;
+	last_modify: string;
+	favorite_counter: number;
 }[];
 
 export const useItemList = (path: keyof typeof MAIN_PATHES) => {

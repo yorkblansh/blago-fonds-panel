@@ -6,10 +6,11 @@ import { Header } from './components/header/header';
 import { ListBlocks_Contract } from '../modules/list.blocks.contract';
 import './home.page.style.scss';
 import { useItemList } from 'app/hooks/useItemList';
+import { BTN } from 'PAGES/components/dropdown.btn/dropdown.btn';
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
-	let { ListBlocks } = ListBlocks_Contract({ path: '/', is_authorized });
+	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
 	return (
 		<>
@@ -36,6 +37,19 @@ export const HOME_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
+				<BTN
+					label="Сорировать:"
+					dropdown_list={[
+						{
+							label: 'По умолчанию',
+							click_action: () => changeSortBy('DEFAULT'),
+						},
+						{
+							label: 'По лайкам',
+							click_action: () => changeSortBy('FAVORITE'),
+						},
+					]}
+				/>
 				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>

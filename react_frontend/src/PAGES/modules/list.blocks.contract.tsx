@@ -7,13 +7,17 @@ import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
 import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { LastModify_DIV } from '../Home_page/components/last_modify.div/last_modify.div';
 import { ListItem } from '../Home_page/components/list.item/list.item';
+import { changeSortBy_arg, useSortBy } from './hooks/useSortBy';
+import { sorted_list } from './list.sort';
 
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
-		ListBlocks: JSX.Element[];
+		ListBlocks: JSX.Element[] | undefined;
 		list: any;
+		changeSortBy: (arg: changeSortBy_arg) => void;
 		//  Ilist;
 	};
 }
@@ -25,9 +29,9 @@ export interface DynObjName {
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
 	const { list, list_length } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
-	let isList_Empty = list_length === 0;
+	let { sortBy, changeSortBy } = useSortBy();
 
-	let ListBlocks: JSX.Element[] = list.map((organisation, i) => {
+	let ListBlocks = sorted_list(list, sortBy)?.map((organisation, i) => {
 		console.dir(organisation.favorite_counter);
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
@@ -74,5 +78,5 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized 
 		);
 	});
 
-	return { ListBlocks: !isList_Empty ? ListBlocks : [<div>Пусто</div>], list };
+	return { ListBlocks, list, changeSortBy };
 };
