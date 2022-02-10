@@ -1,13 +1,13 @@
 {
     "organizes": {
-        "1111": {
+        "12": {
             "info": "",
             "link1": "",
             "link2": "",
-            "name": "1111",
-            "index": 3,
-            "last_modify": "05/02/22 22:19:46",
-            "old_name": "1111111ooo",
+            "name": "12",
+            "index": 0,
+            "last_modify": "10/02/22 16:21:41",
+            "old_name": "1111",
             "favorite_counter": 0
         },
         "Благофонд3": {
@@ -45,11 +45,10 @@
             "link1": "",
             "link2": "",
             "name": "kkkk",
-            "favorite_counter":0
+            "favorite_counter": 0
         }
     },
     "users": {
-      
         "admin": {
             "login": "admin",
             "password": "admin",
@@ -59,13 +58,11 @@
             "login": "qwe",
             "password": "qwe",
             "user_type": "default"
-       
         },
         "user": {
             "login": "user",
             "password": "user",
             "user_type": "default"
-       
         }
     }
 }

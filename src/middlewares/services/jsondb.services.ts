@@ -114,16 +114,29 @@ export class JsonDB_Services {
 
    public static adminka_modify_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
+
       console.table(obj);
       // if (obj.old_name) {
       const { users_names } = this.get_users_ONLY_NAME_STRINGS();
-      const { favorite_count } = this.get_favorite_count_byOrgName(obj.name);
-      users_names.forEach((user_name) => {
-         this.remove_from_favorite({ user_name, org_name: obj.old_name });
-         this.add2favorite({ user_name, org_name: obj.name });
-      });
+      const { favorite_count } = this.get_favorite_count_byOrgName(obj.old_name);
+
+      if (favorite_count !== 0) {
+         users_names.forEach((user_name) => {
+            if (user_name !== 'admin') {
+               this.remove_from_favorite({ user_name, org_name: obj.old_name });
+               this.add2favorite({ user_name, org_name: obj.name });
+            }
+         });
+      }
       jsondb.delete(`/organizes/${obj.old_name}`);
-      jsondb.push(`/organizes/${obj.name}`, obj, true);
+      obj['favorite_counter'] = favorite_count;
+      try {
+         console.dir('TRYING TO PUSH');
+         jsondb.push(`/organizes/${obj.name}`, obj, true);
+      } catch (error) {
+         console.dir('ERRRRROOOORRR');
+         console.error(error);
+      }
       jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true);
       // }
    };
