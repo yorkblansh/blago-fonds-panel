@@ -1,11 +1,7 @@
-import { API, MAIN_PATHES } from 'api/consts';
-import './header.btn.style.scss';
+import './btn.style.scss';
 import './dropdown.btn.style.scss';
 
-type _path = keyof typeof MAIN_PATHES | keyof typeof API;
-
-// type drop_el = [dropdown_el: { click_action: () => void; label: string }];
-
+// type _path = keyof typeof MAIN_PATHES | keyof typeof API;
 interface IBTN {
 	(props: {
 		label: string;
@@ -20,7 +16,7 @@ interface IBTN {
 
 export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
 	return (
-		<>
+		<div className="dropdown-wrapper">
 			<div className="dropdown">
 				<button
 					// onClick={() => {
@@ -36,13 +32,13 @@ export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
 				/>
 				{dropdown_list && (
 					<div className="dropdown-content">
-						{/* {dropdown_list.map(({ click_action: click_action, label }) => {
+						{dropdown_list.map(({ click_action, label }) => {
 							return <a onClick={click_action}>{label}</a>;
-						})} */}
+						})}
 						{/* <a href={path}>Выйти</a> */}
 					</div>
 				)}
 			</div>
-		</>
+		</div>
 	);
 };

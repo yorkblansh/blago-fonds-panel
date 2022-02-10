@@ -114,17 +114,18 @@ export class JsonDB_Services {
 
    public static adminka_modify_data = (obj: I_obj) => {
       const { jsondb } = JsonDB_Contract();
-      if (obj.old_name) {
-         const { users_names } = this.get_users_ONLY_NAME_STRINGS();
-         const { favorite_count } = this.get_favorite_count_byOrgName(obj.name);
-         users_names.forEach((user_name) => {
-            this.remove_from_favorite({ user_name, org_name: obj.old_name });
-            this.add2favorite({ user_name, org_name: obj.name });
-         });
-         jsondb.delete(`/organizes/${obj.old_name}`);
-         jsondb.push(`/organizes/${obj.name}`, obj, true);
-         jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true);
-      }
+      console.table(obj);
+      // if (obj.old_name) {
+      const { users_names } = this.get_users_ONLY_NAME_STRINGS();
+      const { favorite_count } = this.get_favorite_count_byOrgName(obj.name);
+      users_names.forEach((user_name) => {
+         this.remove_from_favorite({ user_name, org_name: obj.old_name });
+         this.add2favorite({ user_name, org_name: obj.name });
+      });
+      jsondb.delete(`/organizes/${obj.old_name}`);
+      jsondb.push(`/organizes/${obj.name}`, obj, true);
+      jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true);
+      // }
    };
 
    public static reg_new_user = ({ login, password }: { login: string; password: string }) => {

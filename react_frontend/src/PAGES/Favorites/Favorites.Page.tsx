@@ -9,7 +9,7 @@ import { ListBlocks_Contract } from 'PAGES/modules/list.blocks.contract';
 export const FAVORITES_PAGE = () => {
 	let { is_authorized } = getAccountProps();
 	let { ListBlocks } = ListBlocks_Contract({ path: '/favorites', is_authorized });
-	let isListBlocks = ListBlocks.length !== 0;
+	let isListBlocks = ListBlocks?.length !== 0;
 
 	console.dir(ListBlocks);
 	return (

@@ -12,6 +12,7 @@ export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
 	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
+
 	return (
 		<>
 			<Header
@@ -47,6 +48,14 @@ export const HOME_PAGE = () => {
 						{
 							label: 'По лайкам',
 							click_action: () => changeSortBy('FAVORITE'),
+						},
+						{
+							label: 'По дате изменения',
+							click_action: () => changeSortBy('LAST_MODIFY'),
+						},
+						{
+							label: 'По названию',
+							click_action: () => changeSortBy('ALPHABET'),
 						},
 					]}
 				/>

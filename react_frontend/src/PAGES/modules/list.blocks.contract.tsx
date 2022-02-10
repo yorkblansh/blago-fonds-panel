@@ -7,7 +7,6 @@ import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
 import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
-import { Dispatch, SetStateAction, useState } from 'react';
 import { LastModify_DIV } from '../Home_page/components/last_modify.div/last_modify.div';
 import { ListItem } from '../Home_page/components/list.item/list.item';
 import { changeSortBy_arg, useSortBy } from './hooks/useSortBy';
@@ -29,7 +28,7 @@ export interface DynObjName {
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
 	const { list, list_length } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
-	let { sortBy, changeSortBy } = useSortBy();
+	let { sortBy, changeSortBy } = useSortBy('DEFAULT');
 
 	let ListBlocks = sorted_list(list, sortBy)?.map((organisation, i) => {
 		console.dir(organisation.favorite_counter);
