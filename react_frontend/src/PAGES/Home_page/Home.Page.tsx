@@ -7,12 +7,18 @@ import { ListBlocks_Contract } from '../modules/list.blocks.contract';
 import './home.page.style.scss';
 import { useItemList } from 'app/hooks/useItemList';
 import { BTN } from 'PAGES/components/dropdown.btn/dropdown.btn';
+import { useState } from 'react';
+import { changeSortBy_arg } from 'PAGES/modules/hooks/useSortBy';
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
 	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
+	let [Label, setLabel] = useState('');
+	let [targetItem, setArrows] = useState('');
+	const dropdown_list_data = (bbb: [a: string, b: changeSortBy_arg][]) => bbb;
 
+	
 	return (
 		<>
 			<Header
@@ -39,28 +45,25 @@ export const HOME_PAGE = () => {
 			/>
 			<div className="home-page" id="home-page">
 				<BTN
-					label="Сорировать:"
-					dropdown_list={[
-						{
-							label: 'По умолчанию',
-							click_action: () => changeSortBy('DEFAULT'),
-						},
-						{
-							label: 'По лайкам',
-							click_action: () => changeSortBy('FAVORITE'),
-						},
-						{
-							label: 'По дате изменения',
-							click_action: () => changeSortBy('LAST_MODIFY'),
-						},
-						{
-							label: 'По названию',
-							click_action: () => changeSortBy('ALPHABET'),
-						},
-					]}
+					label={`Сорировать: ${Label}`}
+					dropdown_list={dropdown_list_data([
+						['По лайкам', 'FAVORITE'],
+						['По дате изменения', 'LAST_MODIFY'],
+						['По названию', 'ALPHABET'],
+					]).map((drpdwn_item) => {
+						return {
+							label: `${(targetItem === drpdwn_item[0] && '>>') || ''} ${drpdwn_item[0]}`,
+							click_action: () => {
+								changeSortBy(drpdwn_item[1]);
+								setLabel(drpdwn_item[0]);
+								setArrows(drpdwn_item[0]);
+							},
+						};
+					})}
 				/>
 				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>
 	);
+	
 };

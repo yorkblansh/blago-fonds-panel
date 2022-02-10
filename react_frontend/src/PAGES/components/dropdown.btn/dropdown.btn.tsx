@@ -1,7 +1,6 @@
 import './btn.style.scss';
 import './dropdown.btn.style.scss';
 
-// type _path = keyof typeof MAIN_PATHES | keyof typeof API;
 interface IBTN {
 	(props: {
 		label: string;
@@ -33,7 +32,7 @@ export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
 				{dropdown_list && (
 					<div className="dropdown-content">
 						{dropdown_list.map(({ click_action, label }) => {
-							return <a onClick={click_action}>{label}</a>;
+							return <a onClick={() => click_action()}>{label}</a>;
 						})}
 						{/* <a href={path}>Выйти</a> */}
 					</div>

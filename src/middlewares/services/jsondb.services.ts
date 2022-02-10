@@ -5,7 +5,7 @@ import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface';
 import async from 'async';
 
 interface IaddORremove_favorite {
-   (props: { user_name: string; org_name: string }): void;
+   (props: { user_name: string; org_name: string; perf_type: 'BY_USER' | 'BY_SYSTEM' }): void;
 }
 
 export class JsonDB_Services {
@@ -13,8 +13,8 @@ export class JsonDB_Services {
       const { jsondb } = JsonDB_Contract();
       const json_data: Ijson_data_HOME_PAGE = jsondb.getData(`/organizes`);
       const json_data_HOME_PAGE = json_data;
-      console.dir('MUST GET ORGSSSS');
-      console.dir(json_data);
+      // console.dir('MUST GET ORGSSSS');
+      // console.dir(json_data);
       return { json_data_HOME_PAGE };
    };
 
@@ -31,7 +31,7 @@ export class JsonDB_Services {
       const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
          return [org_name, favorite_count[i]];
       });
-      console.dir(end_pairs);
+      // console.dir(end_pairs);
       return { end_pairs };
    };
 
@@ -54,8 +54,8 @@ export class JsonDB_Services {
             _cb();
          },
          (err) => {
-            if (err) console.dir(err);
-            console.dir(end_obj);
+            // if (err) console.dir(err);
+            // console.dir(end_obj);
             cb(end_obj);
          },
       );
@@ -83,15 +83,15 @@ export class JsonDB_Services {
       perf_type === 'DECREMENT' && _push(favorite_count - 1);
    };
 
-   public static add2favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
+   public static add2favorite: IaddORremove_favorite = ({ user_name, org_name, perf_type }) => {
       const { jsondb } = JsonDB_Contract();
-      this.incrORdecr_favorite_counter(org_name, 'INCREMENT');
+      if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'INCREMENT');
       jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true);
    };
 
-   public static remove_from_favorite: IaddORremove_favorite = ({ user_name, org_name }) => {
+   public static remove_from_favorite: IaddORremove_favorite = ({ user_name, org_name, perf_type }) => {
       const { jsondb } = JsonDB_Contract();
-      this.incrORdecr_favorite_counter(org_name, 'DECREMENT');
+      if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'DECREMENT');
       jsondb.delete(`/users/${user_name}/favorites/${org_name}`);
    };
 
@@ -123,8 +123,8 @@ export class JsonDB_Services {
       if (favorite_count !== 0) {
          users_names.forEach((user_name) => {
             if (user_name !== 'admin') {
-               this.remove_from_favorite({ user_name, org_name: obj.old_name });
-               this.add2favorite({ user_name, org_name: obj.name });
+               this.remove_from_favorite({ user_name, org_name: obj.old_name, perf_type: 'BY_SYSTEM' });
+               this.add2favorite({ user_name, org_name: obj.name, perf_type: 'BY_SYSTEM' });
             }
          });
       }
@@ -135,7 +135,7 @@ export class JsonDB_Services {
          jsondb.push(`/organizes/${obj.name}`, obj, true);
       } catch (error) {
          console.dir('ERRRRROOOORRR');
-         console.error(error);
+         // console.error(error);
       }
       jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true);
       // }
@@ -166,7 +166,7 @@ export class JsonDB_Services {
          }
          cb({ is_user_exist, login: _login, password, user_type });
       } catch (error) {
-         console.dir(error);
+         // console.dir(error);
       }
 
       // return { login: json_data.login, password: json_data.password };
