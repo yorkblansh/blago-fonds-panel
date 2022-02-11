@@ -1,21 +1,29 @@
 import './btn.style.scss';
 import './dropdown.btn.style.scss';
 
-interface IBTN {
+interface ISortBTNS {
 	(props: {
 		label: string;
-		// path: _path;
 		dropdown_list: {
 			click_action: () => void;
 			label: string;
 		}[];
-		favorite_count?: number | string;
+
+		second_label: string;
+		sort_types_list: {
+			click_action: () => void;
+			label: string;
+		}[];
 	}): JSX.Element;
 }
 
-export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
+export const SortBTNS: ISortBTNS = ({ label, dropdown_list, second_label }) => {
 	return (
 		<div className="dropdown-wrapper">
+			<div className="dropdown--type">
+				<button className="dropbtn" children={<div>{`${second_label}: От А до Я`}</div>} />
+			</div>
+
 			<div className="dropdown">
 				<button
 					// onClick={() => {
@@ -25,7 +33,7 @@ export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
 					children={
 						<div>
 							<div>{label}</div>
-							{favorite_count && <div className="header-btn--fav_count_color">{favorite_count}</div>}
+							{/* {favorite_count && <div className="header-btn--fav_count_color">{favorite_count}</div>} */}
 						</div>
 					}
 				/>
@@ -34,7 +42,6 @@ export const BTN: IBTN = ({ label, dropdown_list, favorite_count }) => {
 						{dropdown_list.map(({ click_action, label }) => {
 							return <a onClick={() => click_action()}>{label}</a>;
 						})}
-						{/* <a href={path}>Выйти</a> */}
 					</div>
 				)}
 			</div>

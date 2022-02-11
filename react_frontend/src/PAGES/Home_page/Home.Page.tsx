@@ -6,19 +6,19 @@ import { Header } from './components/header/header';
 import { ListBlocks_Contract } from '../modules/list.blocks.contract';
 import './home.page.style.scss';
 import { useItemList } from 'app/hooks/useItemList';
-import { BTN } from 'PAGES/components/dropdown.btn/dropdown.btn';
+import { SortBTNS } from 'PAGES/components/dropdown.btn/dropdown.btn';
 import { useState } from 'react';
 import { changeSortBy_arg } from 'PAGES/modules/hooks/useSortBy';
+import { BTN } from 'PAGES/components/button/btn';
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
 	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
-	let [Label, setLabel] = useState('');
+	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
 	const dropdown_list_data = (bbb: [a: string, b: changeSortBy_arg][]) => bbb;
-
-	
+	const sorttype_list_data = (bbb: [a: string, b: changeSortBy_arg][]) => bbb;
 	return (
 		<>
 			<Header
@@ -44,7 +44,7 @@ export const HOME_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
-				<BTN
+				<SortBTNS
 					label={`Сорировать: ${Label}`}
 					dropdown_list={dropdown_list_data([
 						['По лайкам', 'FAVORITE'],
@@ -60,10 +60,18 @@ export const HOME_PAGE = () => {
 							},
 						};
 					})}
+					second_label="Тип сортировки"
+					sort_types_list={sorttype_list_data([
+						['От А до Я', ''],
+						['От Я до А', ''],
+						['От Большего к Меньшему', ''],
+						['От Меньшему к Большего', ''],
+						['']
+					])}
 				/>
+
 				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>
 	);
-	
 };
