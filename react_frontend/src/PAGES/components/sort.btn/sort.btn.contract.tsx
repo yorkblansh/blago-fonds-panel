@@ -5,17 +5,13 @@ import './dropdown.btn.style.scss';
 
 interface ISortBTNS {
 	(props: {
-		isDropdown_list?: boolean;
+		Dropdown_list?: [a: string, b: changeSortBy_arg][];
 		changeSortBy: (arg: changeSortBy_arg) => void;
 		isSortTypes_list?: boolean;
-	}): { SortBTN: JSX.Element };
+	}): { SortBTNs: JSX.Element };
 }
 
-export const SortBTNS_Contract: ISortBTNS = ({
-	isDropdown_list: dropdown_list,
-	changeSortBy,
-	isSortTypes_list: sort_types_list,
-}) => {
+export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSortTypes_list }) => {
 	const dropdown_list_data = (array_arg: [a: string, b: changeSortBy_arg][]) => array_arg;
 	const sorttype_list_data = (array_arg: [a: string, b: changeSortBy_arg][]) => array_arg;
 
@@ -26,7 +22,6 @@ export const SortBTNS_Contract: ISortBTNS = ({
 			<div className="dropdown--type">
 				<button className="dropbtn" children={<div>{`Тип сортировки: От А до Я`}</div>} />
 			</div>
-
 			<div className="dropdown">
 				<button
 					className="header-btn dropbtn"
@@ -37,22 +32,35 @@ export const SortBTNS_Contract: ISortBTNS = ({
 						</div>
 					}
 				/>
-				{dropdown_list && (
+				{Dropdown_list && (
 					<div className="dropdown-content">
-						{dropdown_list_data([
-							['По лайкам', 'FAVORITE'],
-							['По дате изменения', 'LAST_MODIFY'],
-							['По названию', 'ALPHABET'],
-						])
-							.map((drpdwn_item) => ({
-								label: `${(targetItem === drpdwn_item[0] && '>>') || ''} ${drpdwn_item[0]}`,
-								click_action: () => {
-									changeSortBy(drpdwn_item[1]);
-									setLabel(drpdwn_item[0]);
-									setArrows(drpdwn_item[0]);
-								},
+						{Dropdown_list.map((drpdwn_item) => ({
+							label: `${(targetItem === drpdwn_item[0] && '>>') || ''} ${drpdwn_item[0]}`,
+							click_action: () => {
+								changeSortBy(drpdwn_item[1]);
+								setLabel(drpdwn_item[0]);
+								setArrows(drpdwn_item[0]);
+							},
+						})).map(({ click_action, label }) => (
+							<a onClick={() => click_action()} children={label} />
+						))}
+					</div>
+				)}
+				{isSortTypes_list && (
+					<div className="dropdown-content">
+						{[
+							['От А до Я', 'ALPHABET'],
+							['От Я до А', 'ALPHABET'],
+							['От Большего к Меньшему', 'FAVORITE'],
+							['От Меньшему к Большего', 'FAVORITE'],
+							['Сначла последние', 'LAST_MODIFY'],
+							['Сначла первые', 'LAST_MODIFY'],
+						]
+							.map((sort_typeItem) => ({
+								label: sort_typeItem[0],
+								click_action: () => console.dir(123),
 							}))
-							.map(({ click_action, label }) => (
+							.map(({ label, click_action }) => (
 								<a onClick={() => click_action()} children={label} />
 							))}
 					</div>
@@ -60,5 +68,5 @@ export const SortBTNS_Contract: ISortBTNS = ({
 			</div>
 		</>
 	);
-	return { SortBTN };
+	return { SortBTNs: SortBTN };
 };
