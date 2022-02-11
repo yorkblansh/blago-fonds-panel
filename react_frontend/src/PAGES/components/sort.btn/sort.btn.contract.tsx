@@ -39,23 +39,22 @@ export const SortBTNS_Contract: ISortBTNS = ({
 				/>
 				{dropdown_list && (
 					<div className="dropdown-content">
-						{/* {dropdown_list.map(({ click_action, label }) => {
-							return <a onClick={() => click_action()}>{label}</a>;
-						})} */}
 						{dropdown_list_data([
 							['По лайкам', 'FAVORITE'],
 							['По дате изменения', 'LAST_MODIFY'],
 							['По названию', 'ALPHABET'],
-						]).map((drpdwn_item) => {
-							return {
+						])
+							.map((drpdwn_item) => ({
 								label: `${(targetItem === drpdwn_item[0] && '>>') || ''} ${drpdwn_item[0]}`,
 								click_action: () => {
 									changeSortBy(drpdwn_item[1]);
 									setLabel(drpdwn_item[0]);
 									setArrows(drpdwn_item[0]);
 								},
-							};
-						})}
+							}))
+							.map(({ click_action, label }) => (
+								<a onClick={() => click_action()} children={label} />
+							))}
 					</div>
 				)}
 			</div>
