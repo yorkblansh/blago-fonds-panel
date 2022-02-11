@@ -12,7 +12,16 @@ export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
 	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
-	let { SortBTN } = SortBTNS_Contract({ changeSortBy, isDropdown_list: true, isSortTypes_list: true });
+
+	let { SortBTNs } = SortBTNS_Contract({
+		changeSortBy,
+		Dropdown_list: [
+			['По лайкам', 'FAVORITE'],
+			['По дате изменения', 'LAST_MODIFY'],
+			['По названию', 'ALPHABET'],
+		],
+		isSortTypes_list: true,
+	});
 
 	return (
 		<>
@@ -39,7 +48,7 @@ export const HOME_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
-				<div className="dropdown-wrapper" children={SortBTN} />
+				<div className="dropdown-wrapper" children={SortBTNs} />
 				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>
