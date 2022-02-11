@@ -12,9 +12,6 @@ interface ISortBTNS {
 }
 
 export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSortTypes_list }) => {
-	const dropdown_list_data = (array_arg: [a: string, b: changeSortBy_arg][]) => array_arg;
-	const sorttype_list_data = (array_arg: [a: string, b: changeSortBy_arg][]) => array_arg;
-
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
 	let SortBTN = (
