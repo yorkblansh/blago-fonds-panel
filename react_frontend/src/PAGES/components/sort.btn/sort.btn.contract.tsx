@@ -5,19 +5,9 @@ import './dropdown.btn.style.scss';
 
 interface ISortBTNS {
 	(props: {
-		// label: string;
 		isDropdown_list?: boolean;
-		//  {
-		// 	click_action: () => void;
-		// 	label: string;
-		// }[];
 		changeSortBy: (arg: changeSortBy_arg) => void;
-		// second_label: string;
 		isSortTypes_list?: boolean;
-		//  {
-		// 	click_action: () => void;
-		// 	label: string;
-		// }[];
 	}): { SortBTN: JSX.Element };
 }
 
