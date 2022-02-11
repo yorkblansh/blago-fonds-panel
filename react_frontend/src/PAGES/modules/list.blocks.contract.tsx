@@ -13,7 +13,7 @@ import { TchangeSortBy, useSortBy } from './hooks/useSortBy';
 
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
-		ListBlocks: JSX.Element[] | undefined;
+		ListBlocks: JSX.Element[];
 		list: any;
 		changeSortBy: TchangeSortBy;
 	};
@@ -26,9 +26,9 @@ export interface DynObjName {
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
 	const { list, list_length } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
-	let { SORT: sortBy, changeSortBy, sorted_list } = useSortBy({ defaultSortBy: 'ALPHABET', sortType: 'A_z' });
-
-	let ListBlocks = sorted_list(list, sortBy)?.map((organisation, i) => {
+	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' });
+	console.table(SORT);
+	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		console.dir(organisation.favorite_counter);
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',

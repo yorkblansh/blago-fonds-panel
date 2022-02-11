@@ -14,12 +14,15 @@ interface ISortBTNS {
 export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSortTypes_list }) => {
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
-	let [sortTypesItems, set_sortTypeItems] = useState([
+
+	let lil_mass: [string, keyof typeof enum_ListBlocks_sortBy][] = [
 		['От А до Я', 'ALPHABET'],
 		['От Я до А', 'ALPHABET'],
-	]);
+	];
 
-	let mass = [
+	let [sortTypesItems, set_sortTypeItems] = useState(lil_mass);
+
+	let mass: [string, keyof typeof enum_ListBlocks_sortBy][][] = [
 		[
 			['От Большего к Меньшему', 'FAVORITE'],
 			['От Меньшему к Большего', 'FAVORITE'],
@@ -46,7 +49,14 @@ export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSo
 						{sortTypesItems
 							.map((sort_typeItem) => ({
 								label: sort_typeItem[0],
-								click_action: () => console.dir(123),
+								click_action: () => {
+									let _sortType: 'A_z' | 'Z_a';
+									if (sort_typeItem[0] === 'От А до Я') _sortType = 'A_z';
+									else if (sort_typeItem[0] === 'От Я до А') _sortType = 'Z_a';
+									else _sortType = 'Z_a';
+
+									changeSortBy({ sortBy: sort_typeItem[1], sortType: _sortType });
+								},
 							}))
 							.map(({ label, click_action }) => (
 								<a onClick={() => click_action()} children={label} />
