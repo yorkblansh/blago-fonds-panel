@@ -31,8 +31,8 @@ export const SortBTNS_Contract: ISortBTNS = ({
 
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
-	const SortBTN = (
-		<div className="dropdown-wrapper">
+	let SortBTN = (
+		<>
 			<div className="dropdown--type">
 				<button className="dropbtn" children={<div>{`Тип сортировки: От А до Я`}</div>} />
 			</div>
@@ -69,7 +69,7 @@ export const SortBTNS_Contract: ISortBTNS = ({
 					</div>
 				)}
 			</div>
-		</div>
+		</>
 	);
 	return { SortBTN };
 };
