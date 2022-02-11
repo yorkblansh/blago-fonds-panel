@@ -1,12 +1,12 @@
-import { changeSortBy_arg } from 'PAGES/modules/hooks/useSortBy';
+import { enum_ListBlocks_sortBy, TchangeSortBy } from 'PAGES/modules/hooks/useSortBy';
 import { useState } from 'react';
 import './btn.style.scss';
 import './dropdown.btn.style.scss';
 
 interface ISortBTNS {
 	(props: {
-		Dropdown_list?: [a: string, b: changeSortBy_arg][];
-		changeSortBy: (arg: changeSortBy_arg) => void;
+		Dropdown_list?: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
+		changeSortBy: TchangeSortBy;
 		isSortTypes_list?: boolean;
 	}): { SortBTNs: JSX.Element };
 }
@@ -14,10 +14,45 @@ interface ISortBTNS {
 export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSortTypes_list }) => {
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
-	let SortBTN = (
+	let [sortTypesItems, set_sortTypeItems] = useState([
+		['От А до Я', 'ALPHABET'],
+		['От Я до А', 'ALPHABET'],
+	]);
+
+	let mass = [
+		[
+			['От Большего к Меньшему', 'FAVORITE'],
+			['От Меньшему к Большего', 'FAVORITE'],
+		],
+		[
+			['Сначла последние', 'LAST_MODIFY'],
+			['Сначла первые', 'LAST_MODIFY'],
+		],
+		[
+			['От А до Я', 'ALPHABET'],
+			['От Я до А', 'ALPHABET'],
+		],
+	];
+
+	let SortBTNs = (
 		<>
-			<div className="dropdown--type">
-				<button className="dropbtn" children={<div>{`Тип сортировки: От А до Я`}</div>} />
+			<div className="dropdown--types">
+				<button
+					className="header-btn dropbtn--types"
+					children={<div>{`Тип сортировки: ${sortTypesItems[0][0]}`}</div>}
+				/>
+				{isSortTypes_list && (
+					<div className="dropdown-content--types">
+						{sortTypesItems
+							.map((sort_typeItem) => ({
+								label: sort_typeItem[0],
+								click_action: () => console.dir(123),
+							}))
+							.map(({ label, click_action }) => (
+								<a onClick={() => click_action()} children={label} />
+							))}
+					</div>
+				)}
 			</div>
 			<div className="dropdown">
 				<button
@@ -31,39 +66,21 @@ export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSo
 				/>
 				{Dropdown_list && (
 					<div className="dropdown-content">
-						{Dropdown_list.map((drpdwn_item) => ({
+						{Dropdown_list.map((drpdwn_item, i) => ({
 							label: `${(targetItem === drpdwn_item[0] && '>>') || ''} ${drpdwn_item[0]}`,
 							click_action: () => {
-								changeSortBy(drpdwn_item[1]);
+								changeSortBy({ sortBy: drpdwn_item[1], sortType: 'A_z' });
 								setLabel(drpdwn_item[0]);
 								setArrows(drpdwn_item[0]);
+								set_sortTypeItems(mass[i]);
 							},
 						})).map(({ click_action, label }) => (
 							<a onClick={() => click_action()} children={label} />
 						))}
 					</div>
 				)}
-				{isSortTypes_list && (
-					<div className="dropdown-content">
-						{[
-							['От А до Я', 'ALPHABET'],
-							['От Я до А', 'ALPHABET'],
-							['От Большего к Меньшему', 'FAVORITE'],
-							['От Меньшему к Большего', 'FAVORITE'],
-							['Сначла последние', 'LAST_MODIFY'],
-							['Сначла первые', 'LAST_MODIFY'],
-						]
-							.map((sort_typeItem) => ({
-								label: sort_typeItem[0],
-								click_action: () => console.dir(123),
-							}))
-							.map(({ label, click_action }) => (
-								<a onClick={() => click_action()} children={label} />
-							))}
-					</div>
-				)}
 			</div>
 		</>
 	);
-	return { SortBTNs: SortBTN };
+	return { SortBTNs };
 };

@@ -9,14 +9,13 @@ import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
 import { LastModify_DIV } from '../Home_page/components/last_modify.div/last_modify.div';
 import { ListItem } from '../Home_page/components/list.item/list.item';
-import { changeSortBy_arg, useSortBy } from './hooks/useSortBy';
+import { TchangeSortBy, useSortBy } from './hooks/useSortBy';
 
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
 		ListBlocks: JSX.Element[] | undefined;
 		list: any;
-		changeSortBy: (arg: changeSortBy_arg) => void;
-		//  Ilist;
+		changeSortBy: TchangeSortBy;
 	};
 }
 
@@ -27,7 +26,7 @@ export interface DynObjName {
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized }) => {
 	const { list, list_length } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
-	let { sortBy, changeSortBy, sorted_list } = useSortBy('ALPHABET');
+	let { SORT: sortBy, changeSortBy, sorted_list } = useSortBy({ defaultSortBy: 'ALPHABET', sortType: 'A_z' });
 
 	let ListBlocks = sorted_list(list, sortBy)?.map((organisation, i) => {
 		console.dir(organisation.favorite_counter);
