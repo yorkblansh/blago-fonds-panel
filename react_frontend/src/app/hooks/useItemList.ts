@@ -21,12 +21,13 @@ export type Ilist = {
 	favorite_counter: number;
 }[];
 
+export let LIST = { organizes: { name: '', link1: '', link2: '', info: '', last_modify: '', favorite_counter: 0 } };
+
 export const useItemList = (path: keyof typeof MAIN_PATHES) => {
 	let { user_name } = getAccountProps();
 
-	let bb = { organizes: { name: '', link1: '', link2: '', info: '', last_modify: '', favorite_counter: 0 } };
 	const aa: any[] | never[] = [];
-	const [list, updateList] = useState(bb);
+	const [list, updateList] = useState(LIST);
 
 	let _path: any;
 	if (path === '/') _path = REST_API('/home');

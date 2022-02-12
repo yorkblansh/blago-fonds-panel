@@ -6,37 +6,21 @@ import { _sortType } from './_sortType.fn';
 
 interface ISortBTNS {
 	(props: {
-		Dropdown_list?: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
+		Dropdown_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
 		changeSortBy: TchangeSortBy;
-		isSortTypes_list?: boolean;
+		SortTypes_list: [string, keyof typeof enum_ListBlocks_sortBy][][];
 	}): { SortBTNs: JSX.Element };
 }
 
-export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSortTypes_list }) => {
+export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, SortTypes_list }) => {
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
 
-	let lil_mass: [string, keyof typeof enum_ListBlocks_sortBy][] = [
-		['От А до Я', 'ALPHABET'],
-		['От Я до А', 'ALPHABET'],
-	];
-
-	let [sortTypesItems, set_sortTypeItems] = useState(lil_mass);
-
-	let mass: [string, keyof typeof enum_ListBlocks_sortBy][][] = [
-		[
-			['От Большего к Меньшему', 'FAVORITE'],
-			['От Меньшему к Большего', 'FAVORITE'],
-		],
-		[
-			['Сначла последние', 'LAST_MODIFY'],
-			['Сначла первые', 'LAST_MODIFY'],
-		],
-		[
-			['От А до Я', 'ALPHABET'],
-			['От Я до А', 'ALPHABET'],
-		],
-	];
+	// let lil_mass: [string, keyof typeof enum_ListBlocks_sortBy][] = [
+	// 	['От А до Я', 'ALPHABET'],
+	// 	['От Я до А', 'ALPHABET'],
+	// ];
+	let [sortTypesItems, set_sortTypeItems] = useState(SortTypes_list[2]);
 
 	let SortBTNs = (
 		<>
@@ -45,7 +29,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSo
 					className="header-btn dropbtn--types"
 					children={<div>{`Тип сортировки: ${sortTypesItems[0][0]}`}</div>}
 				/>
-				{isSortTypes_list && (
+				{SortTypes_list && (
 					<div className="dropdown-content--types">
 						{sortTypesItems
 							.map((sort_typeItem) => ({
@@ -78,7 +62,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSo
 								changeSortBy({ sortBy: drpdwn_item[1], sortType: 'A_z' });
 								setLabel(drpdwn_item[0]);
 								setArrows(drpdwn_item[0]);
-								set_sortTypeItems(mass[i]);
+								set_sortTypeItems(SortTypes_list[i]);
 							},
 						})).map(({ click_action, label }) => (
 							<a onClick={() => click_action()} children={label} />

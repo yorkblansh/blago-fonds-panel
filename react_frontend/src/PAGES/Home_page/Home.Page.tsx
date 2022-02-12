@@ -20,7 +20,20 @@ export const HOME_PAGE = () => {
 			['По дате изменения', 'LAST_MODIFY'],
 			['По названию', 'ALPHABET'],
 		],
-		isSortTypes_list: true,
+		SortTypes_list: [
+			[
+				['От Большего к Меньшему', 'FAVORITE'],
+				['От Меньшему к Большего', 'FAVORITE'],
+			],
+			[
+				['Сначла последние', 'LAST_MODIFY'],
+				['Сначла первые', 'LAST_MODIFY'],
+			],
+			[
+				['От А до Я', 'ALPHABET'],
+				['От Я до А', 'ALPHABET'],
+			],
+		],
 	});
 
 	return (

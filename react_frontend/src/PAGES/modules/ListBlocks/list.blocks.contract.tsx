@@ -9,13 +9,13 @@ import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
 import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div';
 import { ListItem } from 'PAGES/Home_page/components/list.item/list.item';
-
+import { LIST } from 'app/hooks/useItemList';
 import { TchangeSortBy, useSortBy } from './hooks/useSortBy';
 
 interface IListBlocks_Contract {
 	(props: { path: keyof typeof MAIN_PATHES; is_authorized: boolean }): {
 		ListBlocks: JSX.Element[];
-		list: any;
+		list: typeof LIST.organizes[];
 		changeSortBy: TchangeSortBy;
 	};
 }
