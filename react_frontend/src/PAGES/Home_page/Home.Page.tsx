@@ -10,11 +10,8 @@ import { SortBTNS_Contract } from 'PAGES/modules/ListBlocks/sort.btn/sort.btn.co
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
-	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
+	let { ListBlocks, SortBTNs } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
-
-
-
 	return (
 		<>
 			<Header

@@ -4,7 +4,7 @@ import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler';
 import { getAccountProps } from 'app/getAccountProps';
 import { add2favorite } from 'app/home_page/add2favorite';
 import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
-import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
+import { Ilist_elements, LIST, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
 import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div';
@@ -23,6 +23,8 @@ interface IListBlocks_Contract {
 	}): {
 		ListBlocks: JSX.Element[];
 		changeSortBy: TchangeSortBy;
+		SortBTNs: JSX.Element | undefined;
+		list: typeof LIST.organizes[];
 	};
 }
 
@@ -40,30 +42,7 @@ const isSortButtons = (props: {
 	let { SortButtons, changeSortBy } = props;
 	if (SortButtons) {
 		let { SortBy_list, SortType_list } = SortButtons;
-		let { SortBTNs } = SortBTNS_Contract({
-			changeSortBy,
-			SortBy_list,
-			//  [
-			// 	['По лайкам', 'FAVORITE'],
-			// 	['По дате изменения', 'LAST_MODIFY'],
-			// 	['По названию', 'ALPHABET'],
-			// ],
-			SortType_list,
-			//  [
-			// 	[
-			// 		['От Большего к Меньшему', 'FAVORITE'],
-			// 		['От Меньшему к Большего', 'FAVORITE'],
-			// 	],
-			// 	[
-			// 		['Сначла последние', 'LAST_MODIFY'],
-			// 		['Сначла первые', 'LAST_MODIFY'],
-			// 	],
-			// 	[
-			// 		['От А до Я', 'ALPHABET'],
-			// 		['От Я до А', 'ALPHABET'],
-			// 	],
-			// ],
-		});
+		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list });
 		return { SortBTNs };
 	} else return { SortBTNs: undefined };
 };
@@ -72,7 +51,6 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized,
 	const { list } = useItemList(path);
 	const { favorites_names, user_name } = getAccountProps();
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' });
-
 	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy });
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {

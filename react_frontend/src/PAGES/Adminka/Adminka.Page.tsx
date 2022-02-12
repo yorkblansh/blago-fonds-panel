@@ -12,7 +12,9 @@ import { PATH } from 'api/consts';
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps();
-	let { ListBlocks, list } = ListBlocks_Contract({ path: '/adminka', is_authorized });
+	let { ListBlocks, list, SortBTNs } = ListBlocks_Contract({ path: '/adminka', is_authorized, SortButtons:{
+		
+	} });
 	let { ModalMenus } = ModalMenus_Contract({ list });
 	let { software_version } = getSoftwareVersion();
 
@@ -24,6 +26,7 @@ export const ADMINKA_PAGE = () => {
 					ExitBtn={<Header_ADM_BTN path="/logout" Label="Выйти из админки" />}
 				/>
 				<Add_Item_Btn Label="Добавить новое" />
+				<div className="dropdown-wrapper" children={SortBTNs} />
 				<WrapperItems key={'wrapper-items'} Items={ListBlocks} ModalMenus={ModalMenus} />
 				<div id="software-version" children={software_version} />
 			</div>
