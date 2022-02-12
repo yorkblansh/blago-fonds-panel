@@ -15,11 +15,6 @@ interface ISortBTNS {
 export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, SortTypes_list }) => {
 	let [Label, setLabel] = useState('По названию');
 	let [targetItem, setArrows] = useState('');
-
-	// let lil_mass: [string, keyof typeof enum_ListBlocks_sortBy][] = [
-	// 	['От А до Я', 'ALPHABET'],
-	// 	['От Я до А', 'ALPHABET'],
-	// ];
 	let [sortTypesItems, set_sortTypeItems] = useState(SortTypes_list[2]);
 
 	let SortBTNs = (
