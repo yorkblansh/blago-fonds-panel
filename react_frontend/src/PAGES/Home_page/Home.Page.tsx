@@ -13,28 +13,7 @@ export const HOME_PAGE = () => {
 	let { ListBlocks, changeSortBy } = ListBlocks_Contract({ path: '/', is_authorized });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
 
-	let { SortBTNs } = SortBTNS_Contract({
-		changeSortBy,
-		SortBy_list: [
-			['По лайкам', 'FAVORITE'],
-			['По дате изменения', 'LAST_MODIFY'],
-			['По названию', 'ALPHABET'],
-		],
-		SortType_list: [
-			[
-				['От Большего к Меньшему', 'FAVORITE'],
-				['От Меньшему к Большего', 'FAVORITE'],
-			],
-			[
-				['Сначла последние', 'LAST_MODIFY'],
-				['Сначла первые', 'LAST_MODIFY'],
-			],
-			[
-				['От А до Я', 'ALPHABET'],
-				['От Я до А', 'ALPHABET'],
-			],
-		],
-	});
+
 
 	return (
 		<>
