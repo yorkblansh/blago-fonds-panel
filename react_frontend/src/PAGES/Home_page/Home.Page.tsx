@@ -6,11 +6,11 @@ import { Header } from './components/header/header';
 import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract';
 import './home.page.style.scss';
 import { useItemList } from 'app/hooks/useItemList';
-import { SortBTNS_Contract } from 'PAGES/modules/ListBlocks/sort.btn/sort.btn.contract';
+import { SortButtons } from 'config/SortButtons';
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();
-	let { ListBlocks, SortBTNs } = ListBlocks_Contract({ path: '/', is_authorized });
+	let { ListBlocks, SortBTNs } = ListBlocks_Contract({ path: '/', is_authorized, SortButtons });
 	let { list_length: favorite_list_length } = useItemList('/favorites');
 	return (
 		<>

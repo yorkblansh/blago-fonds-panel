@@ -9,12 +9,15 @@ import { Add_Item_Btn } from './components/add.item.btn/add.item.btn';
 import { getSoftwareVersion } from 'app/getSoftwareVersion';
 import { getAccountProps } from 'app/getAccountProps';
 import { PATH } from 'api/consts';
+import { SortButtons } from 'config/SortButtons';
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps();
-	let { ListBlocks, list, SortBTNs } = ListBlocks_Contract({ path: '/adminka', is_authorized, SortButtons:{
-		
-	} });
+	let { ListBlocks, list, SortBTNs } = ListBlocks_Contract({
+		path: '/adminka',
+		is_authorized,
+		SortButtons,
+	});
 	let { ModalMenus } = ModalMenus_Contract({ list });
 	let { software_version } = getSoftwareVersion();
 
