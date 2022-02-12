@@ -12,7 +12,7 @@ interface IsendForm {
 	(props: { data?: any; path: keyof typeof API }, cb?: (res: any) => void): void;
 }
 
-export const getSoftwareVersion = (cb: (props: any) => void) => {
+export const get_SoftwareVersion = (cb: (props: any) => void) => {
 	axios
 		.get(REST_API('/get_version'))
 		.then((res) => {

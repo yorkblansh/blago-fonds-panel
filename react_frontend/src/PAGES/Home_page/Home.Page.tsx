@@ -15,12 +15,12 @@ export const HOME_PAGE = () => {
 
 	let { SortBTNs } = SortBTNS_Contract({
 		changeSortBy,
-		Dropdown_list: [
+		SortBy_list: [
 			['По лайкам', 'FAVORITE'],
 			['По дате изменения', 'LAST_MODIFY'],
 			['По названию', 'ALPHABET'],
 		],
-		SortTypes_list: [
+		SortType_list: [
 			[
 				['От Большего к Меньшему', 'FAVORITE'],
 				['От Меньшему к Большего', 'FAVORITE'],
