@@ -1,20 +1,14 @@
 /* eslint-disable react/jsx-pascal-case */
-import { Ilist } from 'app/hooks/useItemList';
-import { DynObjName } from 'PAGES/modules/ListBlocks/list.blocks.contract';
 import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal';
 import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal';
 import { ModalMenu } from '../layouts/modal.menus/modal.menus';
 
 interface IModalMenus_Contract {
-	(props: {
-		list: any;
-		//  Ilist
-	}): { ModalMenus: JSX.Element[] };
+	(props: { list: any }): { ModalMenus: JSX.Element[] };
 }
 
 export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
 	let ModalMenus = list.map((values: any, index: any) => {
-		// let values = _values[Object.keys(_values)[0]];
 		return (
 			<>
 				<ModalMenu
