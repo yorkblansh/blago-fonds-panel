@@ -43,6 +43,7 @@ export const useSortBy: IuseSortBy = (defaultSortMode) => {
 					// return dateA - dateB;
 					return dateA > dateB ? -1 : dateA < dateB ? 1 : 0;
 				});
+				console.table([sortBy, sortType]);
 				if (sortType === 'A_z') return a__z;
 				else if (sortType === 'Z_a') return a__z.reverse();
 			} else if (sortBy === 'DEFAULT') return list;

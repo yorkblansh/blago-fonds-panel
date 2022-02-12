@@ -1,7 +1,8 @@
-import { enum_ListBlocks_sortBy, TchangeSortBy } from 'PAGES/modules/hooks/useSortBy';
+import { enum_ListBlocks_sortBy, TchangeSortBy } from 'PAGES/modules/ListBlocks/hooks/useSortBy';
 import { useState } from 'react';
 import './btn.style.scss';
 import './dropdown.btn.style.scss';
+import { _sortType } from './_sortType.fn';
 
 interface ISortBTNS {
 	(props: {
@@ -50,12 +51,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ Dropdown_list, changeSortBy, isSo
 							.map((sort_typeItem) => ({
 								label: sort_typeItem[0],
 								click_action: () => {
-									let _sortType: 'A_z' | 'Z_a';
-									if (sort_typeItem[0] === 'От А до Я') _sortType = 'A_z';
-									else if (sort_typeItem[0] === 'От Я до А') _sortType = 'Z_a';
-									else _sortType = 'Z_a';
-
-									changeSortBy({ sortBy: sort_typeItem[1], sortType: _sortType });
+									changeSortBy({ sortBy: sort_typeItem[1], sortType: _sortType(sort_typeItem[0]) });
 								},
 							}))
 							.map(({ label, click_action }) => (

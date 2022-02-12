@@ -3,10 +3,10 @@ import { PATH, REST_API } from 'api/consts';
 import { getAccountProps } from 'app/getAccountProps';
 import { Header_BTN } from './components/buttons/header.btn';
 import { Header } from './components/header/header';
-import { ListBlocks_Contract } from '../modules/list.blocks.contract';
+import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract';
 import './home.page.style.scss';
 import { useItemList } from 'app/hooks/useItemList';
-import { SortBTNS_Contract } from 'PAGES/components/sort.btn/sort.btn.contract';
+import { SortBTNS_Contract } from 'PAGES/modules/ListBlocks/sort.btn/sort.btn.contract';
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps();

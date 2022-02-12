@@ -7,8 +7,9 @@ import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
 import { Ilist_elements, useItemList } from 'app/hooks/useItemList';
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
 import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
-import { LastModify_DIV } from '../Home_page/components/last_modify.div/last_modify.div';
-import { ListItem } from '../Home_page/components/list.item/list.item';
+import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div';
+import { ListItem } from 'PAGES/Home_page/components/list.item/list.item';
+
 import { TchangeSortBy, useSortBy } from './hooks/useSortBy';
 
 interface IListBlocks_Contract {
