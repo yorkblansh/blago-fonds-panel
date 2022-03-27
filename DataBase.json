@@ -1,1 +1,69 @@
-{"organizes":{"Благофонд222":{"info":"other info___","link1":"http://google.com","link2":"http2___","name":"Благофонд222","index":2,"last_modify":"10/02/22 17:31:57","old_name":"Благофонд222","favorite_counter":2},"Благофонд3":{"info":"other info___","link1":"httppppp","link2":"http2___","name":"Благофонд3","index":3,"last_modify":"10/02/22 19:33:42","old_name":"Благофонд3","favorite_counter":0},"Благофонд1":{"info":"dop inffffaaa","link1":"google.com","link2":"yandex.ru","name":"Благофонд1","index":1,"last_modify":"10/02/22 19:50:23","old_name":"Благофонд1","favorite_counter":0},"Друойфонд":{"info":"","link1":"","link2":"","name":"Друойфонд","index":4,"last_modify":"10/02/22 20:08:24","old_name":"Друойфонд","favorite_counter":1},"АА фонд":{"info":"","link1":"","link2":"","name":"АА фонд","index":0,"last_modify":"12/02/22 10:51:19","old_name":"А фонд","favorite_counter":1},"BB Фонд":{"info":"","last_modify":"12/02/22 10:52:19","link1":"http://google.com","link2":"","name":"BB Фонд","favorite_counter":0}},"users":{"admin":{"login":"admin","password":"admin","user_type":"admin"},"qwe":{"login":"qwe","password":"qwe","user_type":"default","favorites":{"Благофонд222":"Благофонд222","Друойфонд":"Друойфонд","АА фонд":"АА фонд"}},"user":{"login":"user","password":"user","user_type":"default","favorites":{"Благофонд222":"Благофонд222","Друойфонд":"Друойфонд","АА фонд":"АА фонд"}}}}
+{
+    "organizes": {
+        "Благофонд222": {
+            "info": "other info___",
+            "link1": "http://google.com",
+            "link2": "http2___",
+            "name": "Благофонд222",
+            "index": 2,
+            "last_modify": "10/02/22 17:31:57",
+            "old_name": "Благофонд222",
+            "favorite_counter": 2
+        },
+        "Благофонд3": {
+            "info": "other info___",
+            "link1": "httppppp",
+            "link2": "http2___",
+            "name": "Благофонд3",
+            "index": 3,
+            "last_modify": "10/02/22 19:33:42",
+            "old_name": "Благофонд3",
+            "favorite_counter": 0
+        },
+        "Благофонд1": {
+            "info": "dop inffffaaa",
+            "link1": "google.com",
+            "link2": "yandex.ru",
+            "name": "Благофонд1",
+            "index": 1,
+            "last_modify": "10/02/22 19:50:23",
+            "old_name": "Благофонд1",
+            "favorite_counter": 0
+        },
+        "Друойфонд": {
+            "info": "",
+            "link1": "",
+            "link2": "",
+            "name": "Друойфонд",
+            "index": 4,
+            "last_modify": "10/02/22 20:08:24",
+            "old_name": "Друойфонд",
+            "favorite_counter": 1
+        },
+        "АА фонд": {
+            "info": "",
+            "link1": "",
+            "link2": "",
+            "name": "АА фонд",
+            "index": 0,
+            "last_modify": "12/02/22 10:51:19",
+            "old_name": "А фонд",
+            "favorite_counter": 1
+        },
+        "BB Фонд": {
+            "info": "",
+            "last_modify": "12/02/22 10:52:19",
+            "link1": "http://google.com",
+            "link2": "",
+            "name": "BB Фонд",
+            "favorite_counter": 0
+        }
+    },
+    "users": {
+        "admin": {
+            "login": "admin",
+            "password": "admin",
+            "user_type": "admin"
+        }
+    }
+}
