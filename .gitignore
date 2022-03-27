@@ -3,3 +3,6 @@ pnpm-lock.yaml
 dist/server
 dist
 src/CLIENT/build
+
+react_frontend/package-lock.json
+package-lock.json
