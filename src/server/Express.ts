@@ -54,8 +54,8 @@ class Express {
     * Starts the express server
     */
    public init(): void {
-      this.server_for_client.listen(5005, () => {
-         console.log('Server started on port 5005');
+      this.server_for_client.listen(5010, () => {
+         console.log('Server started on port 5010');
       });
    }
 }
