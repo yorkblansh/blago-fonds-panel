@@ -5,7 +5,9 @@ import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface';
 import async from 'async';
 
 interface IaddORremove_favorite {
-   (props: { user_name: string; org_name: string; perf_type: 'BY_USER' | 'BY_SYSTEM' }): void;
+   user_name: string;
+   org_name: string;
+   perf_type: 'BY_USER' | 'BY_SYSTEM';
 }
 
 export class JsonDB_Services {
@@ -83,13 +85,13 @@ export class JsonDB_Services {
       perf_type === 'DECREMENT' && _push(favorite_count - 1);
    };
 
-   public static add2favorite: IaddORremove_favorite = ({ user_name, org_name, perf_type }) => {
+   public static add2favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
       const { jsondb } = JsonDB_Contract();
       if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'INCREMENT');
       jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true);
    };
 
-   public static remove_from_favorite: IaddORremove_favorite = ({ user_name, org_name, perf_type }) => {
+   public static remove_from_favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
       const { jsondb } = JsonDB_Contract();
       if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'DECREMENT');
       jsondb.delete(`/users/${user_name}/favorites/${org_name}`);
