@@ -5,15 +5,13 @@ import './dropdown.btn.style.scss';
 type _path = keyof typeof MAIN_PATHES | keyof typeof API;
 
 interface IHeader_BTN {
-	(props: {
 		label: string;
 		path: _path;
 		dropdown_list?: [{ click_link: _path; label: string }];
 		favorite_count?: number | string;
-	}): JSX.Element;
 }
 
-export const Header_BTN: IHeader_BTN = ({ label, path, dropdown_list: dropdown, favorite_count }) => {
+export const Header_BTN = ({ label, path, dropdown_list: dropdown, favorite_count }: IHeader_BTN) => {
 	return (
 		<>
 			<div className="dropdown">
