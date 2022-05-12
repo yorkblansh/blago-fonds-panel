@@ -1,11 +1,33 @@
 .header--wrapper {
+    height: auto;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     background-color: rgb(101, 181, 196);
     top: 0;
+    justify-content: space-between;
     width: 100%;
     height: fit-content;
+
+    &--title {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 25px;
+        margin-bottom: 5px;
+        padding-left: 30px;
+
+        & > * {
+            display: flex;
+            // background-color: blueviolet;
+        }
+    }
+
+    &--btns {
+        display: flex;
+        align-items: center;
+    }
 
     &--pos_absolute {
         position: absolute;
