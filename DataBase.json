@@ -56,7 +56,7 @@
             "link1": "http://google.com",
             "link2": "",
             "name": "BB Фонд",
-            "favorite_counter": 0
+            "favorite_counter": 1
         }
     },
     "users": {
@@ -64,6 +64,14 @@
             "login": "admin",
             "password": "admin",
             "user_type": "admin"
+        },
+        "qq": {
+            "login": "qq",
+            "password": "qq",
+            "user_type": "default",
+            "favorites": {
+                "BB Фонд": "BB Фонд"
+            }
         }
     }
 }
