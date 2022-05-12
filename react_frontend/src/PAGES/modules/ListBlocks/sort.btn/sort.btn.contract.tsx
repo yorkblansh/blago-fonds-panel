@@ -21,7 +21,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ SortBy_list, changeSortBy, SortTy
 		<>
 			<div className="dropdown--types">
 				<button
-					className="header-btn dropbtn--types"
+					className=" dropbtn--types"
 					children={<div>{`Тип сортировки: ${sortTypesItems[0][0]}`}</div>}
 				/>
 				{SortType_list && (
@@ -41,7 +41,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ SortBy_list, changeSortBy, SortTy
 			</div>
 			<div className="dropdown">
 				<button
-					className="header-btn dropbtn"
+					className=" dropbtn"
 					children={
 						<div>
 							<div>{`Сорировать: ${Label}`}</div>
