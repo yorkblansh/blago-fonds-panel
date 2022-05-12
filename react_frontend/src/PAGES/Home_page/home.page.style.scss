@@ -12,17 +12,15 @@
         margin: 15px;
 
         &--element {
-            background-color: blueviolet;
+            background-color: #21c1c1;
             margin: 15px;
             border-radius: 6px;
             margin: 5px;
             padding: 5px;
             width: auto;
-
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-
 
             &--data {
                 display: flex;
