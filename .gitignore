@@ -7,3 +7,4 @@ src/CLIENT/build
 react_frontend/package-lock.json
 package-lock.json
 react_frontend/yarn.lock
+yarn.lock
