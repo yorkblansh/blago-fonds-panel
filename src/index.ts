@@ -1,3 +1,3 @@
-import { my_Server } from './server/Server';
+import { my_Server } from './server/Server'
 
-new my_Server().loadServer();
+new my_Server().loadServer()
