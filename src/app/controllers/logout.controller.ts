@@ -1,7 +1,7 @@
 import { Request as IRequest } from 'express'
 import { Response as IResponse } from 'express'
-import { ILogger } from '../LOGS/Logger'
-import { LogOut_mware } from '../app/api/logout.mware'
+import { ILogger } from '../../LOGS/Logger'
+import { LogOut_mware } from '../api/logout.mware'
 
 export class LogOut_Controller {
 	public static perform(req: IRequest, res: IResponse): void {

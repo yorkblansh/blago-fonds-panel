@@ -1,5 +1,5 @@
-import { ILogger } from '../../LOGS/Logger'
-import { GV_mware } from '../../app/api/git_version_mware/gv.mware'
+import { ILogger } from '../../../LOGS/Logger'
+import { GV_mware } from '../../api/git_version_mware/gv.mware'
 import { Request as IRequest } from 'express'
 import { Response as IResponse } from 'express'
 
