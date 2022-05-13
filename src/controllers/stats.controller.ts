@@ -1,7 +1,7 @@
 import { Request as IRequest } from 'express'
 import { Response as IResponse } from 'express'
 import { ILogger } from '../LOGS/Logger'
-import { Stats_mware } from '../middlewares/api/stats.mware'
+import { Stats_mware } from '../app/api/stats.mware'
 
 export class Stats_Controller {
 	public static get_stats(req: IRequest, res: IResponse) {
