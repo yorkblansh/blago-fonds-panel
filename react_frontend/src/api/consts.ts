@@ -16,6 +16,7 @@ export enum MAIN_PATHES {
 	'/auth',
 	'/',
 	'/favorites',
+	'/keep',
 	'/register',
 	'/stats',
 }
