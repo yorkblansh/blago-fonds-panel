@@ -75,7 +75,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 						})}
 					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
-							// Icon={LikeIcon}
+							favorite_counter={organisation.favorite_counter}
 							_onClick={() => {
 								isLiked
 									? removeFromFavorite(organisation.name, user_name)
@@ -86,7 +86,6 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 							type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 						/>
 					)}
-					{isRenderCounter && <FavoriteCounter_div favorite_counter={organisation.favorite_counter} />}
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>
 			</div>
