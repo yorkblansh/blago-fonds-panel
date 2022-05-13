@@ -20,8 +20,13 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
 						<div className="modal--input_wrapper">
 							<form>
 								<InputModal name="name" Label="Название" value={values.name} index={index} />
-								<InputModal name="link1" Label="Ссылка1" value={values.link1} index={index} />
-								<InputModal name="link2" Label="Ссылка2" value={values.link2} index={index} />
+								<InputModal name="link1" Label="Ссылка на сайт фонда" value={values.link1} index={index} />
+								<InputModal
+									name="link2"
+									Label="Ссылка на отчёты деятельности фонда"
+									value={values.link2}
+									index={index}
+								/>
 								<InputModal name="info" Label="Доп. Информация" value={values.info} index={index} />
 							</form>
 						</div>

@@ -1,11 +1,10 @@
 import { API, MAIN_PATHES, REST_API } from 'api/consts'
 import axios from 'axios'
 
-export interface IgetItemsPageData {
-	(
-		props: { path: keyof typeof MAIN_PATHES; user_name?: string },
-		cb: (res: { data: { organizes: any } }) => void,
-	): void
+export interface getItemsPageDataProps {
+	path: keyof typeof MAIN_PATHES
+	user_name?: string
+	fond_name?: string
 }
 
 interface IsendForm {
@@ -25,9 +24,12 @@ export const get_SoftwareVersion = (cb: (props: any) => void) => {
 		})
 }
 
-export const getItemsPageData: IgetItemsPageData = ({ path, user_name }, cb) => {
+export const getItemsPageData = (
+	{ path, user_name, fond_name }: getItemsPageDataProps,
+	cb: (res: { data: { organizes: any } }) => void,
+) => {
 	axios
-		.post(path, { user_name }) // home or favorites
+		.post(path, { user_name, fond_name }) // home or favorites
 		.then((res) => {
 			console.dir(res)
 			cb(res)

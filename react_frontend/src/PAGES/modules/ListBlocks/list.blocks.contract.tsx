@@ -3,10 +3,11 @@ import { MAIN_PATHES, PATH, PERF_TYPE } from 'api/consts'
 import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler'
 import { getAccountProps } from 'app/getAccountProps'
 import { add2favorite } from 'app/home_page/add2favorite'
+import { add2keep } from 'app/home_page/add2keep'
 import { removeFromFavorite } from 'app/home_page/remove.from.favorite'
-import { Ilist_elements, LIST, useItemList } from 'app/hooks/useItemList'
+import { removeFromKeep } from 'app/home_page/remove.from.keep'
+import { useItemList } from 'app/hooks/useItemList'
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn'
-import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div'
 import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div'
 import { ListItem } from 'PAGES/Home_page/components/list.item/list.item'
 import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy'
@@ -19,10 +20,6 @@ interface ListBlocksProps {
 		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
 		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 	}
-}
-
-export interface DynObjName {
-	[key: string]: Ilist_elements
 }
 
 const isSortButtons = (props: {
@@ -42,22 +39,26 @@ const isSortButtons = (props: {
 
 export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBlocksProps) => {
 	const { list } = useItemList(path)
-	const { favorites_names, user_name } = getAccountProps()
+	const { favorites_names, keeped_names, user_name } = getAccountProps()
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
 	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy })
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
-		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
+		const isRenderFavoriteBtns = (path === '/' || path === '/favorites' || path === '/keeped') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
 			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
+			isKeeped = keeped_names.some((org_name) => org_name === organisation.name),
 			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'],
-			isRenderCounter = organisation.favorite_counter !== 0
+			isRenderCounter = organisation.favorite_counter !== 0,
+			isRenderKeepCounter = organisation
+
+		// console.dir(`${organisation.name} IS KEEPED: ${isKeeped}`)
 		return (
 			<div key={`element_${i}`} className="home-page--wrapper--element" id="home-page--wrapper--element">
 				<div className="home-page--wrapper--element--data">
 					<ListItem Label="Название" index={i} value={organisation.name} />
-					<ListItem link Label="Ссылка1" index={i} value={organisation.link1} />
-					<ListItem link Label="Ссылка2" index={i} value={organisation.link2} />
+					<ListItem link Label="Ссылка на сайт фонда" index={i} value={organisation.link1} />
+					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={i} value={organisation.link2} />
 					<ListItem Label="Доп. информация" index={i} value={organisation.info} />
 				</div>
 				<div className="home-page--wrapper--element--buttons">
@@ -74,17 +75,32 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 							)
 						})}
 					{isRenderFavoriteBtns && (
-						<Item_Perform_BTN
-							favorite_counter={organisation.favorite_counter}
-							_onClick={() => {
-								isLiked
-									? removeFromFavorite(organisation.name, user_name)
-									: add2favorite(organisation.name, user_name)
-								document.location.href = PATH(path)
-							}}
-							Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
-							type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
-						/>
+						<>
+							<Item_Perform_BTN
+								counter={organisation.favorite_counter}
+								_onClick={() => {
+									// LIKE BTN
+									isLiked
+										? removeFromFavorite(organisation.name, user_name)
+										: add2favorite(organisation.name, user_name)
+									document.location.href = PATH(path)
+								}}
+								Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
+								type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
+							/>
+							<Item_Perform_BTN
+								counter={organisation.keep_counter}
+								_onClick={() => {
+									// KEEP BTN
+									isKeeped
+										? removeFromKeep(organisation.name, user_name)
+										: add2keep(organisation.name, user_name)
+									document.location.href = PATH(path)
+								}}
+								Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
+								type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
+							/>
+						</>
 					)}
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>

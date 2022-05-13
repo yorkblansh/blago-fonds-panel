@@ -12,6 +12,7 @@ export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()
 	let { ListBlocks, SortBTNs } = ListBlocks_Contract({ path: '/', is_authorized, SortButtons })
 	let { list_length: favorite_list_length } = useItemList('/favorites')
+	let { list_length: keep_list_length } = useItemList('/keeped')
 	return (
 		<>
 			<Header
@@ -20,9 +21,14 @@ export const HOME_PAGE = () => {
 						? [
 								<Header_BTN path={PATH('/stats')} label="Перейти в статистику" />,
 								<Header_BTN
-									path={PATH('/favorites')}
+									path={PATH('/favorites')} // Лайки
 									label="Понравилось"
 									favorite_count={favorite_list_length}
+								/>,
+								<Header_BTN
+									path={PATH('/keeped')} // Закладки
+									label="Закладки"
+									favorite_count={keep_list_length}
 								/>,
 								<Header_BTN
 									path={REST_API('/logout')}

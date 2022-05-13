@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { env } from 'process'
 import { getCookie } from './getCookie'
-import { getFavoritesNames } from './hooks/useFavorites.names.list'
+import { useFavoritesNames } from './hooks/useFavorites.names.list'
+import { useKeepedNames } from './hooks/useKeeped.names'
 
 export const getAccountProps = () => {
 	let user_name: string
@@ -26,6 +28,14 @@ export const getAccountProps = () => {
 		user_name = 'test_user'
 	}
 	let is_admin = user_name === 'admin' && true
-	let { favorites_names } = getFavoritesNames(user_name)
-	return { is_authorized, user_key, user_name, favorites_names, is_admin }
+	const { favorites_names } = useFavoritesNames(user_name)
+	const { keeped_names } = useKeepedNames(user_name)
+	return {
+		is_authorized,
+		user_key,
+		user_name,
+		favorites_names,
+		keeped_names,
+		is_admin,
+	}
 }

@@ -20,6 +20,84 @@ export class JsonDB_Services {
 		return { json_data_HOME_PAGE }
 	}
 
+	//keep
+	public static getOrganizes_keep_counts = () => {
+		const { jsondb } = JsonDB_Contract()
+		const organizes = jsondb.getData(`/organizes`)
+		const org_names = Object.keys(organizes)
+		// eslint-disable-next-line prefer-const
+		let favorite_count: number[] = []
+
+		favorite_count = org_names.map((org_name): number => {
+			return jsondb.getData(`/organizes/${org_name}/keep_counter`)
+		})
+		const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
+			return [org_name, favorite_count[i]]
+		})
+		// console.dir(end_pairs);
+		return { end_pairs }
+	}
+
+	public static getKeeped_ONLY_NAME_STRINGS = (user_name: string) => {
+		const { jsondb } = JsonDB_Contract()
+		const keep = jsondb.getData(`/users/${user_name}/keep`)
+		const obj_keys = Object.keys(keep)
+		return { obj_keys, keep }
+	}
+
+	public static getKeeped = ({ user_name, cb }: { user_name: string; cb }): any => {
+		const { jsondb } = JsonDB_Contract()
+		const { obj_keys, keep } = this.getKeeped_ONLY_NAME_STRINGS(user_name)
+		// eslint-disable-next-line prefer-const
+		let end_obj = {}
+		async.each(
+			obj_keys,
+			(key, _cb) => {
+				end_obj[keep[key]] = jsondb.getData(`/organizes/${keep[key]}`)
+				_cb()
+			},
+			(err) => {
+				// if (err) console.dir(err);
+				// console.dir(end_obj);
+				cb(end_obj)
+			},
+		)
+
+		// return { favorites: end_favorites };
+		// for (const key in favorites) {
+		//    end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`);
+		//    // console.dir(favorites[key]);
+		//    // console.dir(jsondb.getData(`/organizes/${favorites[key]}`));
+		// }
+	}
+
+	public static get_keep_count_byOrgName = (org_name: string) => {
+		const { jsondb } = JsonDB_Contract()
+		const keep_count: number = jsondb.getData(`/organizes/${org_name}/keep_counter`)
+		return { keep_count }
+	}
+
+	public static incrORdecr_keep_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
+		const { jsondb } = JsonDB_Contract()
+		const _push = (keep_count: number) => jsondb.push(`/organizes/${org_name}/keep_counter`, keep_count, true)
+		const { keep_count } = this.get_keep_count_byOrgName(org_name)
+		perf_type === 'INCREMENT' && _push(keep_count + 1)
+		perf_type === 'DECREMENT' && _push(keep_count - 1)
+	}
+
+	public static add2keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
+		const { jsondb } = JsonDB_Contract()
+		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'INCREMENT')
+		jsondb.push(`/users/${user_name}/keep/${org_name}`, org_name, true)
+	}
+
+	public static remove_from_keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
+		const { jsondb } = JsonDB_Contract()
+		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'DECREMENT')
+		jsondb.delete(`/users/${user_name}/keep/${org_name}`)
+	}
+
+	// favorites
 	public static getOrganizes_favorite_counts = () => {
 		const { jsondb } = JsonDB_Contract()
 		const organizes = jsondb.getData(`/organizes`)
@@ -101,6 +179,7 @@ export class JsonDB_Services {
 		const { jsondb } = JsonDB_Contract()
 		jsondb.push(`/organizes/${obj.name}`, obj, true)
 		jsondb.push(`/organizes/${obj.name}/favorite_counter`, 0, true)
+		jsondb.push(`/organizes/${obj.name}/keep_counter`, 0, true)
 	}
 
 	public static adminka_remove_data = ({ name }: { name: string }) => {
@@ -121,6 +200,7 @@ export class JsonDB_Services {
 		// if (obj.old_name) {
 		const { users_names } = this.get_users_ONLY_NAME_STRINGS()
 		const { favorite_count } = this.get_favorite_count_byOrgName(obj.old_name)
+		const { keep_count } = this.get_keep_count_byOrgName(obj.old_name)
 
 		if (favorite_count !== 0) {
 			users_names.forEach((user_name) => {
@@ -132,6 +212,7 @@ export class JsonDB_Services {
 		}
 		jsondb.delete(`/organizes/${obj.old_name}`)
 		obj['favorite_counter'] = favorite_count
+		obj['keep_count'] = keep_count
 		try {
 			console.dir('TRYING TO PUSH')
 			jsondb.push(`/organizes/${obj.name}`, obj, true)
@@ -140,6 +221,7 @@ export class JsonDB_Services {
 			// console.error(error);
 		}
 		jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true)
+		jsondb.push(`/organizes/${obj.name}/keep_counter`, keep_count, true)
 		// }
 	}
 

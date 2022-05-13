@@ -2,19 +2,19 @@
 import { useEffect, useState } from 'react'
 import { sendForm } from '../home_page/axios.fns'
 
-export const useFavoritesNames = (user_name: string) => {
+export const useKeepedNames = (user_name: string) => {
 	// sendForm({ path: '/get_favorites_names' }, (get_favorites_names) => {});
 
-	const [favorites_names, update_favorites_names_List] = useState([''])
+	const [keeped_names, update_favorites_names_List] = useState([''])
 
 	useEffect(() => {
 		if (process.env.NODE_ENV === 'production') {
-			sendForm({ path: '/get_favorites_names', data: { user_name } }, (a) => {
+			sendForm({ path: '/get_keeped_names', data: { user_name } }, (a) => {
 				update_favorites_names_List(a.data.org_names)
 			})
 		} else if (process.env.NODE_ENV === 'development') {
 			// updateList(dev_data.organizes);
 		}
 	}, [update_favorites_names_List, user_name])
-	return { favorites_names }
+	return { keeped_names }
 }

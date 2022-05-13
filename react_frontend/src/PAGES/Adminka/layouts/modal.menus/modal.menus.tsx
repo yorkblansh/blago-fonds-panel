@@ -1,18 +1,16 @@
 import { PERF_TYPE } from 'api/consts'
 import './modal.menus.style.scss'
 
-interface IModalMenu {
-	(props: {
-		type: keyof typeof PERF_TYPE
-		index: number
-		SaveBtn: JSX.Element
-		CloseBtn: JSX.Element
-		InputModal: JSX.Element
-		RemoveModalLabel?: string
-	}): JSX.Element
+interface ModalMenuProps {
+	type: keyof typeof PERF_TYPE
+	index: number
+	SaveBtn: JSX.Element
+	CloseBtn: JSX.Element
+	InputModal: JSX.Element
+	RemoveModalLabel?: string
 }
 
-export const ModalMenu: IModalMenu = ({ type, index, CloseBtn, SaveBtn, InputModal, RemoveModalLabel }) => {
+export const ModalMenu = ({ type, index, CloseBtn, SaveBtn, InputModal, RemoveModalLabel }: ModalMenuProps) => {
 	let _index
 	if (type === 'MODIFY') {
 		_index = index

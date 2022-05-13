@@ -16,9 +16,10 @@ export enum MAIN_PATHES {
 	'/auth',
 	'/',
 	'/favorites',
-	'/keep',
+	'/keeped',
 	'/register',
 	'/stats',
+	'/fonds',
 }
 
 export enum API {
@@ -26,15 +27,26 @@ export enum API {
 	'/logout',
 	'/home',
 	'/auth_post',
+
 	'/modify_data_api',
 	'/remove_data_api',
 	'/create_data_api',
+
 	'/get_version',
+
 	'/add_2_favorite',
 	'/remove_from_favorite',
 	'/favorites_api',
 	'/get_favorites_names',
+
+	'/add2keep',
+	'/remove_from_keep',
+	'/keep_api',
+	'/get_keeped_names',
+
 	'/get_stats',
+
+	'/fonds',
 }
 
 export enum PERF_TYPE {
@@ -44,6 +56,9 @@ export enum PERF_TYPE {
 
 	'ADD_2_FAVORITE',
 	'REMOVE_FROM_FAVORITE',
+
+	'ADD_2_KEEPED',
+	'REMOVE_FROM_KEEPED',
 }
 
 export type Iuser_types = 'admin' | 'default'
