@@ -49,7 +49,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
-			is_aFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
+			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
 			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'],
 			isRenderCounter = organisation.favorite_counter !== 0
 		return (
@@ -76,13 +76,13 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
 							_onClick={() => {
-								is_aFavoriteOrg
+								isLiked
 									? removeFromFavorite(organisation.name, user_name)
 									: add2favorite(organisation.name, user_name)
 								document.location.href = PATH(path)
 							}}
-							Label={is_aFavoriteOrg ? 'Убрать из избранного' : 'Добавить визбранное'}
-							type={is_aFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
+							Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
+							type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 						/>
 					)}
 					{isRenderCounter && <FavoriteCounter_div favorite_counter={organisation.favorite_counter} />}
