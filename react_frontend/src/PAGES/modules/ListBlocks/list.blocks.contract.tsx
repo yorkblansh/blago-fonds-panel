@@ -75,6 +75,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 						})}
 					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
+							// Icon={LikeIcon}
 							_onClick={() => {
 								isLiked
 									? removeFromFavorite(organisation.name, user_name)
