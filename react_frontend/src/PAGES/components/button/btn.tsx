@@ -1,5 +1,5 @@
 interface IBTN {
-	(props: { Label: string }): JSX.Element;
+	(props: { Label: string }): JSX.Element
 }
 
 export const BTN: IBTN = ({ Label }) => {
@@ -9,5 +9,5 @@ export const BTN: IBTN = ({ Label }) => {
 		>
 			{Label}
 		</button>
-	);
-};
+	)
+}

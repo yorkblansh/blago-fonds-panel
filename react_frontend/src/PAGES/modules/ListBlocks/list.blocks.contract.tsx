@@ -1,64 +1,64 @@
 /* eslint-disable react/jsx-pascal-case */
-import { MAIN_PATHES, PATH, PERF_TYPE } from 'api/consts';
-import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler';
-import { getAccountProps } from 'app/getAccountProps';
-import { add2favorite } from 'app/home_page/add2favorite';
-import { removeFromFavorite } from 'app/home_page/remove.from.favorite';
-import { Ilist_elements, LIST, useItemList } from 'app/hooks/useItemList';
-import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn';
-import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div';
-import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div';
-import { ListItem } from 'PAGES/Home_page/components/list.item/list.item';
-import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy';
-import { SortBTNS_Contract } from './sort.btn/sort.btn.contract';
+import { MAIN_PATHES, PATH, PERF_TYPE } from 'api/consts'
+import { DisplayModalToogler } from 'app/adminka/DisplayModalToogler'
+import { getAccountProps } from 'app/getAccountProps'
+import { add2favorite } from 'app/home_page/add2favorite'
+import { removeFromFavorite } from 'app/home_page/remove.from.favorite'
+import { Ilist_elements, LIST, useItemList } from 'app/hooks/useItemList'
+import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn'
+import { FavoriteCounter_div } from 'PAGES/components/favorite.counter.div/favorite.counter.div'
+import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div'
+import { ListItem } from 'PAGES/Home_page/components/list.item/list.item'
+import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy'
+import { SortBTNS_Contract } from './sort.btn/sort.btn.contract'
 
 interface IListBlocks_Contract {
 	(props: {
-		path: keyof typeof MAIN_PATHES;
-		is_authorized: boolean;
+		path: keyof typeof MAIN_PATHES
+		is_authorized: boolean
 		SortButtons?: {
-			SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
-			SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][];
-		};
+			SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+			SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
+		}
 	}): {
-		ListBlocks: JSX.Element[];
-		changeSortBy: TchangeSortBy;
-		SortBTNs: JSX.Element | undefined;
-		list: typeof LIST.organizes[];
-	};
+		ListBlocks: JSX.Element[]
+		changeSortBy: TchangeSortBy
+		SortBTNs: JSX.Element | undefined
+		list: typeof LIST.organizes[]
+	}
 }
 
 export interface DynObjName {
-	[key: string]: Ilist_elements;
+	[key: string]: Ilist_elements
 }
 
 const isSortButtons = (props: {
-	changeSortBy: TchangeSortBy;
+	changeSortBy: TchangeSortBy
 	SortButtons?: {
-		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
-		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][];
-	};
+		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
+	}
 }): { SortBTNs: JSX.Element | undefined } => {
-	let { SortButtons, changeSortBy } = props;
+	let { SortButtons, changeSortBy } = props
 	if (SortButtons) {
-		let { SortBy_list, SortType_list } = SortButtons;
-		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list });
-		return { SortBTNs };
-	} else return { SortBTNs: undefined };
-};
+		let { SortBy_list, SortType_list } = SortButtons
+		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list })
+		return { SortBTNs }
+	} else return { SortBTNs: undefined }
+}
 
 export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized, SortButtons }) => {
-	const { list } = useItemList(path);
-	const { favorites_names, user_name } = getAccountProps();
-	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' });
-	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy });
+	const { list } = useItemList(path)
+	const { favorites_names, user_name } = getAccountProps()
+	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
+	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy })
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = (path === '/' || path === '/favorites') && is_authorized,
 			isRenderAdminkaBtns = path === '/adminka',
 			is_aFavoriteOrg = favorites_names.some((org_name) => org_name === organisation.name),
 			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY'],
-			isRenderCounter = organisation.favorite_counter !== 0;
+			isRenderCounter = organisation.favorite_counter !== 0
 		return (
 			<div key={`element_${i}`} className="home-page--wrapper--element" id="home-page--wrapper--element">
 				<div className="home-page--wrapper--element--data">
@@ -73,20 +73,20 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized,
 							return (
 								<Item_Perform_BTN
 									_onClick={() => {
-										DisplayModalToogler(i, true, TYPE);
+										DisplayModalToogler(i, true, TYPE)
 									}}
 									Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
 									type={TYPE}
 								/>
-							);
+							)
 						})}
 					{isRenderFavoriteBtns && (
 						<Item_Perform_BTN
 							_onClick={() => {
 								is_aFavoriteOrg
 									? removeFromFavorite(organisation.name, user_name)
-									: add2favorite(organisation.name, user_name);
-								document.location.href = PATH(path);
+									: add2favorite(organisation.name, user_name)
+								document.location.href = PATH(path)
 							}}
 							Label={is_aFavoriteOrg ? 'Убрать из избранного' : 'Добавить визбранное'}
 							type={is_aFavoriteOrg ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
@@ -96,8 +96,8 @@ export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized,
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>
 			</div>
-		);
-	});
+		)
+	})
 
-	return { ListBlocks, list, changeSortBy, SortBTNs };
-};
+	return { ListBlocks, list, changeSortBy, SortBTNs }
+}

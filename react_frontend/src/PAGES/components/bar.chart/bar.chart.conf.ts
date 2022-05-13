@@ -7,15 +7,15 @@ import {
 	ElementChartOptions,
 	PluginChartOptions,
 	ScaleChartOptions,
-} from 'chart.js';
-import { _DeepPartialObject } from 'chart.js/types/utils';
+} from 'chart.js'
+import { _DeepPartialObject } from 'chart.js/types/utils'
 
 // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-export type IBarData_object = ChartData<'bar', number[], unknown>;
-export type IBarOptions_object = ChartOptions<'bar'>;
+export type IBarData_object = ChartData<'bar', number[], unknown>
+export type IBarOptions_object = ChartOptions<'bar'>
 
 export interface IBarData {
-	(props: { labels: string[]; numeric_values: number[]; DatasetLabel: string }): { bar_data: IBarData_object };
+	(props: { labels: string[]; numeric_values: number[]; DatasetLabel: string }): { bar_data: IBarData_object }
 }
 export const BarData: IBarData = ({ labels, numeric_values, DatasetLabel }) => {
 	const bar_data: IBarData_object = {
@@ -34,12 +34,12 @@ export const BarData: IBarData = ({ labels, numeric_values, DatasetLabel }) => {
 		// 	// 	backgroundColor: 'rgba(53, 162, 235, 0.5)',
 		// 	// },
 		// ],
-	};
-	return { bar_data };
-};
+	}
+	return { bar_data }
+}
 
 export interface IBarOptions {
-	(props: { title_text?: string }): { bar_options: IBarOptions_object };
+	(props: { title_text?: string }): { bar_options: IBarOptions_object }
 }
 export const BarOptions: IBarOptions = ({ title_text }) => {
 	const bar_options: IBarOptions_object = {
@@ -58,6 +58,6 @@ export const BarOptions: IBarOptions = ({ title_text }) => {
 				text: title_text ? title_text : '',
 			},
 		},
-	};
-	return { bar_options };
-};
+	}
+	return { bar_options }
+}

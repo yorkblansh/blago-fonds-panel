@@ -1,25 +1,25 @@
 /* eslint-disable react/jsx-pascal-case */
-import './adminka.page.style.scss';
-import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract';
-import { Header_ADM_BTN } from './components/header.adm.btns/header.adm.to_home.btn';
-import { HeaderWR_Adminka } from './components/wrapper.header/wrapper.header.adm';
-import { WrapperItems } from './components/wrapper.wrapper_items/wrapper_items.adm';
-import { ModalMenus_Contract } from './modules/modal.menus.contract';
-import { Add_Item_Btn } from './components/add.item.btn/add.item.btn';
-import { getSoftwareVersion } from 'app/getSoftwareVersion';
-import { getAccountProps } from 'app/getAccountProps';
-import { PATH } from 'api/consts';
-import { SortButtons } from 'config/SortButtons';
+import './adminka.page.style.scss'
+import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract'
+import { Header_ADM_BTN } from './components/header.adm.btns/header.adm.to_home.btn'
+import { HeaderWR_Adminka } from './components/wrapper.header/wrapper.header.adm'
+import { WrapperItems } from './components/wrapper.wrapper_items/wrapper_items.adm'
+import { ModalMenus_Contract } from './modules/modal.menus.contract'
+import { Add_Item_Btn } from './components/add.item.btn/add.item.btn'
+import { getSoftwareVersion } from 'app/getSoftwareVersion'
+import { getAccountProps } from 'app/getAccountProps'
+import { PATH } from 'api/consts'
+import { SortButtons } from 'config/SortButtons'
 
 export const ADMINKA_PAGE = () => {
-	let { is_authorized } = getAccountProps();
+	let { is_authorized } = getAccountProps()
 	let { ListBlocks, list, SortBTNs } = ListBlocks_Contract({
 		path: '/adminka',
 		is_authorized,
 		SortButtons,
-	});
-	let { ModalMenus } = ModalMenus_Contract({ list });
-	let { software_version } = getSoftwareVersion();
+	})
+	let { ModalMenus } = ModalMenus_Contract({ list })
+	let { software_version } = getSoftwareVersion()
 
 	return (
 		<div className="adminka">
@@ -34,5 +34,5 @@ export const ADMINKA_PAGE = () => {
 				<div id="software-version" children={software_version} />
 			</div>
 		</div>
-	);
-};
+	)
+}

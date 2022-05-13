@@ -1,10 +1,10 @@
-import './header.style.scss';
+import './header.style.scss'
 
 export interface HeaderProps {
-	AuthBtn?: JSX.Element;
-	RegisterBtn?: JSX.Element;
-	Buttons: JSX.Element[];
-	reg_or_auth?: boolean;
+	AuthBtn?: JSX.Element
+	RegisterBtn?: JSX.Element
+	Buttons: JSX.Element[]
+	reg_or_auth?: boolean
 }
 
 export const Header = ({ AuthBtn, RegisterBtn, Buttons, reg_or_auth }: HeaderProps) => {
@@ -15,9 +15,9 @@ export const Header = ({ AuthBtn, RegisterBtn, Buttons, reg_or_auth }: HeaderPro
 			</div>
 			<div className="header--wrapper--btns">
 				{Buttons.map((btn, i) => {
-					return <div id={`header--wrapper--element${i}`} children={btn} />;
+					return <div id={`header--wrapper--element${i}`} children={btn} />
 				})}
 			</div>
 		</div>
-	);
-};
+	)
+}

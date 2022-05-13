@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-pascal-case */
-import { LIST } from 'app/hooks/useItemList';
-import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal';
-import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal';
-import { ModalMenu } from '../layouts/modal.menus/modal.menus';
+import { LIST } from 'app/hooks/useItemList'
+import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal'
+import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal'
+import { ModalMenu } from '../layouts/modal.menus/modal.menus'
 
 interface IModalMenus_Contract {
-	(props: { list: typeof LIST.organizes[] }): { ModalMenus: JSX.Element[] };
+	(props: { list: typeof LIST.organizes[] }): { ModalMenus: JSX.Element[] }
 }
 
 export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
@@ -54,7 +54,7 @@ export const ModalMenus_Contract: IModalMenus_Contract = ({ list }) => {
 					index={index}
 				/>
 			</>
-		);
-	});
-	return { ModalMenus };
-};
+		)
+	})
+	return { ModalMenus }
+}

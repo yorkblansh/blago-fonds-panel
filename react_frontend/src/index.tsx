@@ -1,14 +1,14 @@
-import ReactDOM from 'react-dom';
-import './index.scss';
-import { AUTH_PAGE } from './PAGES/Auth/Auth.Page';
-import { HOME_PAGE } from 'PAGES/Home_page/Home.Page';
+import ReactDOM from 'react-dom'
+import './index.scss'
+import { AUTH_PAGE } from './PAGES/Auth/Auth.Page'
+import { HOME_PAGE } from 'PAGES/Home_page/Home.Page'
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page';
-import { PATH } from 'api/consts';
-import { REGISTER_PAGE } from 'PAGES/Register/Register.Page';
-import { FAVORITES_PAGE } from 'PAGES/Favorites/Favorites.Page';
-import { STATS_PAGE } from 'PAGES/Stats/Stats.Page';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { ADMINKA_PAGE } from 'PAGES/Adminka/Adminka.Page'
+import { PATH } from 'api/consts'
+import { REGISTER_PAGE } from 'PAGES/Register/Register.Page'
+import { FAVORITES_PAGE } from 'PAGES/Favorites/Favorites.Page'
+import { STATS_PAGE } from 'PAGES/Stats/Stats.Page'
 
 const App = () => {
 	return (
@@ -25,9 +25,9 @@ const App = () => {
 				</Routes>
 			</BrowserRouter>
 		</div>
-	);
-};
-ReactDOM.render(<App />, document.getElementById('root'));
+	)
+}
+ReactDOM.render(<App />, document.getElementById('root'))
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

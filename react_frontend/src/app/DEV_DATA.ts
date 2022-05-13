@@ -6,4 +6,4 @@ export const dev_data = {
 		name: 'Благофонд',
 		last_modify: '1010100100',
 	},
-};
+}

@@ -1,9 +1,9 @@
-import { enum_ListBlocks_sortBy } from 'PAGES/modules/ListBlocks/hooks/useSortBy';
+import { enum_ListBlocks_sortBy } from 'PAGES/modules/ListBlocks/hooks/useSortBy'
 
 export type TSortButtons = {
-	SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][];
-	SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][];
-};
+	SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+	SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
+}
 
 export const SortButtons: TSortButtons = {
 	SortBy_list: [
@@ -25,4 +25,4 @@ export const SortButtons: TSortButtons = {
 			['От Я до А', 'ALPHABET'],
 		],
 	],
-};
+}
