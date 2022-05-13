@@ -12,19 +12,12 @@ import { ListItem } from 'PAGES/Home_page/components/list.item/list.item'
 import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy'
 import { SortBTNS_Contract } from './sort.btn/sort.btn.contract'
 
-interface IListBlocks_Contract {
-	(props: {
-		path: keyof typeof MAIN_PATHES
-		is_authorized: boolean
-		SortButtons?: {
-			SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
-			SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
-		}
-	}): {
-		ListBlocks: JSX.Element[]
-		changeSortBy: TchangeSortBy
-		SortBTNs: JSX.Element | undefined
-		list: typeof LIST.organizes[]
+interface ListBlocksProps {
+	path: keyof typeof MAIN_PATHES
+	is_authorized: boolean
+	SortButtons?: {
+		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 	}
 }
 
@@ -47,7 +40,7 @@ const isSortButtons = (props: {
 	} else return { SortBTNs: undefined }
 }
 
-export const ListBlocks_Contract: IListBlocks_Contract = ({ path, is_authorized, SortButtons }) => {
+export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBlocksProps) => {
 	const { list } = useItemList(path)
 	const { favorites_names, user_name } = getAccountProps()
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
