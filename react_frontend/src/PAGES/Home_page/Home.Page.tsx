@@ -21,7 +21,7 @@ export const HOME_PAGE = () => {
 								<Header_BTN path={PATH('/stats')} label="Перейти в статистику" />,
 								<Header_BTN
 									path={PATH('/favorites')}
-									label="Избранные"
+									label="Понравилось"
 									favorite_count={favorite_list_length}
 								/>,
 								<Header_BTN
