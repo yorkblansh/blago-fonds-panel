@@ -25,7 +25,6 @@ const App = () => {
 					<Route path={PATH('/keeped')} element={<KEEPED_PAGE />} />
 					<Route path={PATH('/stats')} element={<STATS_PAGE />} />
 					{/* <Route path={'/fonds'} element={<STATS_PAGE />} /> */}
-
 				</Routes>
 			</BrowserRouter>
 		</div>
