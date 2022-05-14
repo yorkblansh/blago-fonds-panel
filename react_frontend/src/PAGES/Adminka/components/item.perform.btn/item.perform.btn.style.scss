@@ -18,11 +18,12 @@
 
 .btn {
     &--ADD_2_FAVORITE {
-        width: 50px;
-        height: 50px;
-
-        background-color: rgba(100, 148, 237, 0);
-        border-color: rgb(12, 44, 148);
+        background-color: rgba(212, 83, 51, 0);
+        border-color: rgb(230, 255, 190);
+        display: flex;
+        flex-direction: row-reverse;
+        height: auto;
+        width: auto;
     }
 
     &--REMOVE_FROM_FAVORITE {
@@ -35,11 +36,12 @@
     }
 
     &--ADD_2_KEEPED {
-        width: 50px;
-        height: 50px;
-
-        background-color: rgba(100, 148, 237, 0);
-        border-color: rgb(12, 44, 148);
+        background-color: rgba(212, 83, 51, 0);
+        border-color: rgb(255, 230, 230);
+        display: flex;
+        flex-direction: row-reverse;
+        height: auto;
+        width: auto;
     }
 
     &--REMOVE_FROM_KEEPED {
