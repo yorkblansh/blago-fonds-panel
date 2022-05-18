@@ -7,7 +7,7 @@ export class Keep_API {
 		logger.log('returned FAVORITES')
 		JsonDB_Services.getKeeped({
 			user_name,
-			cb: (keeped) => {
+			cb: keeped => {
 				res.send({ organizes: keeped })
 			},
 		})

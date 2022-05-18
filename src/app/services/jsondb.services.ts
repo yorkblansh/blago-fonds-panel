@@ -56,7 +56,7 @@ export class JsonDB_Services {
 				end_obj[keep[key]] = jsondb.getData(`/organizes/${keep[key]}`)
 				_cb()
 			},
-			(err) => {
+			err => {
 				// if (err) console.dir(err);
 				// console.dir(end_obj);
 				cb(end_obj)
@@ -133,7 +133,7 @@ export class JsonDB_Services {
 				end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`)
 				_cb()
 			},
-			(err) => {
+			err => {
 				// if (err) console.dir(err);
 				// console.dir(end_obj);
 				cb(end_obj)
@@ -203,7 +203,7 @@ export class JsonDB_Services {
 		const { keep_count } = this.get_keep_count_byOrgName(obj.old_name)
 
 		if (favorite_count !== 0) {
-			users_names.forEach((user_name) => {
+			users_names.forEach(user_name => {
 				if (user_name !== 'admin') {
 					this.remove_from_favorite({ user_name, org_name: obj.old_name, perf_type: 'BY_SYSTEM' })
 					this.add2favorite({ user_name, org_name: obj.name, perf_type: 'BY_SYSTEM' })

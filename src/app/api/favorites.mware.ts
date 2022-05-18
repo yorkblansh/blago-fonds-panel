@@ -7,7 +7,7 @@ export class Favorites_mware {
 		logger.log('returned FAVORITES')
 		JsonDB_Services.getFavorites({
 			user_name,
-			cb: (favorites) => {
+			cb: favorites => {
 				res.send({ organizes: favorites })
 			},
 		})
