@@ -4,10 +4,12 @@
     "description": "",
     "main": "dist/src/index.js",
     "scripts": {
-        "start": "eslint src/ && tsc && npm run symlink_static && node dist/src/index.js",
-        "build": "eslint src/ && tsc && npm run symlink_static",
+        "start": "eslint src/ && tsc && npm run symlink_static && node dist/src/index.js && npm run prettier",
+        "build": "eslint src/ && tsc && npm run symlink_static && npm run prettier",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "symlink_static": "node ./scripts/symlink_react_build/index.js"
+        "symlink_static": "node ./scripts/symlink_react_build/index.js",
+        "prettier": "prettier --write src/* dist/*",
+        "just_start":"cd react_frontend && npm i && npm run build && cd .. && npm i && npm run start"
     },
     "keywords": [],
     "author": "",
