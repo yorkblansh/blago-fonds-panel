@@ -20,7 +20,7 @@
   },
   "lib": ["es2021"],
  
-  "exclude": ["views/", "dist/", "react_frontend/",]
+  "exclude": ["views/", "dist/", "react_frontend/", "scripts/"]
 }
 // {
 //   "compilerOptions": {
