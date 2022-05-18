@@ -1,5 +1,5 @@
 import { IMware } from '../typings/mware.interfaces'
-import { sendStatic } from '../send_static_file.mw'
+import { sendStatic } from '../../server/send_static_file.mw'
 import { JsonDB_Services } from '../services/jsondb.services'
 import { PATH } from '../../../react_frontend/src/api/consts'
 

@@ -1,6 +1,6 @@
 import md5 from 'md5'
 import { COOKIES, PATH } from '../../../react_frontend/src/api/consts'
-import { sendStatic } from '../send_static_file.mw'
+import { sendStatic } from '../../server/send_static_file.mw'
 import { JsonDB_Services } from '../services/jsondb.services'
 import { IMware } from '../typings/mware.interfaces'
 
