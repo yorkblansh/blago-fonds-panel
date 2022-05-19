@@ -82,11 +82,13 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 								 */
 								counter={organisation.favorite_counter}
 								onClick={() => {
-									// LIKE BTN
-									isLiked
-										? removeFromFavorite(organisation.name, user_name)
-										: add2favorite(organisation.name, user_name)
-									document.location.href = PATH(path)
+									if (is_authorized) {
+										document.location.href = PATH(path)
+
+										isLiked
+											? removeFromFavorite(organisation.name, user_name)
+											: add2favorite(organisation.name, user_name)
+									} else document.location.href = PATH('/auth')
 								}}
 								Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
 								type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
@@ -97,11 +99,13 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 								 */
 								counter={organisation.keep_counter}
 								onClick={() => {
-									// KEEP BTN
-									isKeeped
-										? removeFromKeep(organisation.name, user_name)
-										: add2keep(organisation.name, user_name)
-									document.location.href = PATH(path)
+									if (is_authorized) {
+										document.location.href = PATH(path)
+
+										isKeeped
+											? removeFromKeep(organisation.name, user_name)
+											: add2keep(organisation.name, user_name)
+									} else document.location.href = PATH('/auth')
 								}}
 								Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
 								type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
