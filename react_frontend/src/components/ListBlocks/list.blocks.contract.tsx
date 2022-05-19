@@ -12,6 +12,7 @@ import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_
 import { ListItem } from 'PAGES/Home_page/components/list.item/list.item'
 import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy'
 import { SortBTNS_Contract } from './sort.btn/sort.btn.contract'
+import './perf_btn_wrapper.scss'
 
 interface ListBlocksProps {
 	path: keyof typeof MAIN_PATHES
@@ -75,7 +76,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 							)
 						})}
 					{isRenderFavoriteBtns && (
-						<>
+						<div className="perf_btn_wrapper">
 							<Item_Perform_BTN
 								/**
 								 * 💙 Like / Unlike button
@@ -110,7 +111,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 								Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
 								type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
 							/>
-						</>
+						</div>
 					)}
 					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
 				</div>
