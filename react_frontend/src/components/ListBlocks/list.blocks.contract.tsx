@@ -44,7 +44,7 @@ export const ItemList = ({ path, is_authorized, sort_options }: ListBlocksProps)
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
 	let { SortButtons } = isSortButtons({ sort_options, changeSortBy })
 
-	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
+	const ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',
 			isRenderAdminkaBtns = path === '/adminka',
 			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
@@ -119,5 +119,5 @@ export const ItemList = ({ path, is_authorized, sort_options }: ListBlocksProps)
 		)
 	})
 
-	return { ListBlocks, list, changeSortBy, SortBTNs: SortButtons }
+	return { ListBlocks, list, changeSortBy, SortButtons }
 }

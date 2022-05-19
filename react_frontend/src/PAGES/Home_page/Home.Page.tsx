@@ -5,12 +5,12 @@ import { Header_BTN } from './components/buttons/header.btn'
 import { Header } from './components/header/header'
 import './home.page.style.scss'
 import { useItemList } from 'app/hooks/useItemList'
-import { SortButtons } from 'config/SortButtons'
+import { sort_options } from 'config/SortButtons'
 import { ItemList } from 'components/ListBlocks/list.blocks.contract'
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()
-	let { ListBlocks, SortBTNs } = ItemList({ path: '/', is_authorized, sort_options: SortButtons })
+	let { ListBlocks, SortButtons } = ItemList({ path: '/', is_authorized, sort_options })
 	let { list_length: favorite_list_length } = useItemList('/favorites')
 	let { list_length: keep_list_length } = useItemList('/keeped')
 	return (
@@ -43,7 +43,7 @@ export const HOME_PAGE = () => {
 				}
 			/>
 			<div className="home-page" id="home-page">
-				<div className="dropdown-wrapper" children={SortBTNs} />
+				<div className="dropdown-wrapper" children={SortButtons} />
 				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
 			</div>
 		</>

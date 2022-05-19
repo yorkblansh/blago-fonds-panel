@@ -8,15 +8,15 @@ import { Add_Item_Btn } from './components/add.item.btn/add.item.btn'
 import { getSoftwareVersion } from 'app/getSoftwareVersion'
 import { getAccountProps } from 'app/getAccountProps'
 import { PATH } from 'api/consts'
-import { SortButtons } from 'config/SortButtons'
+import { sort_options } from 'config/SortButtons'
 import { ItemList } from 'components/ListBlocks/list.blocks.contract'
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps()
-	let { ListBlocks, list, SortBTNs } = ItemList({
+	let { ListBlocks, list, SortButtons } = ItemList({
 		path: '/adminka',
 		is_authorized,
-		sort_options: SortButtons,
+		sort_options,
 	})
 	let { ModalMenus } = ModalMenus_Contract({ list })
 	let { software_version } = getSoftwareVersion()
@@ -29,7 +29,7 @@ export const ADMINKA_PAGE = () => {
 					ExitBtn={<Header_ADM_BTN path="/logout" Label="Выйти из админки" />}
 				/>
 				<Add_Item_Btn Label="Добавить новое" />
-				<div className="dropdown-wrapper" children={SortBTNs} />
+				<div className="dropdown-wrapper" children={SortButtons} />
 				<WrapperItems key={'wrapper-items'} Items={ListBlocks} ModalMenus={ModalMenus} />
 				<div id="software-version" children={software_version} />
 			</div>
