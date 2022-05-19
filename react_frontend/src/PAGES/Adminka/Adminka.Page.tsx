@@ -9,11 +9,11 @@ import { getSoftwareVersion } from 'app/getSoftwareVersion'
 import { getAccountProps } from 'app/getAccountProps'
 import { PATH } from 'api/consts'
 import { SortButtons } from 'config/SortButtons'
-import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
+import { ItemList } from 'components/ListBlocks/list.blocks.contract'
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps()
-	let { ListBlocks, list, SortBTNs } = ListBlocks_Contract({
+	let { ListBlocks, list, SortBTNs } = ItemList({
 		path: '/adminka',
 		is_authorized,
 		SortButtons,

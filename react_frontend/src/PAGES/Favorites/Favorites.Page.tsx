@@ -2,13 +2,13 @@
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
 import { Bar_Chart } from 'components/bar.chart/bar.chart'
-import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
+import { ItemList } from 'components/ListBlocks/list.blocks.contract'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 
 export const FAVORITES_PAGE = () => {
 	let { is_authorized } = getAccountProps()
-	let { ListBlocks } = ListBlocks_Contract({ path: '/favorites', is_authorized })
+	let { ListBlocks } = ItemList({ path: '/favorites', is_authorized })
 	let isListBlocks = ListBlocks?.length !== 0
 
 	console.dir(ListBlocks)

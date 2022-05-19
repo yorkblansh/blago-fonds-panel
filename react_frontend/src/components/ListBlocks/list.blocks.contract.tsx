@@ -38,7 +38,7 @@ const isSortButtons = (props: {
 	} else return { SortBTNs: undefined }
 }
 
-export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBlocksProps) => {
+export const ItemList = ({ path, is_authorized, SortButtons }: ListBlocksProps) => {
 	const { list } = useItemList(path)
 	const { favorites_names, keeped_names, user_name } = getAccountProps()
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
