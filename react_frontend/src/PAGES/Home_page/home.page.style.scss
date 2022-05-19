@@ -2,7 +2,7 @@
     top: 60px;
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: #ffffff;
     align-content: center;
 
     &--wrapper {
@@ -12,15 +12,14 @@
         margin: 15px;
 
         &--element {
-            background-color: #21c1c1;
-            margin: 15px;
+            background-color: #b3e1e1;
             border-radius: 6px;
-            margin: 5px;
-            padding: 5px;
-            width: auto;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            margin: 5px;
+            padding: 5px;
+            width: auto;
 
             &--data {
                 display: flex;
