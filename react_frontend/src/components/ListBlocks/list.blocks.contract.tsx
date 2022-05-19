@@ -77,6 +77,9 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 					{isRenderFavoriteBtns && (
 						<>
 							<Item_Perform_BTN
+								/**
+								 * 💙 Like / Unlike button
+								 */
 								counter={organisation.favorite_counter}
 								onClick={() => {
 									// LIKE BTN
@@ -89,6 +92,9 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 								type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 							/>
 							<Item_Perform_BTN
+								/**
+								 * 👛 Keep / Unkeep button
+								 */
 								counter={organisation.keep_counter}
 								onClick={() => {
 									// KEEP BTN
