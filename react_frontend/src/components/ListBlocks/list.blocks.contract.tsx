@@ -44,7 +44,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy })
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
-		const isRenderFavoriteBtns = (path === '/' || path === '/favorites' || path === '/keeped') && is_authorized,
+		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',
 			isRenderAdminkaBtns = path === '/adminka',
 			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
 			isKeeped = keeped_names.some((org_name) => org_name === organisation.name),
@@ -66,7 +66,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 						BTN_TYPES.map((TYPE) => {
 							return (
 								<Item_Perform_BTN
-									_onClick={() => {
+									onClick={() => {
 										DisplayModalToogler(i, true, TYPE)
 									}}
 									Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
