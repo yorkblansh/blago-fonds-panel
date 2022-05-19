@@ -29,20 +29,20 @@ const isSortButtons = (props: {
 		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
 		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 	}
-}): { SortBTNs: JSX.Element | undefined } => {
+}): { SortButtons: JSX.Element | undefined } => {
 	let { sort_options: SortButtons, changeSortBy } = props
 	if (SortButtons) {
 		let { SortBy_list, SortType_list } = SortButtons
 		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list })
-		return { SortBTNs }
-	} else return { SortBTNs: undefined }
+		return { SortButtons: SortBTNs }
+	} else return { SortButtons: undefined }
 }
 
 export const ItemList = ({ path, is_authorized, sort_options }: ListBlocksProps) => {
 	const { list } = useItemList(path)
 	const { favorites_names, keeped_names, user_name } = getAccountProps()
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
-	let { SortBTNs } = isSortButtons({ sort_options, changeSortBy })
+	let { SortButtons } = isSortButtons({ sort_options, changeSortBy })
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',
@@ -119,5 +119,5 @@ export const ItemList = ({ path, is_authorized, sort_options }: ListBlocksProps)
 		)
 	})
 
-	return { ListBlocks, list, changeSortBy, SortBTNs }
+	return { ListBlocks, list, changeSortBy, SortBTNs: SortButtons }
 }
