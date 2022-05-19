@@ -9,11 +9,11 @@ import { getSoftwareVersion } from 'app/getSoftwareVersion'
 import { getAccountProps } from 'app/getAccountProps'
 import { PATH } from 'api/consts'
 import { sort_options } from 'config/SortButtons'
-import { ItemList } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/ItemList'
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps()
-	let { ListBlocks, list, SortButtons } = ItemList({
+	let { ListBlocks, list, SortButtons } = useListBlocks({
 		path: '/adminka',
 		is_authorized,
 		sort_options,

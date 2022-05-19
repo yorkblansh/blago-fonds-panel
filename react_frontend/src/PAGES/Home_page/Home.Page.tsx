@@ -6,11 +6,11 @@ import { Header } from './components/header/header'
 import './home.page.style.scss'
 import { useItemList } from 'app/hooks/useItemList'
 import { sort_options } from 'config/SortButtons'
-import { ItemList } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/ItemList'
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()
-	let { ListBlocks, SortButtons } = ItemList({ path: '/', is_authorized, sort_options })
+	let { ListBlocks, SortButtons } = useListBlocks({ path: '/', is_authorized, sort_options })
 	let { list_length: favorite_list_length } = useItemList('/favorites')
 	let { list_length: keep_list_length } = useItemList('/keeped')
 	return (

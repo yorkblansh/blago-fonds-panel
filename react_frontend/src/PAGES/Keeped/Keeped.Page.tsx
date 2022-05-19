@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-pascal-case */
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
-import { ItemList } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/ItemList'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 
 export const KEEPED_PAGE = () => {
 	const { is_authorized } = getAccountProps()
-	const { ListBlocks } = ItemList({ path: '/keeped', is_authorized })
+	const { ListBlocks } = useListBlocks({ path: '/keeped', is_authorized })
 	const isListBlocks = ListBlocks?.length !== 0
 
 	return (
