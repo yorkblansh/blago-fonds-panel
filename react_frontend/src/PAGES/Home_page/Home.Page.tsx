@@ -9,10 +9,10 @@ import { sort_options } from 'config/SortButtons'
 import { useListBlocks } from 'components/ListBlocks/useListBlocks'
 
 export const HOME_PAGE = () => {
-	let { is_authorized, user_name } = getAccountProps()
-	let { ListBlocks, SortButtons } = useListBlocks({ path: '/', is_authorized, sort_options })
-	let { list_length: favorite_list_length } = useItemList('/favorites')
-	let { list_length: keep_list_length } = useItemList('/keeped')
+	const { is_authorized, user_name } = getAccountProps()
+	const { ListBlocks, SortButtons } = useListBlocks({ path: '/', is_authorized, sort_options })
+	const { list_length: favorite_list_length } = useItemList('/favorites')
+	const { list_length: keep_list_length } = useItemList('/keeped')
 	return (
 		<>
 			<Header
