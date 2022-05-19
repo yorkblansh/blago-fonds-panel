@@ -17,7 +17,7 @@ import './perf_btn_wrapper.scss'
 interface ListBlocksProps {
 	path: keyof typeof MAIN_PATHES
 	is_authorized: boolean
-	SortButtons?: {
+	sort_options?: {
 		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
 		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 	}
@@ -25,12 +25,12 @@ interface ListBlocksProps {
 
 const isSortButtons = (props: {
 	changeSortBy: TchangeSortBy
-	SortButtons?: {
+	sort_options?: {
 		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
 		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 	}
 }): { SortBTNs: JSX.Element | undefined } => {
-	let { SortButtons, changeSortBy } = props
+	let { sort_options: SortButtons, changeSortBy } = props
 	if (SortButtons) {
 		let { SortBy_list, SortType_list } = SortButtons
 		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list })
@@ -38,11 +38,11 @@ const isSortButtons = (props: {
 	} else return { SortBTNs: undefined }
 }
 
-export const ItemList = ({ path, is_authorized, SortButtons }: ListBlocksProps) => {
+export const ItemList = ({ path, is_authorized, sort_options }: ListBlocksProps) => {
 	const { list } = useItemList(path)
 	const { favorites_names, keeped_names, user_name } = getAccountProps()
 	let { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
-	let { SortBTNs } = isSortButtons({ SortButtons, changeSortBy })
+	let { SortBTNs } = isSortButtons({ sort_options, changeSortBy })
 
 	let ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',

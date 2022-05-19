@@ -16,7 +16,7 @@ export const ADMINKA_PAGE = () => {
 	let { ListBlocks, list, SortBTNs } = ItemList({
 		path: '/adminka',
 		is_authorized,
-		SortButtons,
+		sort_options: SortButtons,
 	})
 	let { ModalMenus } = ModalMenus_Contract({ list })
 	let { software_version } = getSoftwareVersion()

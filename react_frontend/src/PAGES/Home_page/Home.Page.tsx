@@ -10,7 +10,7 @@ import { ItemList } from 'components/ListBlocks/list.blocks.contract'
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()
-	let { ListBlocks, SortBTNs } = ItemList({ path: '/', is_authorized, SortButtons })
+	let { ListBlocks, SortBTNs } = ItemList({ path: '/', is_authorized, sort_options: SortButtons })
 	let { list_length: favorite_list_length } = useItemList('/favorites')
 	let { list_length: keep_list_length } = useItemList('/keeped')
 	return (
