@@ -26,6 +26,20 @@
                 flex-direction: column;
             }
 
+            &--open_item {
+                background-color: #d9ff05;
+                flex-direction: column;
+                margin: 5px;
+                padding: 5px;
+                position: absolute;
+                width: 200px;
+                margin-left: -86px;
+                border-radius: 20px;
+                text-align: center;
+                left: 50%;
+                right: 50%;
+            }
+
             &--buttons {
                 display: flex;
                 flex-direction: column;

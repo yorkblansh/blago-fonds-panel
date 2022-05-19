@@ -1,0 +1,11 @@
+// interface OpenItemProps {
+// 	display: 'none' | 'flex'
+// }
+
+// export const OpenItemComponent = ({ display }: OpenItemProps) => {
+// 	return (
+// 		<div style={{ display }} className="home-page--wrapper--element--open_item">
+// 			Открыть на полный экран
+// 		</div>
+// 	)
+// }
