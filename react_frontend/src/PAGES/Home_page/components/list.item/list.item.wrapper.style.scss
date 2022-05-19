@@ -4,17 +4,17 @@
         flex-direction: row;
 
         &--label {
-            padding: 3px;
-            margin: 2px;
+            background-color: #a1cbcb;
             border-radius: 5px;
-            background-color: rgb(0 255 255);
+            margin: 2px;
+            padding: 3px;
         }
 
         &--body {
-            padding: 3px;
-            margin: 2px;
+            background-color: #5eaccb;
             border-radius: 5px;
-            background-color: rgb(38 129 165);
+            margin: 2px;
+            padding: 3px;
 
             &--link {
                 text-decoration: underline;
