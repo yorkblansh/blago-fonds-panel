@@ -78,7 +78,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 						<>
 							<Item_Perform_BTN
 								counter={organisation.favorite_counter}
-								_onClick={() => {
+								onClick={() => {
 									// LIKE BTN
 									isLiked
 										? removeFromFavorite(organisation.name, user_name)
@@ -90,7 +90,7 @@ export const ListBlocks_Contract = ({ path, is_authorized, SortButtons }: ListBl
 							/>
 							<Item_Perform_BTN
 								counter={organisation.keep_counter}
-								_onClick={() => {
+								onClick={() => {
 									// KEEP BTN
 									isKeeped
 										? removeFromKeep(organisation.name, user_name)
