@@ -2,7 +2,7 @@
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
 import { Bar_Chart } from 'components/bar.chart/bar.chart'
-import { ItemList } from 'components/ListBlocks/list.blocks.contract'
+import { ItemList } from 'components/ListBlocks/ItemList'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 
