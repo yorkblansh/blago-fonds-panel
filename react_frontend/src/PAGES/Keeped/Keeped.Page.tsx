@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
+import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
-import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract'
 
 export const KEEPED_PAGE = () => {
 	const { is_authorized } = getAccountProps()

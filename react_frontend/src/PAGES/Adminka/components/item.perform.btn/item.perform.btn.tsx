@@ -3,7 +3,7 @@ import './item.perform.btn.style.scss'
 import { PERF_TYPE } from 'api/consts'
 import { FunctionComponent, SVGProps } from 'react'
 import { SvgPerformBtn, SVG_MAP } from './svg'
-import { Counter_div } from 'PAGES/components/counter.div/counter.div'
+import { Counter_div } from 'components/counter.div/counter.div'
 
 export interface Item_Config_BTNprops {
 	counter?: number

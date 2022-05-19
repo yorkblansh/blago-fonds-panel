@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-pascal-case */
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
-import { Bar_Chart } from 'PAGES/components/bar.chart/bar.chart'
+import { Bar_Chart } from 'components/bar.chart/bar.chart'
+import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
-import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract'
 
 export const FAVORITES_PAGE = () => {
 	let { is_authorized } = getAccountProps()

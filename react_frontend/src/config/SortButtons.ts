@@ -1,4 +1,4 @@
-import { enum_ListBlocks_sortBy } from 'PAGES/modules/ListBlocks/hooks/useSortBy'
+import { enum_ListBlocks_sortBy } from 'components/ListBlocks/hooks/useSortBy'
 
 export type TSortButtons = {
 	SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]

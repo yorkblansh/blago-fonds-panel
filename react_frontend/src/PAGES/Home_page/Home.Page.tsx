@@ -3,10 +3,10 @@ import { PATH, REST_API } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
 import { Header_BTN } from './components/buttons/header.btn'
 import { Header } from './components/header/header'
-import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract'
 import './home.page.style.scss'
 import { useItemList } from 'app/hooks/useItemList'
 import { SortButtons } from 'config/SortButtons'
+import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()

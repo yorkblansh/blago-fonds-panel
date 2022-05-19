@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
 import './adminka.page.style.scss'
-import { ListBlocks_Contract } from 'PAGES/modules/ListBlocks/list.blocks.contract'
 import { Header_ADM_BTN } from './components/header.adm.btns/header.adm.to_home.btn'
 import { HeaderWR_Adminka } from './components/wrapper.header/wrapper.header.adm'
 import { WrapperItems } from './components/wrapper.wrapper_items/wrapper_items.adm'
@@ -10,6 +9,7 @@ import { getSoftwareVersion } from 'app/getSoftwareVersion'
 import { getAccountProps } from 'app/getAccountProps'
 import { PATH } from 'api/consts'
 import { SortButtons } from 'config/SortButtons'
+import { ListBlocks_Contract } from 'components/ListBlocks/list.blocks.contract'
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps()
