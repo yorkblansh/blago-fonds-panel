@@ -1,13 +1,15 @@
 .adminka {
-
     &--wrapper {
         &--header {
+            background-color: #ad2800;
             display: flex;
             flex-direction: row;
+            height: -webkit-fit-content;
+            height: -moz-fit-content;
             height: fit-content;
-            width: 100%;
-            background-color: chocolate;
             justify-content: space-between;
+            width: auto;
+            padding-inline: 9px;
         }
     }
 }
