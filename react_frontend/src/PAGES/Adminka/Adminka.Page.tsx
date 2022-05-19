@@ -9,7 +9,7 @@ import { getSoftwareVersion } from 'app/getSoftwareVersion'
 import { getAccountProps } from 'app/getAccountProps'
 import { PATH } from 'api/consts'
 import { sort_options } from 'config/SortButtons'
-import { useListBlocks } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/useListBlocks'
 
 export const ADMINKA_PAGE = () => {
 	let { is_authorized } = getAccountProps()

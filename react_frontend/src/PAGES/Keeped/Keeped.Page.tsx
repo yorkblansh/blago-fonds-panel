@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
-import { useListBlocks } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/useListBlocks'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 

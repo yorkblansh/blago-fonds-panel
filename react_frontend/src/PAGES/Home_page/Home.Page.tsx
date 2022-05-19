@@ -6,7 +6,7 @@ import { Header } from './components/header/header'
 import './home.page.style.scss'
 import { useItemList } from 'app/hooks/useItemList'
 import { sort_options } from 'config/SortButtons'
-import { useListBlocks } from 'components/ListBlocks/ItemList'
+import { useListBlocks } from 'components/ListBlocks/useListBlocks'
 
 export const HOME_PAGE = () => {
 	let { is_authorized, user_name } = getAccountProps()
