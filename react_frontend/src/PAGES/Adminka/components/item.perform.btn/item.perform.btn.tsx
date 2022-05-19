@@ -32,7 +32,7 @@ export const Item_Perform_BTN = ({ type, Label, onClick, counter }: Item_Config_
 				</div>
 			) : (
 				<div className={`adm-edit-btn btn--${type}`} style={{ borderWidth: 0 }} onClick={() => onClick()}>
-					{counter ? <Counter_div {...{ counter, type }} /> : null}
+					{counter && type === 'REMOVE_FROM_FAVORITE' ? <Counter_div {...{ counter, type }} /> : null}
 					<SvgPerformBtn height="50" width="50" select_svg={select_svg ? select_svg : 'unlike'} />
 				</div>
 			)}
