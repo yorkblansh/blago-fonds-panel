@@ -210,6 +210,16 @@ export class JsonDB_Services {
 				}
 			})
 		}
+
+		if (keep_count !== 0) {
+			users_names.forEach(user_name => {
+				if (user_name !== 'admin') {
+					this.remove_from_keeped({ user_name, org_name: obj.old_name, perf_type: 'BY_SYSTEM' })
+					this.add2keeped({ user_name, org_name: obj.name, perf_type: 'BY_SYSTEM' })
+				}
+			})
+		}
+
 		jsondb.delete(`/organizes/${obj.old_name}`)
 		obj['favorite_counter'] = favorite_count
 		obj['keep_count'] = keep_count
