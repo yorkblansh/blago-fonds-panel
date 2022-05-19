@@ -5,7 +5,7 @@ export type TSortButtons = {
 	SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
 }
 
-export const SortButtons: TSortButtons = {
+export const sort_options: TSortButtons = {
 	SortBy_list: [
 		['По лайкам', 'FAVORITE'],
 		['По дате изменения', 'LAST_MODIFY'],
