@@ -181,7 +181,7 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 							/>
 						</div>
 					)}
-					<LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} />
+					{isAdminka ? <LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} /> : null}
 				</div>
 			</div>
 		)
