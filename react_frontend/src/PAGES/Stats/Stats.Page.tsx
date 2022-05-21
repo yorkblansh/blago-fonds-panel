@@ -11,7 +11,7 @@ export const STATS_PAGE = () => {
 	let { is_authorized, is_admin } = getAccountProps()
 	let { org_names, favorite_counters } = getStatsData()
 
-	let { bar_options } = BarOptions({ title_text: 'TITLE text' })
+	let { bar_options } = BarOptions({ title_text: ' ' })
 	let { bar_data } = BarData({
 		DatasetLabel: 'Голоса',
 		labels: org_names,
