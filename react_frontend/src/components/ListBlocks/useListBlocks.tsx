@@ -83,6 +83,7 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 					/**
 					 * Info Block
 					 */
+					style={{ opacity: a ? 0 : 100 }}
 					className="home-page--wrapper--element--data">
 					<ListItem link Label="Ссылка на сайт фонда" index={i} value={organisation.link1} />
 					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={i} value={organisation.link2} />
