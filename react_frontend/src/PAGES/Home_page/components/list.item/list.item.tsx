@@ -43,7 +43,13 @@ export const ListItem = ({ index, value, Label, link, isOrgName, info }: ListIte
 					key={`item_name_${index}`}
 					id={`item_${index}`}
 					children={
-						isOrgName ? <div style={{ fontSize: '25px' }}>{value}</div> : value.length <= 1 ? 'Пусто' : value
+						isOrgName ? (
+							<div style={{ fontSize: '25px', whiteSpace: 'nowrap' }}>{value}</div>
+						) : value.length <= 1 ? (
+							'Пусто'
+						) : (
+							value
+						)
 					}
 				/>
 			) : null}

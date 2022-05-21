@@ -79,11 +79,102 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 				key={`element_${i}`}
 				className="home-page--wrapper--element"
 				id={`home-page--wrapper--element_${i}`}>
+				<div className="home-page--wrapper--element--main_info">
+					<div className="home-page--wrapper--element--org_name">
+						<ListItem isOrgName Label="Название" index={i} value={organisation.name} />
+						<div
+							onClick={() => {
+								if (a) {
+									list.map((_ell, _i): void => {
+										if (_i !== i) {
+											const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
+											el.style.display = 'none'
+											// el.style.height = '100vh'
+											b(false)
+										}
+									})
+								} else {
+									list.map((_ell, _i): void => {
+										if (_i !== i) {
+											const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
+											el.style.display = 'flex'
+											// el.style.height = '100vh'
+											b(true)
+										}
+									})
+								}
+							}}
+							id={`open_item_${i}`}
+							style={{ display: 'none' }}
+							className="home-page--wrapper--element--open_item">
+							{a ? 'развернуть' : 'назад ↩️'}
+						</div>
+					</div>
+
+					<div
+						/**
+						 * Like buttons
+						 */
+						className="home-page--wrapper--element--buttons">
+						{isAdminka && //? Если компонент рендериться в админке, то рисуем кнопки
+							BTN_TYPES.map((TYPE) => {
+								return (
+									<Item_Perform_BTN
+										onClick={() => {
+											DisplayModalToogler(i, true, TYPE)
+										}}
+										Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
+										type={TYPE}
+									/>
+								)
+							})}
+						{isRenderFavoriteBtns && (
+							<div className="perf_btn_wrapper">
+								<Item_Perform_BTN
+									/**
+									 * 💙 Like / Unlike button
+									 */
+									counter={organisation.favorite_counter}
+									onClick={() => {
+										if (is_authorized) {
+											document.location.href = PATH(path)
+
+											isLiked
+												? removeFromFavorite(organisation.name, user_name)
+												: add2favorite(organisation.name, user_name)
+										} else document.location.href = PATH('/auth')
+									}}
+									Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
+									type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
+								/>
+								<Item_Perform_BTN
+									/**
+									 * 👛 Keep / Unkeep button
+									 */
+									counter={organisation.keep_counter}
+									onClick={() => {
+										if (is_authorized) {
+											document.location.href = PATH(path)
+
+											isKeeped
+												? removeFromKeep(organisation.name, user_name)
+												: add2keep(organisation.name, user_name)
+										} else document.location.href = PATH('/auth')
+									}}
+									Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
+									type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
+								/>
+							</div>
+						)}
+						{isAdminka ? <LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} /> : null}
+					</div>
+				</div>
+
 				<div
 					/**
 					 * Info Block
 					 */
-					style={{ opacity: a ? 0 : 100 }}
+					style={{ display: a ? 'none' : 'flex' }}
 					className="home-page--wrapper--element--data">
 					<ListItem link Label="Ссылка на сайт фонда" index={i} value={organisation.link1} />
 					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={i} value={organisation.link2} />
@@ -93,95 +184,6 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 						index={i}
 						value={a ? kk(organisation.info) : organisation.info}
 					/>
-				</div>
-
-				<div className="home-page--wrapper--element--org_name">
-					<ListItem isOrgName Label="Название" index={i} value={organisation.name} />
-					<div
-						onClick={() => {
-							if (a) {
-								list.map((_ell, _i): void => {
-									if (_i !== i) {
-										const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-										el.style.display = 'none'
-										// el.style.height = '100vh'
-										b(false)
-									}
-								})
-							} else {
-								list.map((_ell, _i): void => {
-									if (_i !== i) {
-										const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-										el.style.display = 'flex'
-										// el.style.height = '100vh'
-										b(true)
-									}
-								})
-							}
-						}}
-						id={`open_item_${i}`}
-						style={{ display: 'none' }}
-						className="home-page--wrapper--element--open_item">
-						{a ? 'развернуть' : 'назад ↩️'}
-					</div>
-				</div>
-
-				<div
-					/**
-					 * Like buttons
-					 */
-					className="home-page--wrapper--element--buttons">
-					{isAdminka && //? Если компонент рендериться в админке, то рисуем кнопки
-						BTN_TYPES.map((TYPE) => {
-							return (
-								<Item_Perform_BTN
-									onClick={() => {
-										DisplayModalToogler(i, true, TYPE)
-									}}
-									Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
-									type={TYPE}
-								/>
-							)
-						})}
-					{isRenderFavoriteBtns && (
-						<div className="perf_btn_wrapper">
-							<Item_Perform_BTN
-								/**
-								 * 💙 Like / Unlike button
-								 */
-								counter={organisation.favorite_counter}
-								onClick={() => {
-									if (is_authorized) {
-										document.location.href = PATH(path)
-
-										isLiked
-											? removeFromFavorite(organisation.name, user_name)
-											: add2favorite(organisation.name, user_name)
-									} else document.location.href = PATH('/auth')
-								}}
-								Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
-								type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
-							/>
-							<Item_Perform_BTN
-								/**
-								 * 👛 Keep / Unkeep button
-								 */
-								counter={organisation.keep_counter}
-								onClick={() => {
-									if (is_authorized) {
-										document.location.href = PATH(path)
-
-										isKeeped
-											? removeFromKeep(organisation.name, user_name)
-											: add2keep(organisation.name, user_name)
-									} else document.location.href = PATH('/auth')
-								}}
-								Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
-								type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
-							/>
-						</div>
-					)}
-					{isAdminka ? <LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} /> : null}
 				</div>
 			</div>
 		)

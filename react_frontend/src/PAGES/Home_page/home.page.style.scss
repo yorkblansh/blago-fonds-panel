@@ -15,7 +15,7 @@
             background-color: #b3e1e1;
             border-radius: 6px;
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-between;
             margin: 5px;
             padding: 5px;
@@ -24,25 +24,33 @@
             &--data {
                 // display: flex;
                 flex-direction: column;
-                max-width: 320px;
             }
 
             &--org_name {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
                 align-items: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                width: 320px;
+            }
+
+            &--main_info {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                min-height: 50px;
             }
 
             &--open_item {
                 background-color: #a1cbcb;
-                border-radius: 0px 0px 9px 9px;
+                border-radius: 0px 9px 9px 0px;
                 flex-direction: column;
                 opacity: 88%;
                 padding: 5px;
                 position: relative;
                 text-align: center;
-                width: 80%;
+                width: auto;
+                height: auto;
             }
 
             &--buttons {
