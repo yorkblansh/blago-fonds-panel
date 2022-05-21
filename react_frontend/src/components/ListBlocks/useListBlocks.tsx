@@ -51,7 +51,7 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 
 	const ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
 		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',
-			isRenderAdminkaBtns = path === '/adminka',
+			isAdminka = path === '/adminka',
 			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
 			isKeeped = keeped_names.some((org_name) => org_name === organisation.name),
 			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY']
@@ -131,7 +131,7 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 					 * Like buttons
 					 */
 					className="home-page--wrapper--element--buttons">
-					{isRenderAdminkaBtns && //? Если компонент рендериться в админке, то рисуем кнопки
+					{isAdminka && //? Если компонент рендериться в админке, то рисуем кнопки
 						BTN_TYPES.map((TYPE) => {
 							return (
 								<Item_Perform_BTN
