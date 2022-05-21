@@ -245,7 +245,11 @@ export class JsonDB_Services {
 		cb: (props: { is_user_exist: boolean; login: string; password: string; user_type: Iuser_types }) => void,
 	) => {
 		const { jsondb } = JsonDB_Contract()
-		let json_data: { login: string; password: string; user_type: Iuser_types }
+		let json_data: { login: string; password: string; user_type: Iuser_types } = {
+			login: 'null',
+			password: 'null',
+			user_type: 'default',
+		}
 		try {
 			json_data = jsondb.getData(`/users/${user_login}`)
 			const { login, password, user_type } = json_data
@@ -260,7 +264,9 @@ export class JsonDB_Services {
 			}
 			cb({ is_user_exist, login: _login, password, user_type })
 		} catch (error) {
-			// console.dir(error);
+			console.dir('USER IS    FREE    TO REG!!')
+			cb({ is_user_exist: false, ...json_data })
+			// console.dir(error)
 		}
 
 		// return { login: json_data.login, password: json_data.password };

@@ -22,10 +22,10 @@ export class Register_mware {
 			res.send('<h1>Имя пользователя занято!</h1>').redirect(PATH('/register'))
 		}
 
-		// console.log(`login: ${login}, password: ${password}`);
+		console.log(`login: ${login}, password: ${password}`)
 		JsonDB_Services.get_user(login, ({ is_user_exist }) => {
-			!is_user_exist ? NEXT() : FAIL()
+			// console.dir(a)
+			is_user_exist ? FAIL() : NEXT()
 		})
-		console.dir(78998798)
 	}
 }
