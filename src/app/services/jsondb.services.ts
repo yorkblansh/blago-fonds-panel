@@ -237,7 +237,7 @@ export class JsonDB_Services {
 
 	public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
 		const { jsondb } = JsonDB_Contract()
-		jsondb.push(`/users/${login}`, { login, password, user_type: 'default' })
+		jsondb.push(`/users/${login}`, { login, password, user_type: 'default', keep: {}, favorites: {} })
 	}
 
 	public static get_user = (
