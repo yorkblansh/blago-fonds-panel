@@ -84,38 +84,45 @@ export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksP
 					 * Info Block
 					 */
 					className="home-page--wrapper--element--data">
-					<ListItem Label="Название" index={i} value={organisation.name} />
 					<ListItem link Label="Ссылка на сайт фонда" index={i} value={organisation.link1} />
 					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={i} value={organisation.link2} />
-					<ListItem Label="Доп. информация" index={i} value={a ? kk(organisation.info) : organisation.info} />
+					<ListItem
+						info
+						Label="Доп. информация"
+						index={i}
+						value={a ? kk(organisation.info) : organisation.info}
+					/>
 				</div>
 
-				<div
-					onClick={() => {
-						if (a) {
-							list.map((_ell, _i): void => {
-								if (_i !== i) {
-									const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-									el.style.display = 'none'
-									// el.style.height = '100vh'
-									b(false)
-								}
-							})
-						} else {
-							list.map((_ell, _i): void => {
-								if (_i !== i) {
-									const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-									el.style.display = 'flex'
-									// el.style.height = '100vh'
-									b(true)
-								}
-							})
-						}
-					}}
-					id={`open_item_${i}`}
-					style={{ display: 'none' }}
-					className="home-page--wrapper--element--open_item">
-					{a ? 'Открыть на полный экран' : 'Вернуться к списку'}
+				<div className="home-page--wrapper--element--org_name">
+					<ListItem isOrgName Label="Название" index={i} value={organisation.name} />
+					<div
+						onClick={() => {
+							if (a) {
+								list.map((_ell, _i): void => {
+									if (_i !== i) {
+										const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
+										el.style.display = 'none'
+										// el.style.height = '100vh'
+										b(false)
+									}
+								})
+							} else {
+								list.map((_ell, _i): void => {
+									if (_i !== i) {
+										const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
+										el.style.display = 'flex'
+										// el.style.height = '100vh'
+										b(true)
+									}
+								})
+							}
+						}}
+						id={`open_item_${i}`}
+						style={{ display: 'none' }}
+						className="home-page--wrapper--element--open_item">
+						{a ? 'развернуть' : 'назад ↩️'}
+					</div>
 				</div>
 
 				<div
