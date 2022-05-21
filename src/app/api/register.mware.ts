@@ -12,9 +12,20 @@ export class Register_mware {
 		console.dir(req.body)
 		const login = req.body['login-input_/register']
 		const password = req.body['password-input_/register']
+
+		const NEXT = () => {
+			res.redirect(PATH('/auth'))
+			JsonDB_Services.reg_new_user({ login, password })
+		}
+
+		const FAIL = () => {
+			res.send('<h1>Имя пользователя занято!</h1>').redirect(PATH('/register'))
+		}
+
 		// console.log(`login: ${login}, password: ${password}`);
+		JsonDB_Services.get_user(login, ({ is_user_exist }) => {
+			!is_user_exist ? NEXT() : FAIL()
+		})
 		console.dir(78998798)
-		res.redirect(PATH('/auth'))
-		JsonDB_Services.reg_new_user({ login, password })
 	}
 }
