@@ -1,7 +1,7 @@
 import { Request as IRequest } from 'express'
 import { Response as IResponse } from 'express'
 import { ILogger } from '../../LOGS/Logger'
-import { Home_page_mware } from '../api/home_page.mware'
+import { Home_page_mware } from '../api/home_page.api'
 import { Keep_API } from '../api/keep.api'
 
 export class Keep_Controller {

@@ -1,7 +1,7 @@
 import { Request as IRequest } from 'express'
 import { Response as IResponse } from 'express'
 import { ILogger } from '../../LOGS/Logger'
-import { Favorites_mware } from '../api/favorites.mware'
+import { Favorites_mware } from '../api/favorites.api'
 
 export class Favorites_Controller {
 	public static perform(req: IRequest, res: IResponse): void {
