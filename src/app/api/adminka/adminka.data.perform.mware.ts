@@ -1,5 +1,6 @@
 import { IMware } from '../../typings/mware.interfaces'
 import { JsonDB_Services } from '../../services/jsondb.services'
+
 export type I_obj = {
 	name: string
 	link1: string
