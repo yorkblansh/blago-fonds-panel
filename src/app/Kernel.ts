@@ -12,9 +12,7 @@ export class Kernel {
 	private static Contracts: IKernel_Contracts = () => {
 		const logger = new Logger()
 
-		return {
-			logger,
-		}
+		return { logger }
 	}
 }
 interface IKernel_Contracts {

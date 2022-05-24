@@ -1,3 +1,3 @@
-import { my_Server } from './server/Server'
+import { loadServer } from './server/Server'
 
-new my_Server().loadServer()
+new loadServer()

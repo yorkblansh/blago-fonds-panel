@@ -36,8 +36,8 @@ WEBrouter.post(REST_API('/reg_user_api'), Register_Controller.perform)
 
 //лайки
 WEBrouter.post(REST_API('/favorites_api'), Favorites_Controller.perform)
-WEBrouter.post(REST_API('/add_2_favorite'), Home_page_Controller.add2favorite)
-WEBrouter.post(REST_API('/remove_from_favorite'), Home_page_Controller.remove_from_favorite)
+WEBrouter.post(REST_API('/add_2_favorite'), Favorites_Controller.add2favorite)
+WEBrouter.post(REST_API('/remove_from_favorite'), Favorites_Controller.remove_from_favorite)
 WEBrouter.post(REST_API('/get_favorites_names'), Favorites_Controller.get_favorite_org_names)
 
 //закладки

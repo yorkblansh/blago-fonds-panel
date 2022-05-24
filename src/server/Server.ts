@@ -1,7 +1,5 @@
 import Express from './Express'
 
-export class my_Server {
-	public loadServer(): void {
-		Express.init()
-	}
+export function loadServer(): void {
+	Express.init()
 }
