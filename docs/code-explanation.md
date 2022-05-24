@@ -125,8 +125,8 @@ public static getOrganizes_favorite_counts = () => {
 
 Все страницы в веб-приложении размещены в отдельных папках:
 
-<div style='text-align:center' >
+<center>
 
 ![img](img/page-structure.png)
 
-</div>
+</center>
