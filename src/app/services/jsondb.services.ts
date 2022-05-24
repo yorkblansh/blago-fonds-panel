@@ -10,31 +10,39 @@ interface IaddORremove_favorite {
 	perf_type: 'BY_USER' | 'BY_SYSTEM'
 }
 
-export class JsonDB_Services {
+export interface getUser_cbProps {
+	is_user_exist: boolean
+	login: string
+	password: string
+	user_type: Iuser_types
+}
+
+export class JsonDB_Methods {
 	public static home_page_dataPerform = () => {
 		const { jsondb } = JsonDB_Contract()
 		const json_data: Ijson_data_HOME_PAGE = jsondb.getData(`/organizes`)
 		const json_data_HOME_PAGE = json_data
-		// console.dir('MUST GET ORGSSSS');
-		// console.dir(json_data);
 		return { json_data_HOME_PAGE }
 	}
 
-	//keep
 	public static getOrganizes_keep_counts = () => {
 		const { jsondb } = JsonDB_Contract()
 		const organizes = jsondb.getData(`/organizes`)
 		const org_names = Object.keys(organizes)
-		// eslint-disable-next-line prefer-const
-		let favorite_count: number[] = []
 
-		favorite_count = org_names.map((org_name): number => {
+		/**
+		 * getting array of numbers - keep_counter of each organize
+		 */
+		const keep_count: number[] = org_names.map(org_name => {
 			return jsondb.getData(`/organizes/${org_name}/keep_counter`)
 		})
+
+		/**
+		 * end_pairs - contains array of pairs [org_name, it`s keep count]
+		 */
 		const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
-			return [org_name, favorite_count[i]]
+			return [org_name, keep_count[i]]
 		})
-		// console.dir(end_pairs);
 		return { end_pairs }
 	}
 
@@ -62,13 +70,6 @@ export class JsonDB_Services {
 				cb(end_obj)
 			},
 		)
-
-		// return { favorites: end_favorites };
-		// for (const key in favorites) {
-		//    end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`);
-		//    // console.dir(favorites[key]);
-		//    // console.dir(jsondb.getData(`/organizes/${favorites[key]}`));
-		// }
 	}
 
 	public static get_keep_count_byOrgName = (org_name: string) => {
@@ -97,21 +98,24 @@ export class JsonDB_Services {
 		jsondb.delete(`/users/${user_name}/keep/${org_name}`)
 	}
 
-	// favorites
 	public static getOrganizes_favorite_counts = () => {
 		const { jsondb } = JsonDB_Contract()
 		const organizes = jsondb.getData(`/organizes`)
 		const org_names = Object.keys(organizes)
-		// eslint-disable-next-line prefer-const
-		let favorite_count: number[] = []
 
-		favorite_count = org_names.map((org_name): number => {
+		/**
+		 * getting array of numbers - favorite_counter of each organize
+		 */
+		const favorite_count: number[] = org_names.map((org_name): number => {
 			return jsondb.getData(`/organizes/${org_name}/favorite_counter`)
 		})
+
+		/**
+		 * end_pairs - contains array of pairs [org_name, it`s favorite count]
+		 */
 		const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
 			return [org_name, favorite_count[i]]
 		})
-		// console.dir(end_pairs);
 		return { end_pairs }
 	}
 
@@ -139,13 +143,6 @@ export class JsonDB_Services {
 				cb(end_obj)
 			},
 		)
-
-		// return { favorites: end_favorites };
-		// for (const key in favorites) {
-		//    end_obj[favorites[key]] = jsondb.getData(`/organizes/${favorites[key]}`);
-		//    // console.dir(favorites[key]);
-		//    // console.dir(jsondb.getData(`/organizes/${favorites[key]}`));
-		// }
 	}
 
 	public static get_favorite_count_byOrgName = (org_name: string) => {
@@ -240,10 +237,7 @@ export class JsonDB_Services {
 		jsondb.push(`/users/${login}`, { login, password, user_type: 'default', keep: {}, favorites: {} })
 	}
 
-	public static get_user = (
-		user_login: string,
-		cb: (props: { is_user_exist: boolean; login: string; password: string; user_type: Iuser_types }) => void,
-	) => {
+	public static getUser = (user_login: string, cb: (props: getUser_cbProps) => void) => {
 		const { jsondb } = JsonDB_Contract()
 		let json_data: { login: string; password: string; user_type: Iuser_types } = {
 			login: 'null',

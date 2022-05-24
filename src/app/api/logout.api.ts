@@ -1,8 +1,8 @@
 import { COOKIES } from '../../../react_frontend/src/api/consts'
-import { IMware } from '../typings/mware.interfaces'
+import { ReqResLog } from '../typings/interfaces'
 
-export class LogOut_mware {
-	public static perform: IMware = ({ logger, res }) => {
+export class LogOutAPI {
+	public static perform = ({ logger, res }: ReqResLog) => {
 		logger.log('logged OUT')
 		try {
 			res.clearCookie(COOKIES('admin_key'))

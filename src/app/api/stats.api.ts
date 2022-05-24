@@ -1,9 +1,9 @@
-import { JsonDB_Services } from '../services/jsondb.services'
-import { IMware } from '../typings/mware.interfaces'
+import { JsonDB_Methods } from '../services/jsondb.services'
+import { ReqResLog } from '../typings/interfaces'
 
-export class Stats_mware {
-	public static get_stats: IMware = ({ res }) => {
-		const { end_pairs } = JsonDB_Services.getOrganizes_favorite_counts()
+export class StatsAPI {
+	public static get_stats = ({ res }: ReqResLog) => {
+		const { end_pairs } = JsonDB_Methods.getOrganizes_favorite_counts()
 		res.send({ end_pairs })
 	}
 }
