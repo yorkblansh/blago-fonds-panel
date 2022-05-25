@@ -7,3 +7,14 @@ export interface ReqResLog {
 	res: IResponse
 	logger: ILogger
 }
+
+export interface Organize {
+	name: string
+	link1: string
+	link2: string
+	info: string
+}
+
+export interface Ijson_data_HOME_PAGE {
+	organizes: Organize[]
+}
