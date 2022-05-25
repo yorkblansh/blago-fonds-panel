@@ -39,7 +39,7 @@ export class JsonDB_Methods {
 	 */
 	public static getKeepCounts(): (string | number)[][] {
 		const organizes: { organizes: Organize[] } = jsondb.getData(`/organizes`)
-		const org_names = Object.keys(organizes)
+		const org_names = Object.keys(organizes) // имена организаций
 
 		/**
 		 * получаем массив чисел - keep_counter - счетчик закладок для каждой организации
@@ -52,7 +52,8 @@ export class JsonDB_Methods {
 	}
 
 	/**
-	 * Функция принмает логин пользователя и возвращает массив имен организаций, добавленных пользователем
+	 * Функция принмает логин пользователя и возвращает
+	 * массив имен организаций, добавленных пользователем в закладки
 	 */
 	public static getKeepedOrgNames(user_name: string) {
 		const keep: { OrgName: string } = jsondb.getData(`/users/${user_name}/keep`)
@@ -60,47 +61,69 @@ export class JsonDB_Methods {
 		return { obj_keys, keep }
 	}
 
-	public static getKeeped = ({ user_name, cb }: { user_name: string; cb }): any => {
+	/**
+	 * Функция принимает логин пользователя и
+	 * возвращает добавленные в закладки организации
+	 */
+	public static getKeeped(user_name: string, cb): void {
 		const { obj_keys, keep } = this.getKeepedOrgNames(user_name)
 		// eslint-disable-next-line prefer-const
 		let end_obj = {}
+
 		async.each(
 			obj_keys,
 			(key, _cb) => {
 				end_obj[keep[key]] = jsondb.getData(`/organizes/${keep[key]}`)
 				_cb()
 			},
-			err => {
-				// if (err) console.dir(err);
-				// console.dir(end_obj);
-				cb(end_obj)
-			},
+			err => cb(end_obj),
 		)
 	}
 
-	public static get_keep_count_byOrgName = (org_name: string) => {
-		const keep_count: number = jsondb.getData(`/organizes/${org_name}/keep_counter`)
-		return { keep_count }
+	/**
+	 * Функция принимает название организации и
+	 * возвращает ее счетчик закладок
+	 */
+	public static getOrgKeepCount(org_name: string): number {
+		return jsondb.getData(`/organizes/${org_name}/keep_counter`)
 	}
 
-	public static incrORdecr_keep_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
-		const _push = (keep_count: number) => jsondb.push(`/organizes/${org_name}/keep_counter`, keep_count, true)
-		const { keep_count } = this.get_keep_count_byOrgName(org_name)
-		perf_type === 'INCREMENT' && _push(keep_count + 1)
-		perf_type === 'DECREMENT' && _push(keep_count - 1)
+	/**
+	 * Функция принимает название организации и тип изменения
+	 * счетчика закладок (увеличение или уменьшение счетчика)
+	 *
+	 * Изменяет значение счетчика
+	 */
+	public static editKeepCounter(org_name: string, edit_type: 'INCREMENT' | 'DECREMENT') {
+		const updateKeepCount = (keep_count: number) =>
+			jsondb.push(`/organizes/${org_name}/keep_counter`, keep_count, true) // функция обновляет счетчик закладок
+
+		const keep_count = this.getOrgKeepCount(org_name) // запись счетчика в переменную
+		edit_type === 'INCREMENT' && updateKeepCount(keep_count + 1) // увеличиваем ++
+		edit_type === 'DECREMENT' && updateKeepCount(keep_count - 1) // уменьшаем --
 	}
 
-	public static add2keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'INCREMENT')
+	/**
+	 * Функция принимает {пользователя, название организации, тип выполнения}
+	 *
+	 * Добавляет организацию в закладки к пользователю
+	 */
+	public static add2keeped({ user_name, org_name, perf_type }: FavoriteActionProps) {
+		if (perf_type === 'BY_USER') this.editKeepCounter(org_name, 'INCREMENT')
 		jsondb.push(`/users/${user_name}/keep/${org_name}`, org_name, true)
 	}
 
-	public static remove_from_keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'DECREMENT')
+	/**
+	 * Функция принимает {пользователя, название организации, тип выполнения}
+	 *
+	 * Удаляет организацию из закладок пользователя
+	 */
+	public static removeFromKeeped({ user_name, org_name, perf_type }: FavoriteActionProps) {
+		if (perf_type === 'BY_USER') this.editKeepCounter(org_name, 'DECREMENT')
 		jsondb.delete(`/users/${user_name}/keep/${org_name}`)
 	}
 
-	public static getOrganizes_favorite_counts = () => {
+	public static getFavoriteCounts() {
 		const organizes = jsondb.getData(`/organizes`)
 		const org_names = Object.keys(organizes)
 
@@ -120,14 +143,18 @@ export class JsonDB_Methods {
 		return { end_pairs }
 	}
 
-	public static getFavorites_ONLY_NAME_STRINGS = (user_name: string) => {
+	/**
+	 * Функция принмает логин пользователя и возвращает массив
+	 * имен организаций, добавленных пользователем в лайки
+	 */
+	public static getFavoriteOrgNames = (user_name: string) => {
 		const favorites = jsondb.getData(`/users/${user_name}/favorites`)
 		const obj_keys = Object.keys(favorites)
 		return { obj_keys, favorites }
 	}
 
 	public static getFavorites = ({ user_name, cb }: { user_name: string; cb }): any => {
-		const { obj_keys, favorites } = this.getFavorites_ONLY_NAME_STRINGS(user_name)
+		const { obj_keys, favorites } = this.getFavoriteOrgNames(user_name)
 		// eslint-disable-next-line prefer-const
 		let end_obj = {}
 		async.each(
@@ -144,54 +171,86 @@ export class JsonDB_Methods {
 		)
 	}
 
-	public static get_favorite_count_byOrgName = (org_name: string) => {
-		const favorite_count: number = jsondb.getData(`/organizes/${org_name}/favorite_counter`)
-		return { favorite_count }
+	/**
+	 * Функция принимает название организации и
+	 * возвращает ее счетчик закладок
+	 */
+	public static getOrgFavoriteCount(org_name: string): number {
+		return jsondb.getData(`/organizes/${org_name}/favorite_counter`)
 	}
 
-	public static incrORdecr_favorite_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
-		const _push = (favorite_counter: number) =>
+	/**
+	 * Функция принимает название организации и тип изменения
+	 * счетчика лайков (увеличение или уменьшение счетчика)
+	 *
+	 * Изменяет значение счетчика
+	 */
+	public static editFavoriteCounter(org_name: string, edit_type: 'INCREMENT' | 'DECREMENT') {
+		const updateFavoriteCount = (favorite_counter: number) =>
 			jsondb.push(`/organizes/${org_name}/favorite_counter`, favorite_counter, true)
-		const { favorite_count } = this.get_favorite_count_byOrgName(org_name)
-		perf_type === 'INCREMENT' && _push(favorite_count + 1)
-		perf_type === 'DECREMENT' && _push(favorite_count - 1)
+
+		const favorite_count = this.getOrgFavoriteCount(org_name)
+		edit_type === 'INCREMENT' && updateFavoriteCount(favorite_count + 1)
+		edit_type === 'DECREMENT' && updateFavoriteCount(favorite_count - 1)
 	}
 
-	public static add2favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'INCREMENT')
+	/**
+	 * Функция принимает {пользователя, название организации, тип выполнения}
+	 *
+	 * Добавляет организацию в лайки к пользователю
+	 */
+	public static add2favorite({ user_name, org_name, perf_type }: FavoriteActionProps) {
+		if (perf_type === 'BY_USER') this.editFavoriteCounter(org_name, 'INCREMENT')
 		jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true)
 	}
 
-	public static remove_from_favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'DECREMENT')
+	/**
+	 * Функция принимает {пользователя, название организации, тип выполнения}
+	 *
+	 * Удаляет организацию из лайков пользователя
+	 */
+	public static removeFromFavorite = ({ user_name, org_name, perf_type }: FavoriteActionProps) => {
+		if (perf_type === 'BY_USER') this.editFavoriteCounter(org_name, 'DECREMENT')
 		jsondb.delete(`/users/${user_name}/favorites/${org_name}`)
 	}
 
-	public static adminka_create_data = (obj: I_obj) => {
-		jsondb.push(`/organizes/${obj.name}`, obj, true)
-		jsondb.push(`/organizes/${obj.name}/favorite_counter`, 0, true)
-		jsondb.push(`/organizes/${obj.name}/keep_counter`, 0, true)
+	/**
+	 * Функция создает новый элемент, действие доступно только в админке
+	 */
+	public static createItem = (org: Organize) => {
+		jsondb.push(`/organizes/${org.name}`, org, true) // создает запись в JSON бд
+		jsondb.push(`/organizes/${org.name}/favorite_counter`, 0, true)
+		jsondb.push(`/organizes/${org.name}/keep_counter`, 0, true)
 	}
 
-	public static adminka_remove_data = ({ name }: { name: string }) => {
+	/**
+	 * Функция удаляет элемент, действие доступно только в админке
+	 */
+	public static removeItem({ name }: { name: string }) {
 		jsondb.delete(`/organizes/${name}`)
 	}
 
-	public static get_users_ONLY_NAME_STRINGS = () => {
-		const users_names = Object.keys(jsondb.getData('/users'))
-		return { users_names }
+	/**
+	 * Функция запрашивает всех пользователей из бд и возвращает их
+	 */
+	public static getUsers(): { users: User[] } {
+		return jsondb.getData('/users')
 	}
 
-	public static adminka_modify_data = (obj: I_obj) => {
-		const { users_names } = this.get_users_ONLY_NAME_STRINGS()
-		const { favorite_count } = this.get_favorite_count_byOrgName(obj.old_name)
-		const { keep_count } = this.get_keep_count_byOrgName(obj.old_name)
+	/**
+	 * Функция изменяет элемент, действие доступно только в админке
+	 */
+	public static modifyItem(org: Organize) {
+		const users_names = Object.keys(this.getUsers()) // получение имен организаций
+		const favorite_count = this.getOrgFavoriteCount(org.old_name) // получение счетчика лайков
+		const keep_count = this.getOrgKeepCount(org.old_name) // получение счетчика закладок
 
 		if (favorite_count !== 0) {
 			users_names.forEach(user_name => {
 				if (user_name !== 'admin') {
-					this.remove_from_favorite({ user_name, org_name: obj.old_name, perf_type: 'BY_SYSTEM' })
-					this.add2favorite({ user_name, org_name: obj.name, perf_type: 'BY_SYSTEM' })
+					// провряем что пользователь - админ и удаляем старые данные
+					this.removeFromFavorite({ user_name, org_name: org.old_name, perf_type: 'BY_SYSTEM' })
+					this.add2favorite({ user_name, org_name: org.name, perf_type: 'BY_SYSTEM' })
 				}
 			})
 		}
@@ -199,52 +258,78 @@ export class JsonDB_Methods {
 		if (keep_count !== 0) {
 			users_names.forEach(user_name => {
 				if (user_name !== 'admin') {
-					this.remove_from_keeped({ user_name, org_name: obj.old_name, perf_type: 'BY_SYSTEM' })
-					this.add2keeped({ user_name, org_name: obj.name, perf_type: 'BY_SYSTEM' })
+					this.removeFromKeeped({ user_name, org_name: org.old_name, perf_type: 'BY_SYSTEM' })
+					this.add2keeped({ user_name, org_name: org.name, perf_type: 'BY_SYSTEM' })
 				}
 			})
 		}
 
-		jsondb.delete(`/organizes/${obj.old_name}`)
-		obj['favorite_counter'] = favorite_count
-		obj['keep_count'] = keep_count
+		jsondb.delete(`/organizes/${org.old_name}`) // удаляет старый экземпляр
+
+		const newOrg: Organize = org
+		newOrg.favorite_counter = favorite_count
+		newOrg.keep_count = keep_count
+
 		try {
+			// пробуем добавить организацию
 			console.dir('TRYING TO PUSH')
-			jsondb.push(`/organizes/${obj.name}`, obj, true)
+			jsondb.push(`/organizes/${newOrg.name}`, newOrg, true)
 		} catch (error) {
-			console.dir('ERRRRROOOORRR')
-			// console.error(error);
+			console.dir(`Error while modifying ${org.old_name}`)
 		}
-		jsondb.push(`/organizes/${obj.name}/favorite_counter`, favorite_count, true)
-		jsondb.push(`/organizes/${obj.name}/keep_counter`, keep_count, true)
-		// }
+
+		/**
+		 * добавляем новые данные
+		 */
+		jsondb.push(`/organizes/${newOrg.name}/favorite_counter`, favorite_count, true)
+		jsondb.push(`/organizes/${newOrg.name}/keep_counter`, keep_count, true)
 	}
 
-	public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
-		jsondb.push(`/users/${login}`, { login, password, user_type: 'default', keep: {}, favorites: {} })
+	/**
+	 * Функция принимает логин и пароль, регистрирует пользователя
+	 */
+	public static registerUser({ login, password }: { login: string; password: string }) {
+		jsondb.push(`/users/${login}`, {
+			// отправляем данные в json db
+			login,
+			password,
+			user_type: 'default',
+			keep: {},
+			favorites: {},
+		})
 	}
 
+	/**
+	 * Функция принимает логин, возвращает пользователя
+	 * или вовращает ошибку если пользователя не существует
+	 */
 	public static getUser = (user_login: string, cb: (props: getUser_cbProps) => void) => {
 		let json_data: { login: string; password: string; user_type: Iuser_types } = {
 			login: 'null',
 			password: 'null',
 			user_type: 'default',
 		}
+
 		try {
+			// пробуем получить пользователя
 			json_data = jsondb.getData(`/users/${user_login}`)
 			const { login, password, user_type } = json_data
 			let is_user_exist = false
 			let _login = 'NONE'
 			if (json_data.login != undefined) {
+				// если логин существует
 				is_user_exist = true
 				_login = login
 			} else {
+				// если пользователь не найден
 				is_user_exist = false
 				_login = 'NONE'
 			}
 			cb({ is_user_exist, login: _login, password, user_type })
 		} catch (error) {
-			console.dir('USER IS    FREE    TO REG!!')
+			/**
+			 * если непредвиденная ошибка - возаращаем значения по умолчанию
+			 */
 			cb({ is_user_exist: false, ...json_data })
 		}
 	}
