@@ -14,7 +14,3 @@ export interface Organize {
 	link2: string
 	info: string
 }
-
-export interface Ijson_data_HOME_PAGE {
-	organizes: Organize[]
-}
