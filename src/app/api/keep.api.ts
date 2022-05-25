@@ -15,7 +15,7 @@ export class KeepAPI {
 
 	public static get_keeped_org_names = ({ req, res, logger }: ReqResLog) => {
 		const { user_name } = req.body
-		const { obj_keys } = JsonDB_Methods.getKeeped_ONLY_NAME_STRINGS(user_name)
+		const { obj_keys } = JsonDB_Methods.getKeepedOrgNames(user_name)
 		res.send({ org_names: obj_keys })
 	}
 
