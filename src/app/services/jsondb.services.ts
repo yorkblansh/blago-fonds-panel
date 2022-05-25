@@ -1,10 +1,9 @@
 import { Iuser_types } from '../../../react_frontend/src/api/consts'
-import { I_obj } from '../api/adminka/adminka.data.perform.mware'
 import async from 'async'
-import { Organize } from '../typings/interfaces'
+import { Organize, User } from '../typings/interfaces'
 import { jsondb } from '../models/jsondb.contract'
 
-interface IaddORremove_favorite {
+interface FavoriteActionProps {
 	user_name: string
 	org_name: string
 	perf_type: 'BY_USER' | 'BY_SYSTEM'
