@@ -15,7 +15,7 @@ export class FavoritesAPI {
 
 	public static getFavoriteOrgNames = ({ req, res, logger }: ReqResLog) => {
 		const { user_name } = req.body
-		const { obj_keys } = JsonDB_Methods.getFavorites_ONLY_NAME_STRINGS(user_name)
+		const { obj_keys } = JsonDB_Methods.getFavoriteOrgNames(user_name)
 		res.send({ org_names: obj_keys })
 	}
 
@@ -30,6 +30,6 @@ export class FavoritesAPI {
 		const { org_name, user_name }: { org_name: string; user_name: string } = req.body
 		console.dir('SMTH REMOVED FROM FAVORITE')
 
-		JsonDB_Methods.remove_from_favorite({ org_name, user_name, perf_type: 'BY_USER' })
+		JsonDB_Methods.removeFromFavorite({ org_name, user_name, perf_type: 'BY_USER' })
 	}
 }
