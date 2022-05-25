@@ -123,24 +123,18 @@ export class JsonDB_Methods {
 		jsondb.delete(`/users/${user_name}/keep/${org_name}`)
 	}
 
-	public static getFavoriteCounts() {
-		const organizes = jsondb.getData(`/organizes`)
-		const org_names = Object.keys(organizes)
+	public static getFavoriteCounts(): (string | number)[][] {
+		const organizes: Organize[] = jsondb.getData(`/organizes`)
+		const orgNames = Object.keys(organizes)
 
 		/**
-		 * getting array of numbers - favorite_counter of each organize
+		 * получаем массив чисел - favorite_count - счетчик закладок для каждой организации
 		 */
-		const favorite_count: number[] = org_names.map((org_name): number => {
-			return jsondb.getData(`/organizes/${org_name}/favorite_counter`)
+		const favorite_count: number[] = orgNames.map((name): number => {
+			return jsondb.getData(`/organizes/${name}/favorite_counter`)
 		})
 
-		/**
-		 * end_pairs - contains array of pairs [org_name, it`s favorite count]
-		 */
-		const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
-			return [org_name, favorite_count[i]]
-		})
-		return { end_pairs }
+		return orgNames.map((org_name, i) => [org_name, favorite_count[i]])
 	}
 
 	/**
