@@ -1,8 +1,8 @@
 import { Iuser_types } from '../../../react_frontend/src/api/consts'
 import { I_obj } from '../api/adminka/adminka.data.perform.mware'
-import { JsonDB_Contract } from '../models/jsondb.contract'
-import { Ijson_data_HOME_PAGE } from '../typings/json.data.home_page.interface'
 import async from 'async'
+import { Organize } from '../typings/interfaces'
+import { jsondb } from '../models/jsondb.contract'
 
 interface IaddORremove_favorite {
 	user_name: string
@@ -10,6 +10,9 @@ interface IaddORremove_favorite {
 	perf_type: 'BY_USER' | 'BY_SYSTEM'
 }
 
+/**
+ * getUser callback props
+ */
 export interface getUser_cbProps {
 	is_user_exist: boolean
 	login: string
@@ -17,45 +20,49 @@ export interface getUser_cbProps {
 	user_type: Iuser_types
 }
 
+/**
+ * Класс содержит основные методы взаимодействия с базой данных
+ */
 export class JsonDB_Methods {
-	public static home_page_dataPerform = () => {
-		const { jsondb } = JsonDB_Contract()
-		const json_data: Ijson_data_HOME_PAGE = jsondb.getData(`/organizes`)
-		const json_data_HOME_PAGE = json_data
-		return { json_data_HOME_PAGE }
+	/**
+	 * Функция запрашивает все организации из бд и возвращает их
+	 */
+	public static getOrgs(): { organizes: Organize[] } {
+		return jsondb.getData(`/organizes`)
 	}
 
-	public static getOrganizes_keep_counts = () => {
-		const { jsondb } = JsonDB_Contract()
-		const organizes = jsondb.getData(`/organizes`)
+	/**
+	 * Функция возвращает коллекция вида
+	 * [
+	 * 		[название_организации, счетчик_закладок],
+	 * 	...
+	 * ]
+	 */
+	public static getKeepCounts(): (string | number)[][] {
+		const organizes: { organizes: Organize[] } = jsondb.getData(`/organizes`)
 		const org_names = Object.keys(organizes)
 
 		/**
-		 * getting array of numbers - keep_counter of each organize
+		 * получаем массив чисел - keep_counter - счетчик закладок для каждой организации
 		 */
-		const keep_count: number[] = org_names.map(org_name => {
-			return jsondb.getData(`/organizes/${org_name}/keep_counter`)
+		const keep_count: number[] = org_names.map(name => {
+			return jsondb.getData(`/organizes/${name}/keep_counter`)
 		})
 
-		/**
-		 * end_pairs - contains array of pairs [org_name, it`s keep count]
-		 */
-		const end_pairs: (string | number)[][] = org_names.map((org_name, i) => {
-			return [org_name, keep_count[i]]
-		})
-		return { end_pairs }
+		return org_names.map((org_name, i) => [org_name, keep_count[i]])
 	}
 
-	public static getKeeped_ONLY_NAME_STRINGS = (user_name: string) => {
-		const { jsondb } = JsonDB_Contract()
-		const keep = jsondb.getData(`/users/${user_name}/keep`)
+	/**
+	 * Функция принмает логин пользователя и возвращает массив имен организаций, добавленных пользователем
+	 */
+	public static getKeepedOrgNames(user_name: string) {
+		const keep: { OrgName: string } = jsondb.getData(`/users/${user_name}/keep`)
 		const obj_keys = Object.keys(keep)
 		return { obj_keys, keep }
 	}
 
 	public static getKeeped = ({ user_name, cb }: { user_name: string; cb }): any => {
-		const { jsondb } = JsonDB_Contract()
-		const { obj_keys, keep } = this.getKeeped_ONLY_NAME_STRINGS(user_name)
+		const { obj_keys, keep } = this.getKeepedOrgNames(user_name)
 		// eslint-disable-next-line prefer-const
 		let end_obj = {}
 		async.each(
@@ -73,13 +80,11 @@ export class JsonDB_Methods {
 	}
 
 	public static get_keep_count_byOrgName = (org_name: string) => {
-		const { jsondb } = JsonDB_Contract()
 		const keep_count: number = jsondb.getData(`/organizes/${org_name}/keep_counter`)
 		return { keep_count }
 	}
 
 	public static incrORdecr_keep_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
-		const { jsondb } = JsonDB_Contract()
 		const _push = (keep_count: number) => jsondb.push(`/organizes/${org_name}/keep_counter`, keep_count, true)
 		const { keep_count } = this.get_keep_count_byOrgName(org_name)
 		perf_type === 'INCREMENT' && _push(keep_count + 1)
@@ -87,19 +92,16 @@ export class JsonDB_Methods {
 	}
 
 	public static add2keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		const { jsondb } = JsonDB_Contract()
 		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'INCREMENT')
 		jsondb.push(`/users/${user_name}/keep/${org_name}`, org_name, true)
 	}
 
 	public static remove_from_keeped = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		const { jsondb } = JsonDB_Contract()
 		if (perf_type === 'BY_USER') this.incrORdecr_keep_counter(org_name, 'DECREMENT')
 		jsondb.delete(`/users/${user_name}/keep/${org_name}`)
 	}
 
 	public static getOrganizes_favorite_counts = () => {
-		const { jsondb } = JsonDB_Contract()
 		const organizes = jsondb.getData(`/organizes`)
 		const org_names = Object.keys(organizes)
 
@@ -120,14 +122,12 @@ export class JsonDB_Methods {
 	}
 
 	public static getFavorites_ONLY_NAME_STRINGS = (user_name: string) => {
-		const { jsondb } = JsonDB_Contract()
 		const favorites = jsondb.getData(`/users/${user_name}/favorites`)
 		const obj_keys = Object.keys(favorites)
 		return { obj_keys, favorites }
 	}
 
 	public static getFavorites = ({ user_name, cb }: { user_name: string; cb }): any => {
-		const { jsondb } = JsonDB_Contract()
 		const { obj_keys, favorites } = this.getFavorites_ONLY_NAME_STRINGS(user_name)
 		// eslint-disable-next-line prefer-const
 		let end_obj = {}
@@ -146,13 +146,11 @@ export class JsonDB_Methods {
 	}
 
 	public static get_favorite_count_byOrgName = (org_name: string) => {
-		const { jsondb } = JsonDB_Contract()
 		const favorite_count: number = jsondb.getData(`/organizes/${org_name}/favorite_counter`)
 		return { favorite_count }
 	}
 
 	public static incrORdecr_favorite_counter = (org_name: string, perf_type: 'INCREMENT' | 'DECREMENT') => {
-		const { jsondb } = JsonDB_Contract()
 		const _push = (favorite_counter: number) =>
 			jsondb.push(`/organizes/${org_name}/favorite_counter`, favorite_counter, true)
 		const { favorite_count } = this.get_favorite_count_byOrgName(org_name)
@@ -161,40 +159,31 @@ export class JsonDB_Methods {
 	}
 
 	public static add2favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		const { jsondb } = JsonDB_Contract()
 		if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'INCREMENT')
 		jsondb.push(`/users/${user_name}/favorites/${org_name}`, org_name, true)
 	}
 
 	public static remove_from_favorite = ({ user_name, org_name, perf_type }: IaddORremove_favorite) => {
-		const { jsondb } = JsonDB_Contract()
 		if (perf_type === 'BY_USER') this.incrORdecr_favorite_counter(org_name, 'DECREMENT')
 		jsondb.delete(`/users/${user_name}/favorites/${org_name}`)
 	}
 
 	public static adminka_create_data = (obj: I_obj) => {
-		const { jsondb } = JsonDB_Contract()
 		jsondb.push(`/organizes/${obj.name}`, obj, true)
 		jsondb.push(`/organizes/${obj.name}/favorite_counter`, 0, true)
 		jsondb.push(`/organizes/${obj.name}/keep_counter`, 0, true)
 	}
 
 	public static adminka_remove_data = ({ name }: { name: string }) => {
-		const { jsondb } = JsonDB_Contract()
 		jsondb.delete(`/organizes/${name}`)
 	}
 
 	public static get_users_ONLY_NAME_STRINGS = () => {
-		const { jsondb } = JsonDB_Contract()
 		const users_names = Object.keys(jsondb.getData('/users'))
 		return { users_names }
 	}
 
 	public static adminka_modify_data = (obj: I_obj) => {
-		const { jsondb } = JsonDB_Contract()
-
-		console.table(obj)
-		// if (obj.old_name) {
 		const { users_names } = this.get_users_ONLY_NAME_STRINGS()
 		const { favorite_count } = this.get_favorite_count_byOrgName(obj.old_name)
 		const { keep_count } = this.get_keep_count_byOrgName(obj.old_name)
@@ -233,12 +222,10 @@ export class JsonDB_Methods {
 	}
 
 	public static reg_new_user = ({ login, password }: { login: string; password: string }) => {
-		const { jsondb } = JsonDB_Contract()
 		jsondb.push(`/users/${login}`, { login, password, user_type: 'default', keep: {}, favorites: {} })
 	}
 
 	public static getUser = (user_login: string, cb: (props: getUser_cbProps) => void) => {
-		const { jsondb } = JsonDB_Contract()
 		let json_data: { login: string; password: string; user_type: Iuser_types } = {
 			login: 'null',
 			password: 'null',
@@ -260,9 +247,6 @@ export class JsonDB_Methods {
 		} catch (error) {
 			console.dir('USER IS    FREE    TO REG!!')
 			cb({ is_user_exist: false, ...json_data })
-			// console.dir(error)
 		}
-
-		// return { login: json_data.login, password: json_data.password };
 	}
 }
