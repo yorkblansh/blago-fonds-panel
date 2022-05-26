@@ -1,5 +1,5 @@
-import { enum_ListBlocks_sortBy, TchangeSortBy } from 'PAGES/modules/ListBlocks/hooks/useSortBy'
 import { useState } from 'react'
+import { enum_ListBlocks_sortBy, TchangeSortBy } from '../hooks/useSortBy'
 import './btn.style.scss'
 import './dropdown.btn.style.scss'
 import { _sortType } from './_sortType.fn'

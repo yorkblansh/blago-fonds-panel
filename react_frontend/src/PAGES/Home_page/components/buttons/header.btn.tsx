@@ -23,7 +23,7 @@ export const Header_BTN = ({ label, path, dropdown_list: dropdown, favorite_coun
 					children={
 						<div>
 							<div>{label}</div>
-							{favorite_count && <div className="header-btn--fav_count_color">{favorite_count}</div>}
+							{favorite_count ? <div className="header-btn--fav_count_color">{favorite_count}</div> : null}
 						</div>
 					}
 				/>

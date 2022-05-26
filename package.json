@@ -1,5 +1,5 @@
 {
-    "name": "report_parser",
+    "name": "blago-fonds-panel",
     "version": "1.0.0",
     "description": "",
     "main": "dist/src/index.js",

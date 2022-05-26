@@ -1,7 +1,7 @@
 import check_yes from './check_yes.svg'
 import check_no from './check_no.svg'
-import unlike from './unlike.svg'
 import like from './like.svg'
+import unlike from './unlike.svg'
 
 interface SvgPerformBtnProps {
 	select_svg: keyof typeof SVG_MAP

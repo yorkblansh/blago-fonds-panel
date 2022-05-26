@@ -1,0 +1,13 @@
+import { useState } from 'react'
+
+export const useOpenItemState = () => {
+	const [display, setOpenItem] = useState<{ i: string | number; state: 'none' | 'flex' }>({
+		i: 0,
+		state: 'none',
+	})
+
+	const el: any = document.getElementById(`open_item_${display.i}`)
+	el.style.display = display.state
+
+	return { setOpenItem }
+}

@@ -3,13 +3,13 @@ import './item.perform.btn.style.scss'
 import { PERF_TYPE } from 'api/consts'
 import { FunctionComponent, SVGProps } from 'react'
 import { SvgPerformBtn, SVG_MAP } from './svg'
-import { Counter_div } from 'PAGES/components/counter.div/counter.div'
+import { Counter_div } from 'components/counter.div/counter.div'
 
 export interface Item_Config_BTNprops {
 	counter?: number
 	type: keyof typeof PERF_TYPE
 	Label: string
-	_onClick: () => void
+	onClick: () => void
 	Icon?: FunctionComponent<SVGProps<SVGSVGElement> & { title?: string | undefined }>
 }
 
@@ -21,18 +21,19 @@ const PERFORM_BTN_ICON_MAP: { [x in keyof typeof PERF_TYPE]?: keyof typeof SVG_M
 	ADD_2_KEEPED: 'check_yes',
 }
 
-export const Item_Perform_BTN = ({ type, Label, _onClick, counter }: Item_Config_BTNprops) => {
+export const Item_Perform_BTN = ({ type, Label, onClick, counter }: Item_Config_BTNprops) => {
 	const select_svg = PERFORM_BTN_ICON_MAP[type]
+	const isLikeButton = counter && (type === 'REMOVE_FROM_FAVORITE' || type === 'ADD_2_FAVORITE')
 	const isAdmin = type === 'CREATE' || type === 'MODIFY' || type === 'REMOVE'
 	return (
 		<>
 			{isAdmin ? (
-				<div className={`adm-edit-btn btn--${type}`} style={{ borderWidth: 3 }} onClick={() => _onClick()}>
+				<div className={`adm-edit-btn btn--${type}`} style={{ borderWidth: 3 }} onClick={() => onClick()}>
 					<div>{Label}</div>
 				</div>
 			) : (
-				<div className={`adm-edit-btn btn--${type}`} style={{ borderWidth: 0 }} onClick={() => _onClick()}>
-					{counter ? <Counter_div {...{ counter, type }} /> : null}
+				<div className={`adm-edit-btn btn--${type}`} style={{ borderWidth: 0 }} onClick={() => onClick()}>
+					{isLikeButton ? <Counter_div {...{ counter, type }} /> : null}
 					<SvgPerformBtn height="50" width="50" select_svg={select_svg ? select_svg : 'unlike'} />
 				</div>
 			)}
