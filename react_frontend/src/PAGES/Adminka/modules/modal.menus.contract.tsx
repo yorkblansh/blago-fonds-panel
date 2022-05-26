@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { LIST } from 'app/hooks/useItemList'
+import { LIST } from 'app/hooks/getItemList'
 import { Button_Modal } from '../layouts/modal.menus/components/button.modal/button.modal'
 import { InputModal } from '../layouts/modal.menus/components/inputs.modal/input.modal'
 import { ModalMenu } from '../layouts/modal.menus/modal.menus'

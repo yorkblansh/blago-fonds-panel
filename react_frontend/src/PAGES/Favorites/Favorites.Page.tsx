@@ -3,13 +3,13 @@ import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
 import { Bar_Chart } from 'components/bar.chart/bar.chart'
 import { useListBlocks } from 'components/ListBlocks/useListBlocks'
-import { sort_options } from 'config/SortButtons'
+import { sortOptions } from 'config/SortButtons'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 
 export const FAVORITES_PAGE = () => {
-	let { is_authorized } = getAccountProps()
-	let { ListBlocks, SortButtons } = useListBlocks({ path: '/favorites', is_authorized,sort_options })
+	let { isAuthorized: is_authorized } = getAccountProps()
+	let { ListBlocks, SortButtons } = useListBlocks({ path: '/favorites', isAuthorized: is_authorized,sortOptions: sortOptions })
 	let isListBlocks = ListBlocks?.length !== 0
 
 	console.dir(ListBlocks)

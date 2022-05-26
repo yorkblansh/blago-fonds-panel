@@ -8,7 +8,7 @@ import { getAccountProps } from 'app/getAccountProps'
 import { getStatsData } from 'app/getStats.data'
 
 export const STATS_PAGE = () => {
-	let { is_authorized, is_admin } = getAccountProps()
+	let { isAuthorized: is_authorized, isAdmin: is_admin } = getAccountProps()
 	let { org_names, favorite_counters } = getStatsData()
 
 	let { bar_options } = BarOptions({ title_text: ' ' })

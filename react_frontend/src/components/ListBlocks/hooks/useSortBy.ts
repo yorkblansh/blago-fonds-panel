@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Ilist } from 'app/hooks/useItemList'
+import { Ilist } from 'app/hooks/getItemList'
 export enum enum_ListBlocks_sortBy {
 	'FAVORITE',
 	'ALPHABET',
@@ -11,7 +11,7 @@ interface IuseSortBy {
 	(defaultSortBy: { sortBy: keyof typeof enum_ListBlocks_sortBy; sortType: 'A_z' | 'Z_a' }): {
 		SORT: { sortBy: keyof typeof enum_ListBlocks_sortBy; sortType: 'A_z' | 'Z_a' }
 		changeSortBy: (sort: { sortBy: keyof typeof enum_ListBlocks_sortBy; sortType: 'A_z' | 'Z_a' }) => void
-		sorted_list: (list: Ilist, sortBy: keyof typeof enum_ListBlocks_sortBy, sortType: 'A_z' | 'Z_a') => Ilist
+		getSortedList: (list: Ilist, sortBy: keyof typeof enum_ListBlocks_sortBy, sortType: 'A_z' | 'Z_a') => Ilist
 	}
 }
 
@@ -52,5 +52,5 @@ export const useSortBy: IuseSortBy = (defaultSortMode) => {
 	}
 
 	let [SORT, changeSortBy]: any = useState(defaultSortMode)
-	return { SORT, changeSortBy, sorted_list }
+	return { SORT, changeSortBy, getSortedList: sorted_list }
 }

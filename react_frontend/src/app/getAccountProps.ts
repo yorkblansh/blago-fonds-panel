@@ -5,37 +5,37 @@ import { useFavoritesNames } from './hooks/useFavorites.names.list'
 import { useKeepedNames } from './hooks/useKeeped.names'
 
 export const getAccountProps = () => {
-	let user_name: string
+	let userName: string
 
 	let user_key: string
 	let cookies: any = getCookie()
-	let is_authorized = false
+	let isAuthorized = false
 	if (process.env.NODE_ENV === 'production') {
 		user_key = cookies?.user_key
-		user_name = cookies?.user_name
+		userName = cookies?.user_name
 		if (user_key) {
-			is_authorized = true
+			isAuthorized = true
 		} else {
-			is_authorized = false
+			isAuthorized = false
 		}
 	} else if (process.env.NODE_ENV === 'development') {
-		is_authorized = true
-		user_name = 'test_user'
+		isAuthorized = true
+		userName = 'test_user'
 		user_key = 'keykey'
 	} else {
 		user_key = 'keykey'
-		is_authorized = false
-		user_name = 'test_user'
+		isAuthorized = false
+		userName = 'test_user'
 	}
-	let is_admin = user_name === 'admin' && true
-	const { favorites_names } = useFavoritesNames(user_name)
-	const { keeped_names } = useKeepedNames(user_name)
+	let isAdmin = userName === 'admin' && true
+	const { favorites_names } = useFavoritesNames(userName)
+	const { keeped_names } = useKeepedNames(userName)
 	return {
-		is_authorized,
+		isAuthorized,
 		user_key,
-		user_name,
-		favorites_names,
-		keeped_names,
-		is_admin,
+		userName,
+		favoritesNames: favorites_names,
+		keepedNames: keeped_names,
+		isAdmin,
 	}
 }

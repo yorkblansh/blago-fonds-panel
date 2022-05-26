@@ -1,4 +1,4 @@
-export const _sortType = (sort_typeItem: string) => {
+export const useSortType = (sort_typeItem: string) => {
 	let _sortType: 'A_z' | 'Z_a'
 	if (
 		sort_typeItem === 'От А до Я' ||
