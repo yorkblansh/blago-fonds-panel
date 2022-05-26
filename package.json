@@ -9,7 +9,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "symlink_static": "node ./scripts/symlink_react_build/index.js",
         "prettier": "prettier --write src/* dist/*",
-        "just_start":"cd react_frontend && npm i && npm run build && cd .. && npm i && npm run start"
+        "just_start": "cd react_frontend && npm i && npm run build && cd .. && npm i && npm run start"
     },
     "keywords": [],
     "author": "",
