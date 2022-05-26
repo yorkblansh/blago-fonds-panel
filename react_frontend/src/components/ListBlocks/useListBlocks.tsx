@@ -7,182 +7,215 @@ import { add2favorite } from 'app/home_page/add2favorite'
 import { add2keep } from 'app/home_page/add2keep'
 import { removeFromFavorite } from 'app/home_page/remove.from.favorite'
 import { removeFromKeep } from 'app/home_page/remove.from.keep'
-import { useItemList } from 'app/hooks/useItemList'
+import { getItemList } from 'app/hooks/getItemList'
 import { Item_Perform_BTN } from 'PAGES/Adminka/components/item.perform.btn/item.perform.btn'
 import { LastModify_DIV } from 'PAGES/Home_page/components/last_modify.div/last_modify.div'
 import { ListItem } from 'PAGES/Home_page/components/list.item/list.item'
 import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSortBy'
-import { SortBTNS_Contract } from './sort.btn/sort.btn.contract'
-import './perf_btn_wrapper.scss'
+import { SortButtons } from './sort.btn/SortButtons'
 import { useState } from 'react'
-// import { useOpenItemState } from './hooks/useOpenItemState'
+import './perf_btn_wrapper.scss'
 
-interface ListBlocksProps {
-	path: keyof typeof MAIN_PATHES
-	is_authorized: boolean
-	sort_options?: {
-		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
-		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
-	}
+/**
+ * Функция обрезает текст до 12 символов
+ */
+const trimText = (text: string) => {
+	var sliced = text.slice(0, 12)
+	if (sliced.length < text.length) sliced += '...'
+	return sliced
 }
 
-const isSortButtons = (props: {
+interface SortOptions {
+	SortBy: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+	SortType: [string, keyof typeof enum_ListBlocks_sortBy][][]
+}
+
+interface SortButtonsHookProps {
 	changeSortBy: TchangeSortBy
-	sort_options?: {
-		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
-		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
-	}
-}): { SortButtons: JSX.Element | undefined } => {
-	let { sort_options: SortButtons, changeSortBy } = props
-	if (SortButtons) {
-		let { SortBy_list, SortType_list } = SortButtons
-		let { SortBTNs } = SortBTNS_Contract({ changeSortBy, SortBy_list, SortType_list })
-		return { SortButtons: SortBTNs }
-	} else return { SortButtons: undefined }
+	sortOptions?: SortOptions
 }
 
-export const useListBlocks = ({ path, is_authorized, sort_options }: ListBlocksProps) => {
-	const [a, b] = useState(true)
-	const { list } = useItemList(path)
-	const { favorites_names, keeped_names, user_name } = getAccountProps()
-	const { SORT, changeSortBy, sorted_list } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
-	const { SortButtons } = isSortButtons({ sort_options, changeSortBy })
-	// const { setOpenItem } = useOpenItemState()
+/**
+ * функция возвращает две кнокпи сортировки
+ */
+function getSortButtons({ changeSortBy, sortOptions }: SortButtonsHookProps) {
+	if (sortOptions) {
+		const { SortBy, SortType } = sortOptions
+		return <SortButtons {...{ SortBy, SortType, changeSortBy }} />
+	} else return undefined
+}
 
-	const ListBlocks = sorted_list(list, SORT.sortBy, SORT.sortType).map((organisation, i) => {
-		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped',
-			isAdminka = path === '/adminka',
-			isLiked = favorites_names.some((org_name) => org_name === organisation.name),
-			isKeeped = keeped_names.some((org_name) => org_name === organisation.name),
-			BTN_TYPES: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY']
-		// isRenderCounter = organisation.favorite_counter !== 0,
-		// isRenderKeepCounter = organisation
-		const kk = (text: string) => {
-			var sliced = text.slice(0, 12)
-			if (sliced.length < text.length) sliced += '...'
-			return sliced
+interface Props {
+	path: keyof typeof MAIN_PATHES
+	isAuthorized: boolean
+	sortOptions?: SortOptions
+}
+
+/**
+ * Хук возращает список элементов с возможностью сортировки
+ */
+export const useListBlocks = ({ path, isAuthorized, sortOptions }: Props) => {
+	const [isViewCollapsed, toggleView] = useState(true) // хук позвляющий свернуть / развернуть конкретный элменет
+	const { list } = getItemList(path) // функция возвращает список фондов из бэкенда
+
+	/**
+	 * Функция возвращает пользовательские данные:
+	 * - имена лайкнутых организаций
+	 * - имена организаций добавленных в закладки
+	 * - имя пользователя
+	 */
+	const { favoritesNames, keepedNames, userName } = getAccountProps()
+
+	/**
+	 * Хук позволяющий сортировать элементы по установленным условиям
+	 */
+	const { SORT, changeSortBy, getSortedList } = useSortBy({ sortBy: 'ALPHABET', sortType: 'A_z' })
+
+	/**
+	 * прокидываем функции сортировки в кнопки
+	 */
+	const SortButtons = getSortButtons({ sortOptions, changeSortBy })
+
+	/**
+	 * переменная хранит отсортированные элементы
+	 */
+	const ListBlocks = getSortedList(list, SORT.sortBy, SORT.sortType).map((org, index) => {
+		/**
+		 * Несколько условий для отображения
+		 */
+		const isRenderFavoriteBtns = path === '/' || path === '/favorites' || path === '/keeped'
+		const isAdminka = path === '/adminka'
+		const isLiked = favoritesNames.some((orgName) => orgName === org.name)
+		const isKeeped = keepedNames.some((orgName) => orgName === org.name)
+
+		/**
+		 * Массив хранит типы кнопок отображаемых в админке
+		 */
+		const adminButtonTypes: (keyof typeof PERF_TYPE)[] = ['REMOVE', 'MODIFY']
+
+		/**
+		 * Функция делает кнопку скрытия / разкрытия видимой при наведении
+		 */
+		const onItemHover = (type: 'leave' | 'enter') => {
+			const el: any = document.getElementById(`open_item_${index}`)
+			el.style.display = type === 'leave' ? 'none' : 'flex'
 		}
-		// console.dir(`${organisation.name} IS KEEPED: ${isKeeped}`)
+
+		/**
+		 * Функция сворачивает или разворачивает текущий элемент
+		 */
+		const toggleItemView = () => {
+			list.map((element, _index): void => {
+				if (_index !== index) {
+					const el: any = document.getElementById(`home-page--wrapper--element_${_index}`)
+					el.style.display = isViewCollapsed ? 'none' : 'flex'
+					toggleView(isViewCollapsed ? false : true)
+				}
+			})
+		}
+
+		/**
+		 * Функция ставит или снимает лайки и закладки
+		 */
+		const onPerfButtonClick = (btnType: 'like' | 'keep') => {
+			if (isAuthorized) {
+				document.location.href = PATH(path) // после нажатия перезагружет страницу
+
+				/**
+				 * по условию ставит или снимает лайк / закладку
+				 */
+				btnType === 'like' && isLiked ? removeFromFavorite(org.name, userName) : add2favorite(org.name, userName)
+				btnType === 'keep' && isKeeped ? removeFromKeep(org.name, userName) : add2keep(org.name, userName)
+			} else document.location.href = PATH('/auth') // если пользователь не авторизован, переходим на стр. авторизации
+		}
+
 		return (
 			<div
 				/**
-				 * Item of list
+				 * 🟫 Элемент в списке 🟫
 				 */
-				onMouseLeave={() => {
-					const el: any = document.getElementById(`open_item_${i}`)
-					el.style.display = 'none'
-				}}
-				onMouseEnter={() => {
-					const el: any = document.getElementById(`open_item_${i}`)
-					el.style.display = 'flex'
-				}}
-				key={`element_${i}`}
+
+				/**
+				 * реагируем на наведение мыши
+				 */
+				onMouseLeave={() => onItemHover('leave')}
+				onMouseEnter={() => onItemHover('enter')}
+				key={`element_${index}`}
 				className="home-page--wrapper--element"
-				id={`home-page--wrapper--element_${i}`}>
+				id={`home-page--wrapper--element_${index}`}>
 				<div className="home-page--wrapper--element--main_info">
 					<div className="home-page--wrapper--element--org_name">
-						<ListItem isOrgName Label="Название" index={i} value={organisation.name} />
+						<ListItem
+							// назвние фонда
+							isOrgName
+							Label="Название"
+							index={index}
+							value={org.name}
+						/>
+
 						<div
-							onClick={() => {
-								if (a) {
-									list.map((_ell, _i): void => {
-										if (_i !== i) {
-											const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-											el.style.display = 'none'
-											// el.style.height = '100vh'
-											b(false)
-										}
-									})
-								} else {
-									list.map((_ell, _i): void => {
-										if (_i !== i) {
-											const el: any = document.getElementById(`home-page--wrapper--element_${_i}`)
-											el.style.display = 'flex'
-											// el.style.height = '100vh'
-											b(true)
-										}
-									})
-								}
-							}}
-							id={`open_item_${i}`}
+							// кнопка "развернуть" или "назад"
+							onClick={() => toggleItemView()}
+							id={`open_item_${index}`}
 							style={{ display: 'none' }}
 							className="home-page--wrapper--element--open_item">
-							{a ? 'развернуть' : 'назад ↩️'}
+							{isViewCollapsed ? 'развернуть' : 'назад ↩️'}
 						</div>
 					</div>
 
-					<div
-						/**
-						 * Like buttons
-						 */
-						className="home-page--wrapper--element--buttons">
-						{isAdminka && //? Если компонент рендериться в админке, то рисуем кнопки
-							BTN_TYPES.map((TYPE) => {
-								return (
-									<Item_Perform_BTN
-										onClick={() => {
-											DisplayModalToogler(i, true, TYPE)
-										}}
-										Label={(TYPE === 'MODIFY' && 'Изменить') || (TYPE === 'REMOVE' && 'Удалить') || ''}
-										type={TYPE}
-									/>
-								)
-							})}
-						{isRenderFavoriteBtns && (
+					<div className="home-page--wrapper--element--buttons">
+						{isAdminka && // Если компонент рендериться в админке, то рисуем кнопки
+							adminButtonTypes.map((type) => (
+								<Item_Perform_BTN
+									onClick={() => DisplayModalToogler(index, true, type)}
+									Label={(type === 'MODIFY' && 'Изменить') || (type === 'REMOVE' && 'Удалить') || ''}
+									{...{ type }}
+								/>
+							))}
+
+						{isRenderFavoriteBtns && ( // рендер кнопок лайков и закладок
 							<div className="perf_btn_wrapper">
 								<Item_Perform_BTN
 									/**
 									 * 💙 Like / Unlike button
 									 */
-									counter={organisation.favorite_counter}
-									onClick={() => {
-										if (is_authorized) {
-											document.location.href = PATH(path)
-
-											isLiked
-												? removeFromFavorite(organisation.name, user_name)
-												: add2favorite(organisation.name, user_name)
-										} else document.location.href = PATH('/auth')
-									}}
+									counter={org.favorite_counter}
+									onClick={() => onPerfButtonClick('like')}
 									Label={isLiked ? 'Убрать из избранного' : 'Добавить визбранное'}
 									type={isLiked ? 'REMOVE_FROM_FAVORITE' : 'ADD_2_FAVORITE'}
 								/>
+
 								<Item_Perform_BTN
 									/**
 									 * 👛 Keep / Unkeep button
 									 */
-									counter={organisation.keep_counter}
-									onClick={() => {
-										if (is_authorized) {
-											document.location.href = PATH(path)
-
-											isKeeped
-												? removeFromKeep(organisation.name, user_name)
-												: add2keep(organisation.name, user_name)
-										} else document.location.href = PATH('/auth')
-									}}
+									counter={org.keep_counter}
+									onClick={() => onPerfButtonClick('keep')}
 									Label={isKeeped ? 'Убрать из закладки' : 'Добавить в закладки'}
 									type={isKeeped ? 'REMOVE_FROM_KEEPED' : 'ADD_2_KEEPED'}
 								/>
 							</div>
 						)}
-						{isAdminka ? <LastModify_DIV text={`Последнее изменение: ${organisation.last_modify}`} /> : null}
+						{isAdminka && <LastModify_DIV text={`Последнее изменение: ${org.last_modify}`} />}
 					</div>
 				</div>
 
 				<div
 					/**
-					 * Info Block
+					 * ℹ️ Info Block
 					 */
-					style={{ display: a ? 'none' : 'flex' }}
+					style={{ display: isViewCollapsed ? 'none' : 'flex' }}
 					className="home-page--wrapper--element--data">
-					<ListItem link Label="Ссылка на сайт фонда" index={i} value={organisation.link1} />
-					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={i} value={organisation.link2} />
+					<ListItem link Label="Ссылка на сайт фонда" index={index} value={org.link1} />
+					<ListItem link Label="Ссылка на отчёты деятельности фонда" index={index} value={org.link2} />
 					<ListItem
 						info
 						Label="Доп. информация"
-						index={i}
-						value={a ? kk(organisation.info) : organisation.info}
+						index={index}
+						value={
+							// если элемент свернут - обрезаем текст
+							isViewCollapsed ? trimText(org.info) : org.info
+						}
 					/>
 				</div>
 			</div>

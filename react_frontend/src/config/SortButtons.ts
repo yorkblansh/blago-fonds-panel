@@ -1,17 +1,17 @@
 import { enum_ListBlocks_sortBy } from 'components/ListBlocks/hooks/useSortBy'
 
 export type TSortButtons = {
-	SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
-	SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
+	SortBy: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+	SortType: [string, keyof typeof enum_ListBlocks_sortBy][][]
 }
 
-export const sort_options: TSortButtons = {
-	SortBy_list: [
+export const sortOptions: TSortButtons = {
+	SortBy: [
 		['По лайкам', 'FAVORITE'],
 		['По дате изменения', 'LAST_MODIFY'],
 		['По названию', 'ALPHABET'],
 	],
-	SortType_list: [
+	SortType: [
 		[
 			['От Большего к Меньшему', 'FAVORITE'],
 			['От Меньшему к Большего', 'FAVORITE'],

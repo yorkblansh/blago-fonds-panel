@@ -7,3 +7,23 @@ export interface ReqResLog {
 	res: IResponse
 	logger: ILogger
 }
+
+export interface Organize {
+	name: string
+	link1: string
+	link2: string
+	info: string
+	index?: string
+	last_modify: string
+	old_name?: string
+	favorite_counter?: number
+	keep_count?: number
+}
+
+export interface User {
+	login: string
+	password: string
+	user_type: 'default' | 'admin'
+	keep: { [name: string]: string }[]
+	favorites: { [name: string]: string }[]
+}

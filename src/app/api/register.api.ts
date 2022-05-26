@@ -31,7 +31,7 @@ export class RegisterAPI {
 
 	private static registerUser({ login, password, res }: registerUserProps) {
 		res.redirect(PATH('/auth'))
-		JsonDB_Methods.reg_new_user({ login, password })
+		JsonDB_Methods.registerUser({ login, password })
 	}
 
 	private static catchError({ error_message, res }: registerUserProps) {

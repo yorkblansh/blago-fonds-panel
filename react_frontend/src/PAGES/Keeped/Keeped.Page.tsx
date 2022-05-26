@@ -2,13 +2,13 @@
 import { PATH } from 'api/consts'
 import { getAccountProps } from 'app/getAccountProps'
 import { useListBlocks } from 'components/ListBlocks/useListBlocks'
-import { sort_options } from 'config/SortButtons'
+import { sortOptions } from 'config/SortButtons'
 import { Header_BTN } from 'PAGES/Home_page/components/buttons/header.btn'
 import { Header } from 'PAGES/Home_page/components/header/header'
 
 export const KEEPED_PAGE = () => {
-	const { is_authorized } = getAccountProps()
-	const { ListBlocks, SortButtons } = useListBlocks({ path: '/keeped', is_authorized, sort_options })
+	const { isAuthorized: is_authorized } = getAccountProps()
+	const { ListBlocks, SortButtons } = useListBlocks({ path: '/keeped', isAuthorized: is_authorized, sortOptions: sortOptions })
 	const isListBlocks = ListBlocks?.length !== 0
 
 	return (

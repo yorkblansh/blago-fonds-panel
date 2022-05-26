@@ -1,9 +1,11 @@
 ## Содержание
 
+- [Содержание](#содержание)
 - [Взаимодействие клиент-сервера](#взаимодействие-клиент-сервера)
 - [Работа с JSON базой данных](#работа-с-json-базой-данных)
-    - [Формат хранения данных в БД](#формат-хранения-данных-в-бд)
-    - [Общение с БД](#работа-с-json-базой-данных)
+  - [Формат хранения данных в БД](#формат-хранения-данных-в-бд)
+  - [Общение с БД](#общение-с-бд)
+<!-- - [] -->
 
 ## Взаимодействие клиент-сервера
 На Бэкенд стороне веб-прилжения реализованы эндпоинты (REST-API), описанные в файле `src/routes/RestApi.ts`
@@ -117,5 +119,39 @@ public static getOrganizes_favorite_counts = () => {
     })
     return { end_pairs }
 }
+```
 
+Работа кода на стороне UI (React фреймворк)
+
+Все страницы в веб-приложении размещены в отдельных папках:
+
+![img](img/page-structure.png)
+
+Страницей по-умолчанию является Home Page, она содержит в себе функциональный компонент возращающий так называемый JSX Element ( синтаксически схожий с html тэгами):
+
+
+```ts
+export const HOME_PAGE = () => {
+	const { is_authorized, user_name } = getAccountProps()
+	const { ListBlocks, SortButtons } = useListBlocks({ path: '/', is_authorized, sort_options })
+	const { list_length: favorite_list_length } = useItemList('/favorites')
+	const { list_length: keep_list_length } = useItemList('/keeped')
+	return (
+		<>
+			<Header
+            ...
+			/>
+			<div className="home-page" id="home-page">
+				<div className="dropdown-wrapper" children={SortButtons} />
+				<div className="home-page--wrapper" id="home-page--wrapper" children={ListBlocks} />
+			</div>
+		</>
+	)
+}
+```
+
+Для реализации сортировки фондов на странице были написан кастомный реакт-хук:
+
+```ts
+import { useListBlocks } from 'components/ListBlocks/useListBlocks'
 ```

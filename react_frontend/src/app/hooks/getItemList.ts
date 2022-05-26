@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useEffect, useState } from 'react'
 import { getItemsPageData } from '../home_page/axios.fns'
 import { dev_data } from '../DEV_DATA'
@@ -38,8 +39,8 @@ const PATH_MAP: { [x in keyof typeof MAIN_PATHES]?: keyof typeof API } = {
 	'/fonds': '/fonds',
 }
 
-export const useItemList = (path: keyof typeof MAIN_PATHES, options?: Options) => {
-	let { user_name } = getAccountProps()
+export const getItemList = (path: keyof typeof MAIN_PATHES, options?: Options) => {
+	let { userName: user_name } = getAccountProps()
 	const fond_name = options ? (options.fond_name ? options.fond_name : undefined) : undefined
 	const [list, updateList] = useState(LIST)
 	const _path: any = PATH_MAP[path]
@@ -59,5 +60,5 @@ export const useItemList = (path: keyof typeof MAIN_PATHES, options?: Options) =
 			// updateList(dev_data.organizes);
 		}
 	}, [_path, fond_name, path, updateList, user_name])
-	return { list: Object.values(list), list_length: Object.values(list).length }
+	return { list: Object.values(list), listLength: Object.values(list).length }
 }

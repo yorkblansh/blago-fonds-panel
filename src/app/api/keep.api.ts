@@ -5,17 +5,12 @@ export class KeepAPI {
 	public static getKeeped = ({ req, res, logger }: ReqResLog) => {
 		const { user_name } = req.body
 		logger.log('returned FAVORITES')
-		JsonDB_Methods.getKeeped({
-			user_name,
-			cb: keeped => {
-				res.send({ organizes: keeped })
-			},
-		})
+		JsonDB_Methods.getKeeped(user_name, keeped => res.send({ organizes: keeped }))
 	}
 
 	public static get_keeped_org_names = ({ req, res, logger }: ReqResLog) => {
 		const { user_name } = req.body
-		const { obj_keys } = JsonDB_Methods.getKeeped_ONLY_NAME_STRINGS(user_name)
+		const { obj_keys } = JsonDB_Methods.getKeepedOrgNames(user_name)
 		res.send({ org_names: obj_keys })
 	}
 
@@ -30,6 +25,6 @@ export class KeepAPI {
 		const { org_name, user_name }: { org_name: string; user_name: string } = req.body
 		console.dir('SMTH REMOVED FROM KEEPED')
 
-		JsonDB_Methods.remove_from_keeped({ org_name, user_name, perf_type: 'BY_USER' })
+		JsonDB_Methods.removeFromKeeped({ org_name, user_name, perf_type: 'BY_USER' })
 	}
 }

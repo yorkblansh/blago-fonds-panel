@@ -1,23 +1,22 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react'
 import { enum_ListBlocks_sortBy, TchangeSortBy } from '../hooks/useSortBy'
 import './btn.style.scss'
 import './dropdown.btn.style.scss'
-import { _sortType } from './_sortType.fn'
+import { useSortType } from './useSortType'
 
-interface ISortBTNS {
-	(props: {
-		SortBy_list: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
-		changeSortBy: TchangeSortBy
-		SortType_list: [string, keyof typeof enum_ListBlocks_sortBy][][]
-	}): { SortBTNs: JSX.Element }
+interface Props {
+	SortBy: [a: string, b: keyof typeof enum_ListBlocks_sortBy][]
+	changeSortBy: TchangeSortBy
+	SortType: [string, keyof typeof enum_ListBlocks_sortBy][][]
 }
 
-export const SortBTNS_Contract: ISortBTNS = ({ SortBy_list, changeSortBy, SortType_list }) => {
+export const SortButtons = ({ SortBy: SortBy_list, changeSortBy, SortType: SortType_list }: Props) => {
 	let [Label, setLabel] = useState('По названию')
 	let [targetItem, setArrows] = useState('')
 	let [sortTypesItems, set_sortTypeItems] = useState(SortType_list[2])
 
-	let SortBTNs = (
+	return (
 		<>
 			<div className="dropdown--types">
 				<button className=" dropbtn--types" children={<div>{`Тип сортировки: ${sortTypesItems[0][0]}`}</div>} />
@@ -27,7 +26,7 @@ export const SortBTNS_Contract: ISortBTNS = ({ SortBy_list, changeSortBy, SortTy
 							.map((sort_typeItem) => ({
 								label: sort_typeItem[0],
 								click_action: () => {
-									changeSortBy({ sortBy: sort_typeItem[1], sortType: _sortType(sort_typeItem[0]) })
+									changeSortBy({ sortBy: sort_typeItem[1], sortType: useSortType(sort_typeItem[0]) })
 								},
 							}))
 							.map(({ label, click_action }) => (
@@ -64,5 +63,4 @@ export const SortBTNS_Contract: ISortBTNS = ({ SortBy_list, changeSortBy, SortTy
 			</div>
 		</>
 	)
-	return { SortBTNs }
 }
