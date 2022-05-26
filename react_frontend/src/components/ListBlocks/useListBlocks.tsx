@@ -15,7 +15,6 @@ import { enum_ListBlocks_sortBy, TchangeSortBy, useSortBy } from './hooks/useSor
 import { SortBTNS_Contract } from './sort.btn/sort.btn.contract'
 import './perf_btn_wrapper.scss'
 import { useState } from 'react'
-// import { useOpenItemState } from './hooks/useOpenItemState'
 
 interface ListBlocksProps {
 	path: keyof typeof MAIN_PATHES
