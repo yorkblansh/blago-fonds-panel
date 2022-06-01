@@ -121,11 +121,15 @@ export const useListBlocks = ({ path, isAuthorized, sortOptions }: Props) => {
 			if (isAuthorized) {
 				document.location.href = PATH(path) // после нажатия перезагружет страницу
 
-				/**
-				 * по условию ставит или снимает лайк / закладку
-				 */
-				btnType === 'like' && isLiked ? removeFromFavorite(org.name, userName) : add2favorite(org.name, userName)
-				btnType === 'keep' && isKeeped ? removeFromKeep(org.name, userName) : add2keep(org.name, userName)
+				if (btnType === 'like') {
+					isLiked ? removeFromFavorite(org.name, userName) : add2favorite(org.name, userName)
+				} else if (btnType === 'keep') {
+					isKeeped ? removeFromKeep(org.name, userName) : add2keep(org.name, userName)
+				}
+				// 	btnType === 'like' && isLiked
+				// 		? removeFromFavorite(org.name, userName)
+				// 		: add2favorite(org.name, userName)
+				// btnType === 'keep' && isKeeped ? removeFromKeep(org.name, userName) : add2keep(org.name, userName)
 			} else document.location.href = PATH('/auth') // если пользователь не авторизован, переходим на стр. авторизации
 		}
 
